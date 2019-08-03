@@ -1,0 +1,6 @@
+######### history ##############
+export HISTSIZE=5000                    # max size of history
+export SAVEHIST=1000
+export HISTFILE=~/.zhistory
+setopt histignorealldups
+setopt histnostore

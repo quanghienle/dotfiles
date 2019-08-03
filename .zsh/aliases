@@ -1,0 +1,16 @@
+alias cdc='node /Users/hien.le/Documents/work/cenx-directive-tool/src/index.js'
+alias hs='history | grep'
+alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
+alias d='dirs -v | head -10'
+alias cpwd='pwd | pbcopy'
+alias cp='cp -i'
+alias meow='cat'
+alias please='sudo'
+alias -g G='| grep -i'
+
+
+alias zprompt='vim ~/.zsh/prompt'
+alias zconfig="vim ~/.zshrc"
+alias zalias='vim ~/.zsh/aliases'
+alias zfn='vim ~/.zsh/functions'
+alias zupdate='source ~/.zshrc'

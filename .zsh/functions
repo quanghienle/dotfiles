@@ -1,0 +1,88 @@
+##############  DIRECTORY BOOKMARKS  #####################
+export MARKPATH=$HOME/.marks
+
+# go to a marked directory
+function jump { cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"}
+
+# add to directory bookmarks
+function mark { mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"}
+
+# remove from directory bookmarks
+function unmark { rm -i "$MARKPATH/$1"}
+
+# list directory bookbarks
+function marks { ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/-/g' && echo}
+
+# show directory stack and ask for a dir to switch to
+function dstack() {
+  emulate -L zsh
+  autoload -U colors
+  local color=$fg_bold[blue]
+  integer i=0
+  dirs -p | while read dir
+  do
+	  local num="${$(printf "%-4d " $i)/ /.}"
+	  printf " %s  $color%s$reset_color\n" $num $dir
+	  (( i++ ))
+  done
+  integer dir=-1
+  read -r 'dir?Jump to directory: ' || return
+  (( dir == -1 )) && return
+  if (( dir < 0 || dir >= i ))
+  then
+	  echo d: no such directory stack entry: $dir
+	  return 1
+  fi
+  cd ~$dir
+}
+
+# Determine size of a file or total size of a directory
+function fsize() {
+	if du -b /dev/null > /dev/null 2>&1; then
+		local arg=-sbh;
+	else
+		local arg=-sh;
+	fi
+	if [[ -n "$@" ]]; then
+		du $arg -- "$@";
+	else
+		du $arg .[^.]* ./*;
+	fi;
+}
+
+# see directory structure
+function tre() {
+	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+}
+
+# Extract most know archives with one command
+function extract () {
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1     ;;
+      *.tar.gz)    tar xzf $1     ;;
+      *.bz2)       bunzip2 $1     ;;
+      *.rar)       unrar e $1     ;;
+      *.gz)        gunzip $1      ;;
+      *.tar)       tar xf $1      ;;
+      *.tbz2)      tar xjf $1     ;;
+      *.tgz)       tar xzf $1     ;;
+      *.zip)       unzip $1       ;;
+      *.Z)         uncompress $1  ;;
+      *.7z)        7z x $1        ;;
+      *)     echo "'$1' cannot be extracted via extract()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+# list functions
+function fnlist()
+{
+	grep -B 1 "^function" $HOME/.zsh/functions | \
+	grep -v "^\-\-$" | \
+	awk '{ if(/^#/) { gsub(/^#[:space:]*/, ""); ht=$0 }; getline; gsub(/ ?\(\)/, ":"); printf("-> %-20s %s\n", $2, ht); }' | \
+	sort -u -k 3
+}
+

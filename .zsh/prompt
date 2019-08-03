@@ -1,0 +1,43 @@
+autoload colors && colors
+
+if (( $+commands[git] )); then
+  git="$commands[git]"
+else
+  git="/usr/bin/git"
+fi
+
+git_branch() {
+  echo $($git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+}
+
+git_dirty() {
+  if $(! $git status -s &> /dev/null); then
+    echo ""
+  else
+    echo "$FG[040] ⦗$FG[183]$(git_prompt_info)$FG[040]⦘%{$reset_color%}";
+  fi
+}
+
+git_prompt_info () {
+ ref=$($git symbolic-ref HEAD 2>/dev/null) || return
+ echo "${ref#refs/heads/}"
+}
+
+directory_name() {
+  echo "%{$fg_bold[cyan]%}$(shrink_path -f)%{$reset_color%}";
+}
+
+user_name() {
+        if [ $UID -eq 0 ]; then
+           echo "%{$fg_bold[red]%}%n▷ ";
+        else
+           echo "%{$fg_bold[magenta]%}%n▷ ";
+        fi
+}
+
+prompt_arrow() {
+   echo "$FG[001] ❯$FG[160]❯$FG[196]❯%{$reset_color%} ";
+}
+
+#export RPROMPT="%{$fg_bold[cyan]%}☆%{$reset_color%}"
+export PROMPT=$'\n$(user_name)$(directory_name)$(git_dirty)$(prompt_arrow)'
