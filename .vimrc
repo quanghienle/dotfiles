@@ -51,7 +51,7 @@ nnoremap <leader>fi :CtrlP<CR>
 nnoremap <leader>Fi :CtrlPClearCache<CR>:CtrlP<CR>
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
-" Tab navigation 
+" Tab navigation
 "nnoremap <leader>N :bprevious<CR>
 "nnoremap <leader>n :bnext<CR>
 nnoremap <leader>nt :tabnew<space>
@@ -79,9 +79,10 @@ let vim_markdown_preview_browser = 'Google Chrome'
 let vim_markdown_preview_hotkey = '<leader>md'
 "let vim_markdown_preview_toggle = 2
 let g:vim_markdown_folding_disabled = 1
+let g:netrw_dirhistmax=0
 
-  
-set background=dark 
+
+set background=dark
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2                                              " Fix broken backspace in some setups
