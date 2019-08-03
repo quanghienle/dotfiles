@@ -50,11 +50,6 @@ function fsize() {
 	fi;
 }
 
-# see directory structure
-function tre() {
-	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
-}
-
 # Extract most know archives with one command
 function extract () {
   if [ -f $1 ] ; then
