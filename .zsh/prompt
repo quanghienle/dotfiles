@@ -31,7 +31,8 @@ user_name() {
         if [ $UID -eq 0 ]; then
            echo "%{$fg_bold[red]%}%n▷ ";
         else
-           echo "%{$fg_bold[magenta]%}%n▷ ";
+           #echo "%{$fg_bold[magenta]%}%n▷ ";
+           echo "%{$fg_bold[magenta]%}☠️ ";
         fi
 }
 
