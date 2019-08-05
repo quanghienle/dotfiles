@@ -3440,6 +3440,8 @@
 	<true/>
 	<key>HideTabCloseButton</key>
 	<true/>
+	<key>HideTabNumber</key>
+	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>IRMemory</key>
@@ -3451,7 +3453,7 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 0</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Documents/dotfiles/iterm2</string>
+	<string>~/Documents/color-theme/dark-honeycomb</string>
 	<key>NSNavLastUserSetHideExtensionButtonState</key>
 	<false/>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -3766,7 +3768,7 @@
 			<key>Background Image Is Tiled</key>
 			<false/>
 			<key>Background Image Location</key>
-			<string>/Users/hien.le/Documents/color-theme/darkness/darkness.png</string>
+			<string>/Users/hien.le/Documents/color-theme/dark-honeycomb/dark-honeycomb.png</string>
 			<key>Badge Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -3783,7 +3785,7 @@
 			<key>Badge Text</key>
 			<string></string>
 			<key>Blend</key>
-			<real>0.32596850837628871</real>
+			<real>0.31148820070876293</real>
 			<key>Blink Allowed</key>
 			<false/>
 			<key>Blinking Cursor</key>
@@ -4211,6 +4213,10 @@
 			<false/>
 			<key>Normal Font</key>
 			<string>Menlo-Regular 13</string>
+			<key>Only The Default BG Color Uses Transparency</key>
+			<false/>
+			<key>Open Toolbelt</key>
+			<false/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -4222,7 +4228,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>1000</integer>
+			<integer>0</integer>
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -5091,7 +5097,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>41EF6B87-E4F8-4FFC-8EAE-5A6A187D82CE</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>4</integer>
+	<integer>5</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -5793,6 +5799,8 @@
 	<key>OpenNoWindowsAtStartup</key>
 	<false/>
 	<key>PMPrintingExpandedStateForPrint2</key>
+	<false/>
+	<key>PerPaneBackgroundImage</key>
 	<false/>
 	<key>PointerActions</key>
 	<dict>
