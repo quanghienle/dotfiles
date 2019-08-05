@@ -19,7 +19,8 @@ plugins=(
 
 #export EDITOR="/usr/local/bin/mate -w"
 export EDITOR='vim'
-setopt correct
+#setopt correct
+DISABLE_CORRECTION="true"
 
 #zstyle ’:completion:*:cd:*’ ignore-parents parent pwd
 

@@ -14,6 +14,8 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'flazz/vim-colorschemes'
+Plug 'easymotion/vim-easymotion'
 
 " Clojure
 Plug 'guns/vim-clojure-static'
@@ -25,8 +27,7 @@ call plug#end()
 
 filetype plugin indent on
 syntax on
-" colorscheme gruvbox
-
+colorscheme ir_black
 
 " ============== keyboard shortcuts ==============
 " :map is recursive | :noremap is non-recursive
@@ -35,13 +36,13 @@ syntax on
 let mapleader = ' '
 
 " esc key
-imap <leader>q \<Esc>
-inoremap jj \<Esc>
+" imap <leader>q \<Esc>
+inoremap jj <Esc>
 
 " split and navigate between panes
 nmap G Gzz
 nmap n nzz
-nmap N Nzz
+map N Nzz
 noremap <leader>h :split<CR>
 noremap <leader>v :vsplit<CR>
 noremap <C-h> <C-w>h
@@ -54,12 +55,15 @@ noremap <leader>pi :PlugInstall<CR>
 nnoremap <leader>r :RangerCurrentFile<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 "nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <leader>s :CtrlP<CR>
-nnoremap <leader>S :CtrlPClearCache<CR>:CtrlP<CR>
+nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>P :CtrlPClearCache<CR>:CtrlP<CR>
 
 " source/edit vim
-noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+noremap <silent> <leader>rv :w<CR>:source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 nnoremap <leader>ev :tabnew $MYVIMRC<cr>
+
+" easy motion: <leader><leader> s + 'character' 
+
 
 " Tab navigation
 "nnoremap <leader>N :bprevious<CR>
@@ -89,7 +93,7 @@ let vim_markdown_preview_browser = 'Google Chrome'
 let vim_markdown_preview_hotkey = '<leader>md'
 "let vim_markdown_preview_toggle = 2
 let g:vim_markdown_folding_disabled = 1
-let g:netrw_dirhistmax=0
+let g:netrw_dirhistmax = 0
 let g:airline_theme='dracula'    "themes: dracula, molokai, kolor...
 
 set background=dark

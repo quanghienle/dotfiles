@@ -1,5 +1,7 @@
 autoload colors && colors
 
+BRANCH="\ue0a0"
+
 if (( $+commands[git] )); then
   git="$commands[git]"
 else
@@ -14,7 +16,7 @@ git_dirty() {
   if $(! $git status -s &> /dev/null); then
     echo ""
   else
-    echo "$FG[160]《$FG[183]$(git_prompt_info)$FG[160]》%{$reset_color%}";
+    echo "%{$fg_bold[red]%} ◇ $FG[183]$(git_prompt_info)%{$reset_color%}";
   fi
 }
 
@@ -24,7 +26,7 @@ git_prompt_info () {
 }
 
 directory_name() {
-  echo "%{$fg_bold[cyan]%}$(shrink_path -f)%{$reset_color%}";
+  echo "%{$fg_bold[red]%}◇ %{$fg_bold[cyan]%}$(shrink_path -f)%{$reset_color%}";
 }
 
 user_name() {
