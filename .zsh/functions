@@ -2,7 +2,7 @@
 export MARKPATH=$HOME/.marks
 
 # go to a marked directory
-function jump { cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"}
+function cdx { cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"}
 
 # add to directory bookmarks
 function mark { mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"}
@@ -51,7 +51,7 @@ function fsize() {
 }
 
 # Extract most know archives with one command
-function extract () {
+function extract() {
   if [ -f $1 ] ; then
     case $1 in
       *.tar.bz2)   tar xjf $1     ;;
@@ -73,8 +73,7 @@ function extract () {
 }
 
 # list functions
-function fnlist()
-{
+function fnlist() {
 	grep -B 1 "^function" $HOME/.zsh/functions | \
 	grep -v "^\-\-$" | \
 	awk '{ if(/^#/) { gsub(/^#[:space:]*/, ""); ht=$0 }; getline; gsub(/ ?\(\)/, ":"); printf("-> %-20s %s\n", $2, ht); }' | \

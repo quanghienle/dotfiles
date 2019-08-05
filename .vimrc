@@ -32,9 +32,16 @@ syntax on
 " :map is recursive | :noremap is non-recursive
 " mode letters: n[normal], v[visual], i[insert]
 
-let mapleader = ','
+let mapleader = ' '
+
+" esc key
+imap <leader>q \<Esc>
+inoremap jj \<Esc>
 
 " split and navigate between panes
+nmap G Gzz
+nmap n nzz
+nmap N Nzz
 noremap <leader>h :split<CR>
 noremap <leader>v :vsplit<CR>
 noremap <C-h> <C-w>h
@@ -47,14 +54,17 @@ noremap <leader>pi :PlugInstall<CR>
 nnoremap <leader>r :RangerCurrentFile<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 "nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <leader>fi :CtrlP<CR>
-nnoremap <leader>Fi :CtrlPClearCache<CR>:CtrlP<CR>
+nnoremap <leader>s :CtrlP<CR>
+nnoremap <leader>S :CtrlPClearCache<CR>:CtrlP<CR>
+
+" source/edit vim
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 
 " Tab navigation
 "nnoremap <leader>N :bprevious<CR>
 "nnoremap <leader>n :bnext<CR>
-nnoremap <leader>nt :tabnew<space>
+nnoremap <leader>nt :tabnew<CR>
 
 " copy selected text to system clipboard
 vnoremap <leader>y :w !pbcopy<CR><CR>
@@ -80,7 +90,7 @@ let vim_markdown_preview_hotkey = '<leader>md'
 "let vim_markdown_preview_toggle = 2
 let g:vim_markdown_folding_disabled = 1
 let g:netrw_dirhistmax=0
-
+let g:airline_theme='dracula'    "themes: dracula, molokai, kolor...
 
 set background=dark
 set autoindent
@@ -113,5 +123,9 @@ set splitbelow
 set splitright
 
 set nowrap
+
+" line number coloring
+"set number
+highlight LineNr term=bold ctermfg=DarkGrey guifg=DarkGrey
 
 runtime! macros/matchit.vim

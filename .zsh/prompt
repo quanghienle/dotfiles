@@ -14,7 +14,7 @@ git_dirty() {
   if $(! $git status -s &> /dev/null); then
     echo ""
   else
-    echo "$FG[040] ⦗$FG[183]$(git_prompt_info)$FG[040]⦘%{$reset_color%}";
+    echo "$FG[160]《$FG[183]$(git_prompt_info)$FG[160]》%{$reset_color%}";
   fi
 }
 
@@ -31,8 +31,8 @@ user_name() {
         if [ $UID -eq 0 ]; then
            echo "%{$fg_bold[red]%}%n▷ ";
         else
-           #echo "%{$fg_bold[magenta]%}%n▷ ";
-           echo "%{$fg_bold[magenta]%}☠️ ";
+           echo "%{$fg_bold[green]%}%n";
+           #echo "%{$fg_bold[magenta]%}☠️ ";
         fi
 }
 
@@ -41,4 +41,7 @@ prompt_arrow() {
 }
 
 #export RPROMPT="%{$fg_bold[cyan]%}☆%{$reset_color%}"
-export PROMPT=$'\n$(user_name)$(directory_name)$(git_dirty)$(prompt_arrow)'
+#export PROMPT=$'\n$(user_name)$(directory_name)$(git_dirty)$(prompt_arrow)'
+
+export PROMPT=$'\n%{$fg_bold[grey]%}╭─● $(user_name) $(directory_name)$(git_dirty)
+\%{$fg_bold[grey]%}╰─%{$fg_bold[green]%}● '
