@@ -38,6 +38,7 @@ let mapleader = ' '
 " esc key
 " imap <leader>q \<Esc>
 inoremap jj <Esc>
+vnoremap jj <Esc>
 
 " split and navigate between panes
 nmap G Gzz
@@ -110,7 +111,7 @@ set incsearch                                                " search as you typ
 set laststatus=2                                             " always show statusline
 "set list                                                     " show trailing whitespace
 "set listchars=tab:▸\ ,trail:▫
-"set number                                                   " show line numbers
+set number                                                   " show line numbers
 set ruler                                                    " show where you are
 set scrolloff=3                                              " show context above/below cursorline
 set shiftwidth=2                                             " normal mode indentation commands use 2 spaces

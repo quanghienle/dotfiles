@@ -3514,7 +3514,7 @@
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 500 570 377 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>78 458 650 427 0 0 1440 900 </string>
+	<string>78 450 650 427 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>197 363 570 363 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -3599,13 +3599,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.92901611328125</real>
+				<real>0.948516845703125</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.29105466604232788</real>
+				<real>0.57631728003546812</real>
 				<key>Red Component</key>
-				<real>0.32534962892532349</real>
+				<real>0.31596483243629336</real>
 			</dict>
 			<key>Ansi 13 Color</key>
 			<dict>
@@ -3625,13 +3625,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.873931884765625</real>
+				<real>0.949005126953125</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.77881413831236845</real>
+				<real>0.85492459622312877</real>
 				<key>Red Component</key>
-				<real>0.31733638094738126</real>
+				<real>0.39847905095666647</real>
 			</dict>
 			<key>Ansi 15 Color</key>
 			<dict>
@@ -3677,13 +3677,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.963043212890625</real>
+				<real>0.968841552734375</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.034194968640804291</real>
+				<real>0.040875959675759077</real>
 				<key>Red Component</key>
-				<real>0.095366068184375763</real>
+				<real>0.10198892918904642</real>
 			</dict>
 			<key>Ansi 5 Color</key>
 			<dict>
@@ -3742,13 +3742,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.3099553677642059</real>
+				<real>0.14701638134621853</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.24548023194074631</real>
+				<real>0.031747404485940933</real>
 				<key>Red Component</key>
-				<real>0.737701416015625</real>
+				<real>0.9117431640625</real>
 			</dict>
 			<key>BM Growl</key>
 			<true/>
@@ -3769,6 +3769,8 @@
 			<false/>
 			<key>Background Image Location</key>
 			<string>/Users/hien.le/Documents/color-theme/dark-honeycomb/dark-honeycomb.png</string>
+			<key>Background Image Mode</key>
+			<integer>2</integer>
 			<key>Badge Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -3785,7 +3787,7 @@
 			<key>Badge Text</key>
 			<string></string>
 			<key>Blend</key>
-			<real>0.31148820070876293</real>
+			<real>0.3636326111469072</real>
 			<key>Blink Allowed</key>
 			<false/>
 			<key>Blinking Cursor</key>
@@ -3820,26 +3822,26 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.98533648252487183</real>
+				<real>0.4868979156017304</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.65090185403823853</real>
+				<real>0.910888671875</real>
 				<key>Red Component</key>
-				<real>0.61807161569595337</real>
+				<real>0.55550140039667895</real>
 			</dict>
 			<key>Cursor Guide Color</key>
 			<dict>
 				<key>Alpha Component</key>
 				<real>0.25</real>
 				<key>Blue Component</key>
-				<real>0.216583251953125</real>
+				<real>0.375030517578125</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.17556942654351515</real>
+				<real>0.30407659979566337</real>
 				<key>Red Component</key>
-				<real>0.049618239514529705</real>
+				<real>0.086181024089455605</real>
 			</dict>
 			<key>Cursor Text Color</key>
 			<dict>
@@ -5090,7 +5092,7 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1440, 900}}</string>
 		<key>topLeft</key>
-		<string>{407, 651}</string>
+		<string>{389, 683}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
