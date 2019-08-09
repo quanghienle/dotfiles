@@ -1,5 +1,6 @@
 set nocompatible
 syntax enable
+filetype plugin on
 
 " ================= Plugins ==================
 " add plugin, save and close, run :PluginInstall
@@ -16,6 +17,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
 Plug 'easymotion/vim-easymotion'
+"Plug 'haya14busa/incsearch.vim'
+Plug 'guns/vim-clojure-highlight'
+Plug 'kien/rainbow_parentheses.vim'
 
 " Clojure
 Plug 'guns/vim-clojure-static'
@@ -24,16 +28,18 @@ Plug 'luochen1990/rainbow'
 
 call plug#end()
 
+source ~/.vim/my-colors.vim
 
 filetype plugin indent on
 syntax on
-colorscheme dracula
+" dracula, ir_black, spacegray, basic
+""colorscheme 
 
 " ============== keyboard shortcuts ==============
 " :map is recursive | :noremap is non-recursive
 " mode letters: n[normal], v[visual], i[insert]
 
-let mapleader = ' '
+let mapleader = ','
 
 " esc key
 " imap <leader>q \<Esc>
@@ -43,20 +49,20 @@ vnoremap jj <Esc>
 " split and navigate between panes
 nmap G Gzz
 nmap n nzz
-map N Nzz
+nmap N Nzz
 noremap <leader>h :split<CR>
 noremap <leader>v :vsplit<CR>
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
+noremap <C-k> <gvC-w>k
 noremap <C-l> <C-w>l
 
 " Plugin mapping
 noremap <leader>pi :PlugInstall<CR>
-nnoremap <leader>r :RangerCurrentFile<CR>
+"nnoremap <leader>r :RangerCurrentFile<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 "nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <leader>p :CtrlP<CR>
+nnoremap ;; :CtrlP<CR>
 nnoremap <leader>P :CtrlPClearCache<CR>:CtrlP<CR>
 
 " source/edit vim
@@ -97,6 +103,7 @@ let g:vim_markdown_folding_disabled = 1
 let g:netrw_dirhistmax = 0
 let g:airline_theme='dracula'    "themes: dracula, molokai, kolor...
 
+set hlsearch
 set background=dark
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
@@ -129,12 +136,21 @@ set splitright
 
 set nowrap
 
+nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
+nnoremap i :noh<cr>i
+
 " line number coloring
 "set number
 highlight LineNr term=bold ctermfg=DarkGrey guifg=DarkGrey
 
-"Mode Settings
+" Rainbow parenthesis
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
+
+"Mode Settings
 let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
@@ -146,5 +162,6 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 "  4 -> solid underscore
 "  5 -> blinking vertical bar
 "  6 -> solid vertical bar
+autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
 
 runtime! macros/matchit.vim

@@ -3427,7 +3427,7 @@
 	<key>EnableDivisionView</key>
 	<true/>
 	<key>EnableProxyIcon</key>
-	<false/>
+	<true/>
 	<key>FlashTabBarInFullscreen</key>
 	<true/>
 	<key>HapticFeedbackForEsc</key>
@@ -3441,7 +3441,7 @@
 	<key>HideTabCloseButton</key>
 	<true/>
 	<key>HideTabNumber</key>
-	<true/>
+	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>IRMemory</key>
@@ -3512,9 +3512,9 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>403 404 928 394 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 500 570 377 0 0 1440 900 </string>
+	<string>0 0 1440 877 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>78 450 650 427 0 0 1440 900 </string>
+	<string>78 450 650 427 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>197 363 570 363 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -4272,13 +4272,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.099983269348740578</real>
+				<real>0.220672607421875</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.099983269348740578</real>
+				<real>0.16553314086036153</real>
 				<key>Red Component</key>
-				<real>0.10308837890625</real>
+				<real>0.017203008290380239</real>
 			</dict>
 			<key>Tags</key>
 			<array/>
@@ -4289,7 +4289,7 @@
 			<key>Transparency</key>
 			<real>0.051788546954314722</real>
 			<key>Unlimited Scrollback</key>
-			<false/>
+			<true/>
 			<key>Use Bold Font</key>
 			<true/>
 			<key>Use Bright Bold</key>
@@ -4301,7 +4301,7 @@
 			<key>Use Non-ASCII Font</key>
 			<true/>
 			<key>Use Tab Color</key>
-			<false/>
+			<true/>
 			<key>Use Underline Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
@@ -5099,7 +5099,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>41EF6B87-E4F8-4FFC-8EAE-5A6A187D82CE</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>5</integer>
+	<integer>10</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -5854,7 +5854,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-08-04T21:31:09Z</date>
+	<date>2019-08-05T23:35:31Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SeparateStatusBarsPerPane</key>
