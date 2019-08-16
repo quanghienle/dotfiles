@@ -18,7 +18,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
 Plug 'easymotion/vim-easymotion'
 "Plug 'haya14busa/incsearch.vim'
-Plug 'guns/vim-clojure-highlight'
+"Plug 'guns/vim-clojure-highlight'
 Plug 'kien/rainbow_parentheses.vim'
 
 " Clojure
@@ -28,12 +28,12 @@ Plug 'luochen1990/rainbow'
 
 call plug#end()
 
-source ~/.vim/my-colors.vim
+"source ~/.vim/my-colors.vim
 
 filetype plugin indent on
 syntax on
 " dracula, ir_black, spacegray, basic
-""colorscheme 
+colorscheme basic
 
 " ============== keyboard shortcuts ==============
 " :map is recursive | :noremap is non-recursive
@@ -69,7 +69,7 @@ nnoremap <leader>P :CtrlPClearCache<CR>:CtrlP<CR>
 noremap <silent> <leader>rv :w<CR>:source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 
-" easy motion: <leader><leader> s + 'character' 
+" easy motion: <leader><leader> s + 'character'
 
 
 " Tab navigation
@@ -140,14 +140,14 @@ nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 nnoremap i :noh<cr>i
 
 " line number coloring
-"set number
+" set number
 highlight LineNr term=bold ctermfg=DarkGrey guifg=DarkGrey
 
 " Rainbow parenthesis
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+""au VimEnter * RainbowParenthesesToggle
+""au Syntax * RainbowParenthesesLoadRound
+""au Syntax * RainbowParenthesesLoadSquare
+""au Syntax * RainbowParenthesesLoadBraces
 
 
 "Mode Settings
@@ -163,5 +163,8 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 "  5 -> blinking vertical bar
 "  6 -> solid vertical bar
 autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
+
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE
 
 runtime! macros/matchit.vim

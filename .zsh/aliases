@@ -8,7 +8,8 @@ alias meow='cat'
 alias please='sudo'
 alias -g G='| grep -i'
 alias lsa='ls -a'
-
+alias showDesktop='foo(){defaults write com.apple.finder CreateDesktop true; killall Finder}; foo '
+alias hideDesktop='foo(){defaults write com.apple.finder CreateDesktop false; killall Finder}; foo '
 
 alias zprompt='vim ~/.zsh/prompt'
 alias zconfig="vim ~/.zshrc"
