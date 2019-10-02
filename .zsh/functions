@@ -5,13 +5,13 @@ export MARKPATH=$HOME/.marks
 function cdx { cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"}
 
 # add to directory bookmarks
-function mark { mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"}
+function bm { mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"}
 
 # remove from directory bookmarks
-function unmark { rm -i "$MARKPATH/$1"}
+function bmrm { rm -i "$MARKPATH/$1"}
 
 # list directory bookbarks
-function marks { ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/-/g' && echo}
+function bmls { ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/-/g' && echo}
 
 # show directory stack and ask for a dir to switch to
 function dstack() {

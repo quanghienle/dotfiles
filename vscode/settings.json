@@ -1,0 +1,109 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.editor.highlightModifiedTabs": true,
+
+    "files.autoSave": "afterDelay",
+    "files.trimFinalNewlines": true,
+
+    "clojureVSCode.autoStartNRepl": true,
+    
+    //editor
+    //"editor.rulers": [80],
+    "editor.minimap.enabled": false,
+    "editor.fontSize": 11,
+    "editor.formatOnPaste": true,
+    "editor.renderIndentGuides": false,
+    "editor.renderLineHighlight": "none",
+    //"editor.scrollbar.horizontal": "hidden",
+    //"editor.scrollbar.vertical": "hidden",
+    //"editor.fontFamily": "Fira Code",
+    //"editor.fontLigatures": true,
+
+    "go.docsTool": "gogetdoc",
+    "go.useLanguageServer": true,
+    //terminal
+    "terminal.external.osxExec": "iTerm.App",
+    "terminal.integrated.shell.osx": "/usr/local/bin/zsh",
+    "terminal.integrated.fontSize": 11,
+
+
+    //clojure
+    //"clojureVSCode.cljfmtParameters": "npm run lint",
+    //"clojureVSCode.formatOnSave": true,
+
+    //zen mode
+    "zenMode.hideLineNumbers": false,
+
+    //vim
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.surround": true,
+    "vim.hlsearch": true,
+    "vim.useCtrlKeys": true,
+    "vim.useSystemClipboard": true,
+    "vim.leader": ",",
+    "vim.insertModeKeyBindingsNonRecursive": [
+        
+        {"before": ["j", "j"],              "after": ["<esc>"],         "commands": []},
+        {"before": ["<esc>", "<esc>"],      "after": ["<esc"],          "commands": [":nohl"]},
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+       //remove search highlight when moving cursor or entering insert mode
+        {"before": ["i"],                   "after": ["i"],         "commands": [":nohl"]},
+        {"before": ["right"],               "after": ["right"],     "commands": [":nohl"]},
+        {"before": ["left"],                "after": ["left"],      "commands": [":nohl"]},
+        {"before": ["up"],                  "after": ["up"],        "commands": [":nohl"]},
+        {"before": ["down"],                "after": ["down"],      "commands": [":nohl"]},
+
+        //navigate between tabs
+        {"before": ["<leader>", "1"],       "after": ["1", "g", "t"],  "commands": []},
+        {"before": ["<leader>", "2"],       "after": ["2", "g", "t"],  "commands": []},
+        {"before": ["<leader>", "3"],       "after": ["3", "g", "t"],  "commands": []},
+        {"before": ["<leader>", "4"],       "after": ["4", "g", "t"],  "commands": []},
+        {"before": ["<leader>", "5"],       "after": ["5", "g", "t"],  "commands": []},
+        {"before": ["<leader>", "6"],       "after": ["6", "g", "t"],  "commands": []},
+        {"before": ["<leader>", "7"],       "after": ["7", "g", "t"],  "commands": []},
+        {"before": ["<leader>", "8"],       "after": ["8", "g", "t"],  "commands": []},
+        {"before": ["<leader>", "9"],       "after": ["9", "g", "t"],  "commands": []},
+        
+        //split
+        {"before": ["<leader>", "s"],       "after": [],            "commands": [":split"]},
+        {"before": ["<leader>", "v"],       "after": [],            "commands": [":vsplit"]},
+        //quit
+        {"before": ["Z", "Z"],              "after": [],            "commands": [":wq"]},
+        {"before": ["Z", "Q"],              "after": [],            "commands": [":q!"]}
+    ],
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "Material Theme High Contrast",
+    "window.zoomLevel": 0,
+    "breadcrumbs.enabled": false,
+
+    "workbench.colorCustomizations": {
+        "editor.background": "#2b3844",
+        "editorCursor.foreground": "#00ff45",
+        "editor.selectionBackground": "#446d4a",
+        "editor.selectionHighlightBorder": "#0c7272",
+        "editor.selectionHighlightBackground": "#0b4646",
+        "editorGroup.border": "#058320",
+        "editorBracketMatch.background": "#043535",
+        "editorBracketMatch.border": "#098d26",
+        "editorLineNumber.foreground": "#205a35",
+        "editorLineNumber.activeForeground": "#10c70a",
+        "terminalCursor.foreground": "#00ff45",
+        "statusBar.foreground": "#caccdb",
+        "statusBar.background": "#2b3844",
+        "statusBar.border": "#058320",
+        "activityBar.background": "#2b3844",
+        "activityBar.foreground": "#60cf81",
+        "activityBar.border": "#058320",
+        "sideBar.background": "#2b3844",
+        "sideBar.foreground": "#bbddc5",
+        "sideBar.border": "#058320",
+        "tab.activeBorder": "#1eff00",
+        "panel.border": "#058320",
+        "panel.background": "#283236",
+        "panelTitle.activeBorder": "#1eff00",
+        //"breadcrumb.background": "#0c3e55",
+        "breadcrumb.foreground": "#7cc079",
+    },
+}

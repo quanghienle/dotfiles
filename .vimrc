@@ -6,23 +6,26 @@ filetype plugin on
 " add plugin, save and close, run :PluginInstall
 "
 call plug#begin('~/.vim/plugged')
+Plug 'srcery-colors/srcery-vim'
 Plug  'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/limelight.vim'
-Plug 'francoiscabrol/ranger.vim'
 Plug 'plasticboy/vim-markdown'
-Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
 Plug 'easymotion/vim-easymotion'
-"Plug 'haya14busa/incsearch.vim'
-"Plug 'guns/vim-clojure-highlight'
+Plug 'haya14busa/is.vim'
+Plug 'haya14busa/incsearch.vim'
 Plug 'kien/rainbow_parentheses.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 
 " Clojure
 Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
 Plug 'tpope/vim-fireplace'
 Plug 'luochen1990/rainbow'
 
@@ -32,8 +35,9 @@ call plug#end()
 
 filetype plugin indent on
 syntax on
+
 " dracula, ir_black, spacegray, basic
-colorscheme basic
+colorscheme basic 
 
 " ============== keyboard shortcuts ==============
 " :map is recursive | :noremap is non-recursive
@@ -44,6 +48,7 @@ let mapleader = ','
 " esc key
 " imap <leader>q \<Esc>
 inoremap jj <Esc>
+inoremap jk <C-o>
 vnoremap jj <Esc>
 
 " split and navigate between panes
@@ -54,28 +59,17 @@ noremap <leader>h :split<CR>
 noremap <leader>v :vsplit<CR>
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
-noremap <C-k> <gvC-w>k
+noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
 " Plugin mapping
 noremap <leader>pi :PlugInstall<CR>
-"nnoremap <leader>r :RangerCurrentFile<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
-"nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap ;; :CtrlP<CR>
-nnoremap <leader>P :CtrlPClearCache<CR>:CtrlP<CR>
+
+autocmd BufEnter *.md exe 'noremap <F5> :!open -a "Google Chrome.app" %:p<CR>'
 
 " source/edit vim
-noremap <silent> <leader>rv :w<CR>:source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-nnoremap <leader>ev :tabnew $MYVIMRC<cr>
-
-" easy motion: <leader><leader> s + 'character'
-
-
-" Tab navigation
-"nnoremap <leader>N :bprevious<CR>
-"nnoremap <leader>n :bnext<CR>
-nnoremap <leader>nt :tabnew<CR>
+noremap <silent> <leader>rv :w<CR>:nohl<CR>:source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " copy selected text to system clipboard
 vnoremap <leader>y :w !pbcopy<CR><CR>
@@ -87,23 +81,32 @@ inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
 
+"increase search
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+" :h g:incsearch#auto_nohlsearch
+set hlsearch
+nmap <Esc><Esc> :nohl<CR>
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
 
+let g:instant_markdown_open_to_the_world = 1
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
 let NERDTreeShowHidden = 1
 let g:rainbow_active = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let vim_markdown_preview_github = 1
-let vim_markdown_preview_browser = 'Google Chrome'
-let vim_markdown_preview_hotkey = '<leader>md'
-"let vim_markdown_preview_toggle = 2
-let g:vim_markdown_folding_disabled = 1
 let g:netrw_dirhistmax = 0
-let g:airline_theme='dracula'    "themes: dracula, molokai, kolor...
+let g:airline_theme='kolor'    "themes: dracula, molokai, kolor...
 
-set hlsearch
+set nofoldenable    " disable folding
 set background=dark
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
@@ -116,8 +119,6 @@ set expandtab                                                " expand tabs to sp
 set ignorecase                                               " case-insensitive search
 set incsearch                                                " search as you type
 set laststatus=2                                             " always show statusline
-"set list                                                     " show trailing whitespace
-"set listchars=tab:▸\ ,trail:▫
 set number                                                   " show line numbers
 set ruler                                                    " show where you are
 set scrolloff=3                                              " show context above/below cursorline
@@ -136,35 +137,26 @@ set splitright
 
 set nowrap
 
-nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
-nnoremap i :noh<cr>i
-
-" line number coloring
-" set number
-highlight LineNr term=bold ctermfg=DarkGrey guifg=DarkGrey
-
 " Rainbow parenthesis
-""au VimEnter * RainbowParenthesesToggle
-""au Syntax * RainbowParenthesesLoadRound
-""au Syntax * RainbowParenthesesLoadSquare
-""au Syntax * RainbowParenthesesLoadBraces
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
+let g:ctrlp_working_path_mode = 0
 
 "Mode Settings
 let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 
-"Cursor settings:
-"  1 -> blinking block
-"  2 -> solid block
-"  3 -> blinking underscore
-"  4 -> solid underscore
-"  5 -> blinking vertical bar
-"  6 -> solid vertical bar
-autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
+let g:srcery_transparent_background=1
+autocmd BufEnter *.cljs colorscheme srcery
+autocmd BufEnter *.clj colorscheme srcery "base luciustomorrow-night-eighties
 
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE
+
+highlight LineNr term=bold ctermfg=DarkGrey guifg=DarkGrey
 
 runtime! macros/matchit.vim

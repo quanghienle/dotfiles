@@ -16,7 +16,7 @@ git_dirty() {
   if $(! $git status -s &> /dev/null); then
     echo ""
   else
-    echo "%{$fg_bold[green]%} [$BRANCH_SYM] $FG[183]%{$fg_bold[blue]%}$(git_prompt_info)%{$reset_color%}";
+    echo "%{$fg_bold[green]%} [git] $FG[183]%{$fg_bold[blue]%}$(git_prompt_info)%{$reset_color%}";
   fi
 }
 
