@@ -48,6 +48,7 @@ let mapleader = ','
 " esc key
 " imap <leader>q \<Esc>
 inoremap jj <Esc>
+inoremap <F2> <Esc>:w<CR>i
 inoremap jk <C-o>
 vnoremap jj <Esc>
 

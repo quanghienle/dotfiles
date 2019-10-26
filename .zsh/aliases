@@ -21,4 +21,4 @@ alias zconfig="vim ~/.zshrc"
 alias zalias='vim ~/.zsh/aliases'
 alias zfn='vim ~/.zsh/functions'
 alias zupdate='source ~/.zshrc'
-
+alias etc13="echo '150.132.197.148 eric-cenx-rest-api' | sudo tee -a /etc/hosts; dscacheutil -flushcache"

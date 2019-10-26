@@ -4,6 +4,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="$HOME/bin:$PATH"
+export PATH="$PATH:/usr/local/mongodb/bin"
 
 # Themes found in: /Users/hien.le/.oh-my-zsh/themes
 #ZSH_THEME="my-theme"
