@@ -8,6 +8,7 @@ export PATH="$PATH:/usr/local/mongodb/bin"
 
 # Themes found in: /Users/hien.le/.oh-my-zsh/themes
 #ZSH_THEME="my-theme"
+#ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # add 'globalias' for alias expansion
 plugins=(
@@ -46,3 +47,4 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
