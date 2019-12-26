@@ -1,6 +1,6 @@
 autoload colors && colors
-GIT_SYM=""
-BRANCH_SYM=""
+GIT_SYM="git"
+BRANCH_SYM="git"
 
 if (( $+commands[git] )); then
   git="$commands[git]"

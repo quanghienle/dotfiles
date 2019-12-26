@@ -1,25 +1,15 @@
-alias cdc='node /Users/hien.le/Documents/work/cenx/apps/tools/cenx-directive-tool/src/index.js'
 alias hs='history | grep'
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
 alias d='dirs -v | head -10'
 alias cpwd='pwd | pbcopy'
 alias cp='cp -i'
-alias meow='cat'
-alias please='sudo'
 alias -g G='| grep -i'
 alias lsa='ls -a'
 alias showDesktop='foo(){defaults write com.apple.finder CreateDesktop true; killall Finder}; foo '
 alias hideDesktop='foo(){defaults write com.apple.finder CreateDesktop false; killall Finder}; foo '
-
-alias startshadow='npm run shadow-cljs:start && npm run dev-server:start'
-alias stopshadow='npm run shadow-cljs:stop && npm run dev-server:stop'
-alias startdev='npx lerna run --parallel watch'
-alias restartdev='nvm use && npx lerna bootstrap && npx lerna run --parallel watch'
 
 alias zprompt='vim ~/.zsh/prompt'
 alias zconfig="vim ~/.zshrc"
 alias zalias='vim ~/.zsh/aliases'
 alias zfn='vim ~/.zsh/functions'
 alias zupdate='source ~/.zshrc'
-alias etc13="echo '150.132.197.148 eric-cenx-rest-api' | sudo tee -a /etc/hosts; dscacheutil -flushcache"
-alias etc007="echo '10.120.10.148 eric-cenx-rest-api' | sudo tee -a /etc/hosts; dscacheutil -flushcache"

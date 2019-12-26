@@ -37,7 +37,7 @@ filetype plugin indent on
 syntax on
 
 " dracula, ir_black, spacegray, basic
-colorscheme basic 
+" colorscheme basic 
 
 " ============== keyboard shortcuts ==============
 " :map is recursive | :noremap is non-recursive
