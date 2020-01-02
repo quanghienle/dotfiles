@@ -13,6 +13,13 @@ function bmrm { rm -i "$MARKPATH/$1"}
 # list directory bookbarks
 function bmls { ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/-/g' && echo}
 
+# allows tab when cdx
+function _completemarks {
+  reply=($(ls $MARKPATH))
+}
+compctl -K _completemarks cdx
+compctl -K _completemarks bmrm
+
 # show directory stack and ask for a dir to switch to
 function dstack() {
   emulate -L zsh

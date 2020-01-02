@@ -7,8 +7,10 @@ alias -g G='| grep -i'
 alias lsa='ls -a'
 alias showDesktop='foo(){defaults write com.apple.finder CreateDesktop true; killall Finder}; foo '
 alias hideDesktop='foo(){defaults write com.apple.finder CreateDesktop false; killall Finder}; foo '
+alias outlookMode='defaults write com.microsoft.Outlook NSRequiresAquaSystemAppearance -bool yes'
 
 alias zprompt='vim ~/.zsh/prompt'
+alias p10k='vim ~/.p10k.zsh'
 alias zconfig="vim ~/.zshrc"
 alias zalias='vim ~/.zsh/aliases'
 alias zfn='vim ~/.zsh/functions'

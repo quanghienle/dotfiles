@@ -6,10 +6,10 @@ filetype plugin on
 " add plugin, save and close, run :PluginInstall
 "
 call plug#begin('~/.vim/plugged')
+
 Plug 'srcery-colors/srcery-vim'
-Plug  'scrooloose/nerdtree'
+Plug ' scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
-Plug 'junegunn/limelight.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
@@ -22,12 +22,7 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-
-" Clojure
-Plug 'guns/vim-clojure-static'
-Plug 'guns/vim-clojure-highlight'
-Plug 'tpope/vim-fireplace'
-Plug 'luochen1990/rainbow'
+Plug 'wlangstroth/vim-racket'
 
 call plug#end()
 
@@ -37,7 +32,7 @@ filetype plugin indent on
 syntax on
 
 " dracula, ir_black, spacegray, basic
-" colorscheme basic 
+colorscheme ir_black 
 
 " ============== keyboard shortcuts ==============
 " :map is recursive | :noremap is non-recursive
@@ -67,25 +62,17 @@ noremap <C-l> <C-w>l
 noremap <leader>pi :PlugInstall<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 
-autocmd BufEnter *.md exe 'noremap <F5> :!open -a "Google Chrome.app" %:p<CR>'
-
 " source/edit vim
 noremap <silent> <leader>rv :w<CR>:nohl<CR>:source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " copy selected text to system clipboard
 vnoremap <leader>y :w !pbcopy<CR><CR>
 
-" open and close parenthesis
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-
 "increase search
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
+
 " :h g:incsearch#auto_nohlsearch
 set hlsearch
 nmap <Esc><Esc> :nohl<CR>
@@ -106,6 +93,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:netrw_dirhistmax = 0
 let g:airline_theme='kolor'    "themes: dracula, molokai, kolor...
+
+set expandtab
 
 set nofoldenable    " disable folding
 set background=dark
@@ -151,9 +140,13 @@ let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 
+if has("autocmd")
+    au BufReadPost *.rkt,*.rktl set filetype=racket
+    au filetype racket set lisp
+    au filetype racket set autoindent
+endif
+
 let g:srcery_transparent_background=1
-autocmd BufEnter *.cljs colorscheme srcery
-autocmd BufEnter *.clj colorscheme srcery "base luciustomorrow-night-eighties
 
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE
