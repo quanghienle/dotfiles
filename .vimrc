@@ -8,7 +8,7 @@ filetype plugin on
 call plug#begin('~/.vim/plugged')
 
 Plug 'srcery-colors/srcery-vim'
-Plug ' scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'plasticboy/vim-markdown'
 Plug 'ctrlpvim/ctrlp.vim'

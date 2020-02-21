@@ -15,3 +15,6 @@ alias zconfig="vim ~/.zshrc"
 alias zalias='vim ~/.zsh/aliases'
 alias zfn='vim ~/.zsh/functions'
 alias zupdate='source ~/.zshrc'
+alias chrome="open -a 'Google Chrome'"
+
+alias activate-tf='source ~/./venv/bin/activate'
