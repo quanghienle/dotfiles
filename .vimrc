@@ -15,6 +15,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'preservim/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -98,7 +99,7 @@ let g:surround_{char2nr('c')} = "<center>\r</center>"
 
 set nocompatible
 set nowrap
-set shellcmdflag=-ic
+set shellcmdflag=-c
 set textwidth=100
 set expandtab
 set autoindent
@@ -128,7 +129,6 @@ set cmdheight=2
 set updatetime=300
 set shortmess+=c
 
-
 set number
 set relativenumber
 
@@ -137,7 +137,7 @@ set background=dark
 
 highlight LineNr       ctermbg=None ctermfg=60 
 highlight SignColumn   ctermbg=None
-highlight CursorLineNr ctermbg=None ctermfg=81
+highlight CursorLineNr ctermbg=None ctermfg=81 cterm=bold
 highlight Normal       ctermbg=None
 highlight NonText      ctermbg=None
 
