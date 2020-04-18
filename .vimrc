@@ -35,8 +35,8 @@ noremap <silent> <leader>rv
 
 set splitbelow
 set splitright
-noremap <leader>h :split<CR>
-noremap <leader>v :vsplit<CR>
+noremap <leader>sh :split<CR>
+noremap <leader>sv :vsplit<CR>
 
 
 vnoremap <leader>y "+y
@@ -74,6 +74,11 @@ let g:netrw_dirhistmax = 0
 nnoremap <leader>t :NERDTreeToggle<CR>
 
 
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+
+
 let g:rainbow_active = 1
 let g:rbpt_max = 5
 au VimEnter * RainbowParenthesesToggle
@@ -96,25 +101,24 @@ set nowrap
 set shellcmdflag=-ic
 set textwidth=100
 set expandtab
-set nofoldenable    " disable folding
 set autoindent
-set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
-set backspace=2                                              " Fix broken backspace in some setups
-set clipboard=unnamed                                        " yank and paste with the system clipboard
-set directory-=.                                             " don't store swapfiles in the current directory
+set autoread
+set backspace=2
+set clipboard=unnamed
+set directory-=.    
 set encoding=utf-8
-set ignorecase                                               " case-insensitive search
-set incsearch                                                " search as you type
-set laststatus=2                                             " always show statusline
-set ruler                                                    " show where you are
-set scrolloff=3                                              " show context above/below cursorline
-set shiftwidth=2                                             " normal mode indentation commands use 2 spaces
+set ignorecase     
+set incsearch     
+set laststatus=2 
+set ruler       
+set scrolloff=3
+set shiftwidth=2
 set showcmd
-set smartcase                                                " case-sensitive search if any caps
-set softtabstop=2                                            " insert mode tab and backspace use 2 spaces
-set tabstop=8                                                " actual tabs occupy 8 characters
+set smartcase  
+set softtabstop=2 
+set tabstop=8 
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
-set wildmenu                                                 " show a navigable menu for tab completion
+set wildmenu     
 set wildmode=longest,list,full
 set mouse=a
 set hidden
@@ -143,7 +147,7 @@ highlight GitGutterChangeDelete ctermfg=13 ctermbg=None
 highlight GitGutterDelete       ctermfg=1 ctermbg=None
 
 highlight VertSplit cterm=None ctermfg=61 ctermbg=None
-"set fillchars+=vert:│
+set fillchars+=vert:│
 
 
 au BufRead,BufNewFile *.md setlocal textwidth=100
@@ -173,3 +177,4 @@ nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+
