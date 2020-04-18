@@ -44,6 +44,9 @@ source ~/.zsh/prompt
 source ~/.zsh/history
 source ~/.zsh/key-bindings
 
+set -o emacs
+
+#set -o
 
 ################ docker keychain ########################
 if [ $(command -v docker-credential-osxkeychain) ]; then

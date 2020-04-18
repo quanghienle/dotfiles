@@ -7,7 +7,7 @@ filetype plugin on
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'srcery-colors/srcery-vim'
+" Plug 'srcery-colors/srcery-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'plasticboy/vim-markdown'
@@ -16,23 +16,21 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
 Plug 'easymotion/vim-easymotion'
-Plug 'haya14busa/is.vim'
-Plug 'haya14busa/incsearch.vim'
 Plug 'kien/rainbow_parentheses.vim'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'wlangstroth/vim-racket'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'preservim/nerdcommenter'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
-"source ~/.vim/my-colors.vim
 
 filetype plugin indent on
 syntax on
 
 " dracula, ir_black, spacegray, basic
-colorscheme ir_black 
+colorscheme PaperColor 
 
 " ============== keyboard shortcuts ==============
 " :map is recursive | :noremap is non-recursive
@@ -40,76 +38,66 @@ colorscheme ir_black
 
 let mapleader = ','
 
-" esc key
-" imap <leader>q \<Esc>
-inoremap jj <Esc>
-inoremap <F2> <Esc>:w<CR>i
-inoremap jk <C-o>
-vnoremap jj <Esc>
-
 " split and navigate between panes
 nmap G Gzz
 nmap n nzz
 nmap N Nzz
 noremap <leader>h :split<CR>
 noremap <leader>v :vsplit<CR>
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
 
-" Plugin mapping
-noremap <leader>pi :PlugInstall<CR>
-nnoremap <leader>t :NERDTreeToggle<CR>
+noremap <silent> <leader>rv :w<CR>
+      \ :nohl<CR>
+      \ :source ~/.vimrc<CR>
+      \ :filetype detect<CR>
+      \ :exe ":echo 'vimrc reloaded'"<CR>
 
-" source/edit vim
-noremap <silent> <leader>rv :w<CR>:nohl<CR>:source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " copy selected text to system clipboard
 vnoremap <leader>y :w !pbcopy<CR><CR>
 
-"increase search
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
-" :h g:incsearch#auto_nohlsearch
 set hlsearch
 nmap <Esc><Esc> :nohl<CR>
-let g:incsearch#auto_nohlsearch = 1
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
+nnoremap i :nohl<CR>i
 
-let g:instant_markdown_open_to_the_world = 1
+let g:gitgutter_sign_modified_removed = '≃'
+nmap <leader>git :GitGutterToggle<CR>
+
+
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
 let NERDTreeShowHidden = 1
+let g:netrw_dirhistmax = 0
+nnoremap <leader>t :NERDTreeToggle<CR>
+
+" Rainbow parenthesis
 let g:rainbow_active = 1
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:netrw_dirhistmax = 0
-let g:airline_theme='kolor'    "themes: dracula, molokai, kolor...
+let g:airline_theme='deus'    "themes: dracula, molokai, kolor...
 
+let g:surround_{char2nr('b')} = "__\r__"
+let g:surround_{char2nr('c')} = "<center>\r</center>"
+
+let g:ctrlp_working_path_mode = 0
+
+set nowrap
 set expandtab
-
 set nofoldenable    " disable folding
-set background=dark
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2                                              " Fix broken backspace in some setups
-set backupcopy=yes                                           " see :help crontab
 set clipboard=unnamed                                        " yank and paste with the system clipboard
 set directory-=.                                             " don't store swapfiles in the current directory
 set encoding=utf-8
-set expandtab                                                " expand tabs to spaces
 set ignorecase                                               " case-insensitive search
 set incsearch                                                " search as you type
 set laststatus=2                                             " always show statusline
-set number                                                   " show line numbers
 set ruler                                                    " show where you are
 set scrolloff=3                                              " show context above/below cursorline
 set shiftwidth=2                                             " normal mode indentation commands use 2 spaces
@@ -125,15 +113,23 @@ set mouse=a
 set splitbelow
 set splitright
 
-set nowrap
+set number
+set relativenumber
 
-" Rainbow parenthesis
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+set background=dark
 
-let g:ctrlp_working_path_mode = 0
+highlight LineNr ctermfg=60 ctermbg=None
+highlight SignColumn ctermbg=None
+highlight CursorLineNr ctermfg=11 ctermbg=None
+highlight Normal guibg=None ctermbg=None
+highlight NonText ctermbg=None
+highlight VertSplit cterm=NONE ctermfg=60 ctermbg=None
+
+highlight GitGutterAdd    ctermfg=2 ctermbg=None
+highlight GitGutterChange ctermfg=3 ctermbg=None
+highlight GitGutterDelete ctermfg=1 ctermbg=None
+
+set fillchars+=vert:│
 
 "Mode Settings
 let &t_SI.="\e[5 q" "SI = INSERT mode
@@ -146,11 +142,54 @@ if has("autocmd")
     au filetype racket set autoindent
 endif
 
-let g:srcery_transparent_background=1
 
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
+set hidden
+set nobackup
+set nowritebackup
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
 
-highlight LineNr term=bold ctermfg=DarkGrey guifg=DarkGrey
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-runtime! macros/matchit.vim
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Mappings using CoCList:
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>

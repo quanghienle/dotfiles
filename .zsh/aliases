@@ -1,3 +1,4 @@
+alias ra='ranger'
 alias hs='history | grep'
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
 alias d='dirs -v | head -10'
@@ -7,6 +8,8 @@ alias -g G='| grep -i'
 alias lsa='ls -a'
 alias showDesktop='foo(){defaults write com.apple.finder CreateDesktop true; killall Finder}; foo '
 alias hideDesktop='foo(){defaults write com.apple.finder CreateDesktop false; killall Finder}; foo '
+alias showActiveDock='foo(){defaults write com.apple.dock static-only -bool TRUE; killall Dock}; foo '
+alias showAllDock='foo(){defaults write com.apple.dock static-only -bool FALSE; killall Dock}; foo '
 alias outlookMode='defaults write com.microsoft.Outlook NSRequiresAquaSystemAppearance -bool yes'
 
 alias zprompt='vim ~/.zsh/prompt'
