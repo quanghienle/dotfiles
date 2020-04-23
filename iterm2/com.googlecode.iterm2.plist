@@ -3907,7 +3907,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>269 109 796 486 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1440 -46 1920 1080 1440 -46 1920 1080 </string>
+	<string>2400 -46 960 1080 1440 -46 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>-1110 375 570 427 -1920 -37 1920 1080 </string>
 	<key>NeverWarnAboutShortLivedSessions_E5FDFB05-C479-4119-B35F-1041FBF1CEE2</key>
@@ -4104,13 +4104,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.22833251953125</real>
+				<real>0.224609375</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.13958068799911416</real>
+				<real>0.13486809487083881</real>
 				<key>Red Component</key>
-				<real>0.095881819725036621</real>
+				<real>0.090682059526443481</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -4140,7 +4140,7 @@
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
-			<real>18.5046974143401</real>
+			<real>27.98125198286802</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -4161,7 +4161,7 @@
 			<key>Command</key>
 			<string>neofetch</string>
 			<key>Cursor Boost</key>
-			<real>0.10488061797752808</real>
+			<real>0.26278089887640449</real>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -4719,13 +4719,13 @@
 				<real>0.0</real>
 			</dict>
 			<key>Minimum Contrast</key>
-			<real>0.18332741477272727</real>
+			<real>0.0</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
 			<string>Banana</string>
 			<key>Non Ascii Font</key>
-			<string>SourceCodePro+Powerline+AwesomeRegular 13</string>
+			<string>HackNerdFontCompleteM-Regular 13</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Non-ASCII Ligatures</key>
@@ -4791,13 +4791,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.394927978515625</real>
+				<real>0.22686767578125</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.2746695974409315</real>
+				<real>0.1423768274225434</real>
 				<key>Red Component</key>
-				<real>0.19685535086318851</real>
+				<real>0.087706290185451508</real>
 			</dict>
 			<key>Tags</key>
 			<array/>
@@ -4806,19 +4806,19 @@
 			<key>Title Components</key>
 			<integer>38</integer>
 			<key>Transparency</key>
-			<real>0.19448366116751267</real>
+			<real>0.0</real>
 			<key>Underline Color</key>
 			<dict>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.096136522013694048</real>
+				<real>0.21555339765302506</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.096136522013694048</real>
+				<real>0.8656005859375</real>
 				<key>Red Component</key>
-				<real>0.259307861328125</real>
+				<real>0.047033747658133507</real>
 			</dict>
 			<key>Unlimited Scrollback</key>
 			<true/>
@@ -5695,6 +5695,7 @@
 	<key>NoSyncBFPRecents</key>
 	<array>
 		<string>Monaco</string>
+		<string>Hack Nerd Font Mono</string>
 	</array>
 	<key>NoSyncConfirmRunOpenFile</key>
 	<true/>
@@ -5705,14 +5706,14 @@
 		<key>screenFrame</key>
 		<string>{{1440, -46}, {1920, 1080}}</string>
 		<key>topLeft</key>
-		<string>{2378, 754}</string>
+		<string>{1444, 702}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>8ECCB274-D843-46CA-86AE-3279629F47F0</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>309</integer>
+	<integer>319</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -6505,7 +6506,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-04-18T01:14:50Z</date>
+	<date>2020-04-22T01:14:53Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>

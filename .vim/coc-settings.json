@@ -21,9 +21,5 @@
       "trace.server": "verbose",
       "initializationOptions": {}
     }
-  },
-  "markdownlint.config": {
-    "default": true,
-    "line_length": false
   }
 }
