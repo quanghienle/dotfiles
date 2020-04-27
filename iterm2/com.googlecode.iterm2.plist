@@ -3907,7 +3907,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>269 109 796 486 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2400 -46 960 1080 1440 -46 1920 1080 </string>
+	<string>1666 49 728 985 1440 -46 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>-1110 375 570 427 -1920 -37 1920 1080 </string>
 	<key>NeverWarnAboutShortLivedSessions_E5FDFB05-C479-4119-B35F-1041FBF1CEE2</key>
@@ -4167,13 +4167,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.89779067127295775</real>
+				<real>0.34313241754807677</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.901031494140625</real>
+				<real>0.99737548828125</real>
 				<key>Red Component</key>
-				<real>0.058211782015860081</real>
+				<real>0.04760422557592392</real>
 			</dict>
 			<key>Cursor Guide Color</key>
 			<dict>
@@ -4725,7 +4725,7 @@
 			<key>Name</key>
 			<string>Banana</string>
 			<key>Non Ascii Font</key>
-			<string>HackNerdFontCompleteM-Regular 13</string>
+			<string>HackNerdFontCompleteM-Regular 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Non-ASCII Ligatures</key>
@@ -4843,7 +4843,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>Working Directory</key>
 			<string>/Users/hien.le</string>
 		</dict>
@@ -5694,7 +5694,7 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>Monaco</string>
+		<string>Hack Nerd Font</string>
 		<string>Hack Nerd Font Mono</string>
 	</array>
 	<key>NoSyncConfirmRunOpenFile</key>
@@ -5706,14 +5706,14 @@
 		<key>screenFrame</key>
 		<string>{{1440, -46}, {1920, 1080}}</string>
 		<key>topLeft</key>
-		<string>{1444, 702}</string>
+		<string>{1685, 753}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>8ECCB274-D843-46CA-86AE-3279629F47F0</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>319</integer>
+	<integer>327</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -6506,7 +6506,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-04-22T01:14:53Z</date>
+	<date>2020-04-25T15:45:33Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>

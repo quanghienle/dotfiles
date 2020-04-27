@@ -19,6 +19,13 @@ close_bracket(){
     echo "%{$fg_bold[grey]%}]";
 }
 
+pointy_open(){
+    echo "%{$fg_bold[grey]%}<";
+}
+pointy_close(){
+    echo "%{$fg_bold[grey]%}>";
+}
+
 git_branch() {
   echo $($git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
@@ -27,7 +34,7 @@ git_dirty() {
   if $(! $git status -s &> /dev/null); then
     echo ""
   else
-    echo "$(dashes)$(open_bracket)$FG[183]%{$fg_bold[blue]%}$(git_prompt_info)$(close_bracket)";
+    echo "$(dashes)$(pointy_open)$FG[183]%{$fg_bold[magenta]%}$(git_prompt_info)$(pointy_close)";
   fi
 }
 
@@ -44,7 +51,7 @@ user_name() {
         if [ $UID -eq 0 ]; then
            echo "%{$fg_bold[red]%}%n▷ ";
         else
-           echo "$(open_bracket)%{$fg_bold[green]%}%n$(close_bracket)";
+           echo "$(pointy_open)%{$fg_bold[green]%}%n$(pointy_close)";
            #echo "%{$fg_bold[magenta]%}☠️ ";
         fi
 }
@@ -58,3 +65,4 @@ prompt_arrow() {
 
 export PROMPT=$'\n%{$fg_bold[grey]%}╭────$(user_name)$(dashes)$(directory_name)$(git_dirty)
 \%{$fg_bold[grey]%}╰─$(prompt_arrow)'
+
