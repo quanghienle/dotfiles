@@ -52,7 +52,8 @@ nnoremap <C-h> <C-w>h
 inoremap <expr> <C-j> pumvisible() ? "<Down>" : "<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "<Up>" : "<C-k>"
 
-vnoremap <leader>y :w !pbcopy<CR><CR>
+xnoremap <leader>y "+y
+xnoremap p "_dP
 
 set hlsearch incsearch     
 nmap <Esc><Esc> :nohl<CR>
@@ -62,8 +63,16 @@ nmap n nzz
 
 nmap <leader>n :bn<CR>
 
-nmap <leader>sf :Files<CR>
-nmap <leader>ss :Ag<CR>
+" prevent open calling FZF within NERDTree
+function! FZFOpen(command_str)
+  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
+    exe "normal! \<c-w>\<c-w>"
+  endif
+  exe 'normal! ' . a:command_str . "\<cr>"
+endfunction
+
+nnoremap <leader>sf :call FZFOpen(':Files')<CR>
+nnoremap <leader>ss :call FZFOpen(':Ag')<CR>
 
 
 let g:gitgutter_sign_modified_removed = '≃'
@@ -86,7 +95,7 @@ function! NerdTreeToggleFind()
     endif
 endfunction
 
-nnoremap <leader>t :call NerdTreeToggleFind()<CR>zz
+nnoremap <leader>t :call NerdTreeToggleFind()<CR><C-w>=
 
 let NERDTreeHighlightCursorline=1
 let g:NERDSpaceDelims = 1
@@ -117,7 +126,7 @@ set path+=**
 set ruler textwidth=100 shiftwidth=2 pumheight=10
 set nocompatible noswapfile nowrap
 set showcmd shellcmdflag=-c
-set expandtab softtabstop=2 backspace=2
+set expandtab softtabstop=2 tabstop=2 backspace=2
 set autoindent autoread ignorecase smartcase  
 set clipboard=unnamed directory-=. encoding=utf-8
 set laststatus=2 scrolloff=3
@@ -128,7 +137,7 @@ set hidden nobackup nowritebackup noerrorbells
 set updatetime=300
 set shortmess+=c
 
-set number signcolumn=auto relativenumber 
+set number signcolumn=no relativenumber 
 " set cursorline cursorlineopt=number
 
 highlight DiffAdd         guibg=#306f6b     guifg=NONE
@@ -136,11 +145,13 @@ highlight DiffDelete      guibg=NONE        guifg=#f50a04    gui=BOLD
 highlight DiffChange      guibg=#383656     guifg=NONE
 highlight DiffText        guibg=#4e4c78     guifg=NONE
 
-highlight Visual          guibg=#676E95
+highlight Visual          guibg=#565c7d
+highlight Search          guibg=#6d847f     guifg=#511b72     gui=BOLD
+highlight IncSearch       guibg=#21fa06     guifg=#511b72     gui=BOLD
 highlight CursorLine      guibg=#444267
 highlight VertSplit       guibg=NONE        guifg=#676E95     gui=BOLD
 
-" highlight Normal          guibg=#212333
+highlight Normal          guibg=NONE "#212333
 highlight Pmenu           guibg=#414863
 highlight PmenuSel        guibg=#6A3EB5     guifg=#bfc7d5     gui=BOLD
 highlight PmenuSbar       guibg=#352B59     guifg=#352B59
@@ -160,10 +171,10 @@ nmap <silent> gr <Plug>(coc-references)
 
 nmap <leader>rn <Plug>(coc-rename)
 
-vmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-vmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 nmap <leader>ac  <Plug>(coc-codeaction)

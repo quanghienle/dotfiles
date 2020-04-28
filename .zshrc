@@ -8,7 +8,7 @@ export PATH="$PATH:/usr/local/mongodb/bin"
 
 # Themes found in: /Users/hien.le/.oh-my-zsh/themes
 #ZSH_THEME="my-theme"
-#ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 ############ POWERLEVEL THEME SETTINGS ##############
 #POWERLEVEL9K_MODE='awesome-fontconfig'
@@ -40,7 +40,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh/zsh-autosuggestions.zsh
 source ~/.zsh/aliases
 source ~/.zsh/functions
-source ~/.zsh/prompt
+# source ~/.zsh/prompt
 source ~/.zsh/history
 source ~/.zsh/key-bindings
 
@@ -58,3 +58,6 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
