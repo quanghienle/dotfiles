@@ -2,6 +2,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
@@ -74,6 +75,16 @@ endfunction
 nnoremap <leader>sf :call FZFOpen(':Files')<CR>
 nnoremap <leader>ss :call FZFOpen(':Ag')<CR>
 
+" Toggle signcolumn
+function! ToggleSignColumn()
+    if (&signcolumn == "yes")
+        set signcolumn=no
+    else
+        set signcolumn=yes
+    endif
+endfunction
+
+nmap <leader>sc :call ToggleSignColumn()<CR>
 
 let g:gitgutter_sign_modified_removed = '≃'
 
@@ -138,24 +149,31 @@ set updatetime=300
 set shortmess+=c
 
 set number signcolumn=no relativenumber 
-" set cursorline cursorlineopt=number
+set cursorline cursorlineopt=number
 
-highlight DiffAdd         guibg=#306f6b     guifg=NONE
-highlight DiffDelete      guibg=NONE        guifg=#f50a04    gui=BOLD
-highlight DiffChange      guibg=#383656     guifg=NONE
-highlight DiffText        guibg=#4e4c78     guifg=NONE
+autocmd FileType list,nerdtree setlocal cursorlineopt=both
 
-highlight Visual          guibg=#565c7d
-highlight Search          guibg=#6d847f     guifg=#511b72     gui=BOLD
-highlight IncSearch       guibg=#21fa06     guifg=#511b72     gui=BOLD
-highlight CursorLine      guibg=#444267
-highlight VertSplit       guibg=NONE        guifg=#676E95     gui=BOLD
+hi DiffAdd         guibg=#306f6b     guifg=NONE
+hi DiffDelete      guibg=NONE        guifg=#f50a04    gui=BOLD
+hi DiffChange      guibg=#383656     guifg=NONE
+hi DiffText        guibg=#4e4c78     guifg=NONE
 
-highlight Normal          guibg=NONE "#212333
-highlight Pmenu           guibg=#414863
-highlight PmenuSel        guibg=#6A3EB5     guifg=#bfc7d5     gui=BOLD
-highlight PmenuSbar       guibg=#352B59     guifg=#352B59
-highlight PmenuThumb      guibg=#352B59     guifg=#352B59
+hi CursorLineNr    guibg=NONE        guifg=#c0f307     gui=BOLD
+hi LineNr          guibg=NONE        guifg=#5c6593
+hi! link NonText    LineNr
+hi! link VertSplit  LineNr
+
+hi Visual          guibg=#565c7d
+hi Search          guibg=#6d847f     guifg=#511b72     gui=BOLD
+hi IncSearch       guibg=#21fa06     guifg=#511b72     gui=BOLD
+hi CursorLine      guibg=#444267
+
+" hi Normal          guibg=#212333
+hi Normal          guibg=NONE 
+hi Pmenu           guibg=#414863
+hi PmenuSel        guibg=#6A3EB5     guifg=#bfc7d5     gui=BOLD
+hi PmenuSbar       guibg=#352B59     guifg=#352B59
+hi PmenuThumb      guibg=#352B59     guifg=#352B59
 
 let g:fzf_colors = {
             \ 'bg+':     ['bg', 'CursorLine'],
