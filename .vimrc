@@ -158,7 +158,7 @@ set hidden nobackup nowritebackup noerrorbells
 set updatetime=300
 set shortmess+=c
 
-set number signcolumn=yes relativenumber 
+set number signcolumn=auto relativenumber 
 set cursorline cursorlineopt=both "number
 
 " autocmd FileType list,nerdtree setlocal cursorlineopt=both
