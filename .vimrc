@@ -25,9 +25,12 @@ call plug#end()
 
 filetype plugin indent on
 syntax on
+" if !exists('g:syntax_on')
+"   syntax enable
+" endif
 
 " colorscheme PaperColor 
-" colorscheme combat256
+" colorscheme wombat256
 " colorscheme mycolor
 
 colorscheme palenight
@@ -63,6 +66,11 @@ nmap G Gzz
 nmap n nzz
 
 nmap <leader>n :bn<CR>
+nmap <tab> :bn<CR>
+nmap <S-Tab> :bp<CR>
+command Bd bp | sp | bn | bd
+
+" nmap <leader>e H<leader><leader>w
 
 " prevent open calling FZF within NERDTree
 function! FZFOpen(command_str)
@@ -73,6 +81,7 @@ function! FZFOpen(command_str)
 endfunction
 
 nnoremap <leader>sf :call FZFOpen(':Files')<CR>
+nnoremap <C-p> :call FZFOpen(':Files')<CR>
 nnoremap <leader>ss :call FZFOpen(':Ag')<CR>
 
 " Toggle signcolumn
@@ -122,7 +131,8 @@ au Syntax * RainbowParenthesesLoadBraces
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme="palenight" "'deus'
+" let g:airline_theme='deus' "palenight
+let g:airline_theme='palenight'
 let g:airline_section_y = ''
 let g:airline_section_warning = ''
 let g:airline_skip_empty_sections = 1
@@ -148,17 +158,27 @@ set hidden nobackup nowritebackup noerrorbells
 set updatetime=300
 set shortmess+=c
 
-set number signcolumn=no relativenumber 
-set cursorline cursorlineopt=number
+set number signcolumn=yes relativenumber 
+set cursorline cursorlineopt=both "number
 
-autocmd FileType list,nerdtree setlocal cursorlineopt=both
+" autocmd FileType list,nerdtree setlocal cursorlineopt=both
+
+" show highlight colors
+" :so $VIMRUNTIME/syntax/hitest.vim
+
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorlineopt=both
+  autocmd WinLeave * setlocal cursorlineopt=number
+augroup END
+
 
 hi DiffAdd         guibg=#306f6b     guifg=NONE
-hi DiffDelete      guibg=NONE        guifg=#f50a04    gui=BOLD
+hi DiffDelete      guibg=#2c2f45        guifg=#f50a04    gui=BOLD
 hi DiffChange      guibg=#383656     guifg=NONE
 hi DiffText        guibg=#4e4c78     guifg=NONE
 
-hi CursorLineNr    guibg=NONE        guifg=#c0f307     gui=BOLD
+hi CursorLineNr    guibg=NONE        guifg=#f802ea     gui=BOLD term=BOLD
 hi LineNr          guibg=NONE        guifg=#5c6593
 hi! link NonText    LineNr
 hi! link VertSplit  LineNr
@@ -166,10 +186,14 @@ hi! link VertSplit  LineNr
 hi Visual          guibg=#565c7d
 hi Search          guibg=#6d847f     guifg=#511b72     gui=BOLD
 hi IncSearch       guibg=#21fa06     guifg=#511b72     gui=BOLD
-hi CursorLine      guibg=#444267
+hi CursorLine      guibg=#3b3f5e
+
+" for clojure keywords
+hi Keyword         guibg=NONE        guifg=#d7a4fb
 
 " hi Normal          guibg=#212333
-hi Normal          guibg=NONE 
+" hi Normal          guibg=NONE 
+hi Normal          guibg=#30334b
 hi Pmenu           guibg=#414863
 hi PmenuSel        guibg=#6A3EB5     guifg=#bfc7d5     gui=BOLD
 hi PmenuSbar       guibg=#352B59     guifg=#352B59
@@ -177,7 +201,8 @@ hi PmenuThumb      guibg=#352B59     guifg=#352B59
 
 let g:fzf_colors = {
             \ 'bg+':     ['bg', 'CursorLine'],
-            \ 'gutter':  ['bg', 'Normal'],
+            \ 'gutter':  ['bg', 'DiffDelete'],
+            \ 'bg':      ['bg', 'DiffDelete'],
             \ 'border':  ['fg', 'Function']}
 
 set fillchars+=vert:│
