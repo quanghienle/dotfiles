@@ -22,4 +22,6 @@ alias zupdate='source ~/.zshrc'
 alias chrome="open -a 'Google Chrome'"
 alias ra='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
+alias -g lolcat='lolcat'
+
 alias activate-tf='source ~/./venv/bin/activate'
