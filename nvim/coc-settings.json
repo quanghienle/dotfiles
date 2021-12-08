@@ -1,0 +1,4 @@
+{
+    "html.filetypes": ["html","handlebars","htmldjango","blade","smarty"],
+    "html.autoClosingTags": true
+}

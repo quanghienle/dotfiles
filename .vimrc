@@ -20,32 +20,38 @@ Plug 'drewtempelmeyer/palenight.vim'
 
 Plug 'preservim/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
+Plug 'dkanas/phosphor.vim'
+
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+
+" Plug 'nathanaelkane/vim-indent-guides'
+
+Plug 'sheerun/vim-polyglot'
+Plug 'alvan/vim-closetag'
+" Plug 'stephpy/vim-php-cs-fixer'
 
 call plug#end()
 
 filetype plugin indent on
 syntax on
-" if !exists('g:syntax_on')
 "   syntax enable
 " endif
+" if !exists('g:syntax_on')
 
 " colorscheme PaperColor 
 " colorscheme wombat256
 " colorscheme mycolor
 
 colorscheme palenight
+" colorscheme phosphor
 set background=dark 
 set termguicolors
 
 let mapleader = ','
 
-noremap <silent> <leader>ws 
-      \ :w<CR>
-      \ :source %<CR>
-      \ :nohl<CR>
+noremap <silent> <leader>ws :w<CR>:source %<CR>:nohl<CR>
 
 set splitbelow splitright
 noremap <leader>sh :split<CR>
@@ -55,6 +61,11 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
+" nnoremap <esc> :noh<return><esc>
+
 inoremap <expr> <C-j> pumvisible() ? "<Down>" : "<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "<Up>" : "<C-k>"
 
@@ -62,16 +73,90 @@ xnoremap <leader>y "+y
 xnoremap p "_dP
 nmap <leader>sw yiw/<C-r>"
 
+nnoremap cn *``cgn
+nnoremap cN *``cgN
+nnoremap Y y$
+
 set hlsearch incsearch     
-nmap <Esc><Esc> :nohl<CR>
+" nmap <leader><esc> :nohl<CR>
 nnoremap i :nohl<CR>i
 nmap G Gzz
 nmap n nzz
 
-nmap <leader>n :bn<CR>
 nmap <tab> :bn<CR>
 nmap <S-Tab> :bp<CR>
 command Bd bp | sp | bn | bd
+
+" PHP setup
+" let g:php_cs_fixer_rules = "@PSR2"          " options: --rules (default:@PSR2)
+" let g:php_cs_fixer_php_path = "php"               " Path to PHP
+" let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+" let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
+" let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.
+" 
+" nnoremap <silent><leader>pcd :call PhpCsFixerFixDirectory()<CR>
+" nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
+"
+" au BufRead,BufNewFile *.tpl set filetype=smarty
+au BufRead,BufNewFile *.tpl set filetype=html
+
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tpl,*.php'
+let g:closetag_filetypes = 'html,xhtml,phtml,tpl,php'
+
+if executable('intelephense')
+  augroup LspPHPIntelephense
+    au!
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'intelephense',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'intelephense --stdio']},
+        \ 'whitelist': ['php'],
+        \ 'initialization_options': {'storagePath': '/tmp/intelephense'},
+        \ 'workspace_config': {
+        \   'intelephense': {
+        \     'files': {
+        \       'maxSize': 1000000,
+        \       'associations': ['*.php', '*.phtml'],
+        \       'exclude': [],
+        \     },
+        \     'completion': {
+        \       'insertUseDeclaration': v:true,
+        \       'fullyQualifyGlobalConstantsAndFunctions': v:false,
+        \       'triggerParameterHints': v:true,
+        \       'maxItems': 100,
+        \     },
+        \     'format': {
+        \       'enable': v:true
+        \     },
+        \   },
+        \ }
+        \})
+  augroup END
+endif
+
+let g:fzf_preview_window = 'right:50%'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8  }  }
+
+function! s:fzf_preview_p(bang, ...) abort
+    let preview_args = get(g:, 'fzf_preview_window', ['right:50%', 'ctrl-/'])
+    if empty(preview_args)
+        return { 'options': ['--preview-window', 'hidden'] }
+    endif
+
+    " For backward-compatiblity
+    if type(preview_args) == type('')
+        let preview_args = [preview_args]
+    endif
+    return call('fzf#vim#with_preview', extend(copy(a:000), preview_args))
+endfunction
+
+command! -bar -bang MarksPreview
+    \ call fzf#vim#marks(
+    \     s:fzf_preview_p(<bang>0, {'placeholder': '$([ -r $(echo {4} | sed "s#^~#$HOME#") ] && echo {4} || echo ' . fzf#shellescape(expand('%')) . '):{2}',
+    \               'options': '--preview-window +{2}-/2'}),
+    \     <bang>0)
+
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
 
 " prevent open calling FZF within NERDTree
 function! FZFOpen(command_str)
@@ -82,19 +167,16 @@ function! FZFOpen(command_str)
 endfunction
 
 nnoremap <leader>sf :call FZFOpen(':Files')<CR>
+vnoremap <leader>sf "py:execute ":FZF -q " . getreg("p")<CR>
+
 nnoremap <C-p> :call FZFOpen(':Files')<CR>
-nnoremap <leader>ss :call FZFOpen(':Ag')<CR>
 
-" Toggle signcolumn
-function! ToggleSignColumn()
-    if (&signcolumn == "yes")
-        set signcolumn=no
-    else
-        set signcolumn=yes
-    endif
-endfunction
+nnoremap <leader>sa :call FZFOpen(':Ag')<CR>
+xnoremap <leader>sa "py:call FZFOpen(':Ag ' . getreg("p"))<CR>
 
-nmap <leader>sc :call ToggleSignColumn()<CR>
+nnoremap <leader>sl :call FZFOpen(':Lines')<CR>
+nnoremap <leader>sb :call FZFOpen(':Buffers')<CR>
+nnoremap <leader>sm :call FZFOpen(':MarksPreview')<CR>
 
 let g:gitgutter_sign_modified_removed = '≃'
 
@@ -132,6 +214,14 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+" let g:indent_guides_guide_size = 1
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3b4569
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3b4569
+" let g:indent_guides_enable_on_vim_startup = 1
+    "sdfsdf
+        "sdfsdfsdf
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 " let g:airline_theme='deus' "palenight
@@ -147,13 +237,13 @@ let g:surround_{char2nr('b')} = "__\r__"
 let g:surround_{char2nr('c')} = "<center>\r</center>"
   
 set path+=**
-set ruler textwidth=100 shiftwidth=2 pumheight=10
+set ruler textwidth=100 shiftwidth=4 pumheight=10
 set nocompatible noswapfile nowrap
 set showcmd shellcmdflag=-c
-set expandtab softtabstop=2 tabstop=2 backspace=2
+set expandtab softtabstop=4 tabstop=4 backspace=2
 set autoindent autoread ignorecase smartcase  
 set clipboard=unnamed directory-=. encoding=utf-8
-set laststatus=2 scrolloff=3
+set laststatus=2 scrolloff=8
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmenu wildmode=longest,list,full
 set mouse=a
@@ -161,7 +251,7 @@ set hidden nobackup nowritebackup noerrorbells
 set updatetime=300
 set shortmess+=c
 
-set number signcolumn=auto relativenumber 
+set number signcolumn=yes relativenumber 
 set cursorline cursorlineopt=both "number
 
 " autocmd FileType list,nerdtree setlocal cursorlineopt=both
