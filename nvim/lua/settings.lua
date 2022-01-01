@@ -50,13 +50,14 @@ local options = {
 
 vim.opt.shortmess:append('c');
 vim.opt.path:append('**');
-vim.opt.fillchars:append('vert:|');
+vim.opt.fillchars:append('vert:│');
 
 -- vim.opt.shellcmdflag:remove('c');
 vim.opt.directory:remove('.');
 
 local globals = {
     mapleader = ",",
+    gitgutter_sign_modified_removed = '≃'
 }
 
 for k, v in pairs(options) do

@@ -30,10 +30,10 @@ vim.api.nvim_set_keymap("x", "p", "\"_dP", opt)
 
 -- Buffers
 vim.api.nvim_set_keymap("n", "<Tab>", ":bn<CR>", opt)
-vim.api.nvim_set_keymap("n", "gn", ":bn<CR>", opt)
+vim.api.nvim_set_keymap("n", "<leader>bn", ":bn<CR>", opt)
 vim.api.nvim_set_keymap("n", "<S-Tab>", ":bp<CR>", opt)
-vim.api.nvim_set_keymap("n", "gp", ":bp<CR>", opt)
-vim.api.nvim_set_keymap("n", "<S-q>", ":bp<CR>:sp<CR>:bn<CR>:bd<CR>", opt)
+vim.api.nvim_set_keymap("n", "<leader>bp", ":bp<CR>", opt)
+vim.api.nvim_set_keymap("n", "<leader>bd", ":bp<CR>:sp<CR>:bn<CR>:bd<CR>", opt)
 
 -- Don't yank on delete char
 vim.api.nvim_set_keymap("n", "x", '"_x', opt)
@@ -43,6 +43,7 @@ vim.api.nvim_set_keymap("v", "X", '"_X', opt)
 
 -- write and souce
 vim.api.nvim_set_keymap("n", "<leader>ws", ":w<CR>:source %<CR>:nohl<CR>", opt)
+
 
 ---- GoTo code navigation.
 --vim.api.nvim_set_keymap("n", "gd", "<Plug>(coc-definition)", opt)

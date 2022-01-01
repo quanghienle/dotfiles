@@ -1,11 +1,9 @@
-
-
 require'nvim-tree'.setup {
   disable_netrw       = false,
   hijack_netrw        = true,
   open_on_setup       = false,
   ignore_ft_on_setup  = {},
-  auto_close          = false,
+  auto_close          = true,
   open_on_tab         = false,
   hijack_cursor       = false,
   update_cwd          = true,
@@ -40,7 +38,7 @@ require'nvim-tree'.setup {
     width = 40,
     hide_root_folder = false,
     side = 'left',
-    auto_resize = false,
+    auto_resize = true,
     mappings = {
       custom_only = false,
       list = { }
@@ -88,4 +86,4 @@ require'nvim-tree'.setup {
     { key = "g?",                           cb = tree_cb("toggle_help") },
 } ]]
 
-vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>lua require'nvim-tree'.toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>st", "<cmd>lua require'nvim-tree'.toggle()<CR>", {noremap = true, silent = true})

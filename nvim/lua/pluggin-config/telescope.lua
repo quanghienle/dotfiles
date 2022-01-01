@@ -19,9 +19,12 @@ require('telescope').setup {
             mirror = false,
           },
           prompt_position = "bottom",
+          height = 0.7,
+          width = 0.7,
         },
         file_sorter      = require('telescope.sorters').get_fzy_sorter,
         prompt_prefix    = ' 🔍 ',
+        selection_caret  = '➤ ', 
         color_devicons   = true,
 
         sortng_strategy = "ascending",
@@ -55,12 +58,14 @@ require('telescope').setup {
 }
 
 require('telescope').load_extension('fzf')
-require('telescope').load_extension('coc')
 
+local opts = { noremap = true, silent = true };
 
-vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fm", "<cmd>Telescope marks<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fh", "<cmd>Telescope<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+vim.api.nvim_set_keymap("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", opts)
+vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
+vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
+vim.api.nvim_set_keymap("n", "<leader>fm", "<cmd>Telescope marks<cr>", opts)
+vim.api.nvim_set_keymap("n", "<leader>fh", "<cmd>Telescope<cr>", opts)
+
 

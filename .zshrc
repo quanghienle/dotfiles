@@ -60,3 +60,5 @@ export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
 export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
 export PATH="/opt/homebrew/opt/php@7.2/bin:$PATH"
 export PATH="/opt/homebrew/opt/php@7.2/sbin:$PATH"
+
+alias luamake=/Users/hienle/.config/nvim/lua-language-server/3rd/luamake/luamake

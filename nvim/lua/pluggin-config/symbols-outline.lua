@@ -3,12 +3,11 @@ vim.g.symbols_outline = {
     show_guides = true,
     auto_preview = true,
     position = 'right',
-    relative_width = true,
-    width = 30,
+    width = 25,
     show_numbers = false,
     show_relative_numbers = false,
     show_symbol_details = true,
-    preview_bg_highlight = 'Pmenu',
+    preview_bg_highlight = 'Normal',
     keymaps = { -- These keymaps can be a string or a table for multiple keys
         close = {"<Esc>", "q"},
         goto_location = "<Cr>",
@@ -50,5 +49,5 @@ vim.g.symbols_outline = {
     }
 }
 
-vim.api.nvim_set_keymap("n", "<leader>o", ":SymbolsOutline<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>so", ":SymbolsOutline<CR><C-w>=", { noremap = true, silent = true })
 
