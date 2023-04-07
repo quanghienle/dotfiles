@@ -1,71 +1,61 @@
-local actions    = require('telescope.actions')
-require('telescope').setup {
-    defaults = {
-        vimgrep_arguments = {
-          'rg',
-          '--color=never',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-          '--smart-case',
-          '-u'
-        },
-        layout_config = {
-          horizontal = {
-            mirror = false,
-          },
-          vertical = {
-            mirror = false,
-          },
-          prompt_position = "bottom",
-          height = 0.7,
-          width = 0.7,
-        },
-        file_sorter      = require('telescope.sorters').get_fzy_sorter,
-        prompt_prefix    = ' 🔍 ',
-        selection_caret  = '➤ ', 
-        color_devicons   = true,
-
-        sortng_strategy = "ascending",
-
-        file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
-        grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
-        qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
-
-        mappings = {
-            i = {
-                ["<C-x>"] = false,
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-                ["<C-q>"] = actions.send_to_qflist,
-                ["<C-s>"] = actions.cycle_previewers_next,
-                ["<C-a>"] = actions.cycle_previewers_prev,
-            },
-            n = {
-                ["<C-s>"] = actions.cycle_previewers_next,
-                ["<C-a>"] = actions.cycle_previewers_prev,
-            }
-        }
-    },
-    extensions = {
-        fzf = {
-            override_generic_sorter = false,
-            override_file_sorter = true,
-            case_mode = "smart_case",
-        }
-    }
+local actions = require('telescope.actions')
+local patterns_to_ignore = {
+  "vendor/*", "%.lock", "__pycache__/*", "%.sqlite3", "%.ipynb", "node_modules/*", "%.jpg", "%.jpeg",
+  "%.png", "%.svg", "%.otf", "%.ttf", ".git/", "%.webp", ".dart_tool/", ".github/", ".gradle/", ".idea/",
+  ".settings/", ".vscode/", "__pycache__/", "build/", "env/", "gradle/", "node_modules/", "target/", "%.pdb",
+  "%.dll", "%.class", "%.exe", "%.cache", "%.ico", "%.pdf", "%.dylib", "%.jar", "%.docx", "%.met",
+  "smalljre_*/*", ".vale/", "%.burp", "%.mp4", "%.mkv", "%.rar", "%.zip", "%.7z", "%.tar", "%.bz2", "%.epub",
+  "%.flac", "%.tar.gz",
 }
 
-require('telescope').load_extension('fzf')
+require('telescope').setup {
+  defaults = {
+    path_display         = { 'smart', 'shorten' },
+    layout_config        = {
+      prompt_position = "bottom",
+      height = 0.7,
+      width = 0.7,
+      scroll_speed = 1
+    },
+    file_sorter          = require('telescope.sorters').get_fzy_sorter,
+    file_ignore_patterns = patterns_to_ignore,
+    prompt_prefix        = ' 🔍   ',
+    selection_caret      = '➤ ',
+    color_devicons       = true,
+    scroll_strategy      = "limit",
+    --initial_mode = "normal",
 
-local opts = { noremap = true, silent = true };
-
-vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
-vim.api.nvim_set_keymap("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", opts)
-vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
-vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
-vim.api.nvim_set_keymap("n", "<leader>fm", "<cmd>Telescope marks<cr>", opts)
-vim.api.nvim_set_keymap("n", "<leader>fh", "<cmd>Telescope<cr>", opts)
-
-
+    preview              = {
+      timeout = 1000
+    },
+    mappings             = {
+      i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+      },
+      n = {
+        ["J"] = actions.preview_scrolling_down,
+        ["K"] = actions.preview_scrolling_up,
+      }
+    }
+  },
+  pickers = {
+    lsp_references = {
+      show_line = false,
+      --initial_mode = "normal",
+    },
+    --diagnostics = {
+    --  initial_mode = "normal",
+    --},
+    --grep_string = {
+    --  initial_mode = "normal",
+    --},
+    --buffers = {
+    --  initial_mode = "normal",
+    --},
+    --marks = {
+    --  initial_mode = "normal",
+    --}
+  },
+  extensions = {}
+}

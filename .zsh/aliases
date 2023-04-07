@@ -2,7 +2,6 @@ alias hs='history | grep'
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
 alias d='dirs -v | head -10'
 alias cpwd='pwd | pbcopy'
-alias cp='cp -i'
 alias -g G='| grep -i'
 alias lsa='ls -a'
 alias showDesktop='foo(){defaults write com.apple.finder CreateDesktop true; killall Finder}; foo '
@@ -11,20 +10,30 @@ alias showActiveDock='foo(){defaults write com.apple.dock static-only -bool TRUE
 alias showAllDock='foo(){defaults write com.apple.dock static-only -bool FALSE; killall Dock}; foo '
 alias outlookMode='defaults write com.microsoft.Outlook NSRequiresAquaSystemAppearance -bool yes'
 
-alias zprompt='vim ~/.zsh/prompt'
-alias vimrc='vim ~/.vimrc'
+alias zprompt='nvim ~/.zsh/prompt'
 alias nvimrc='nvim ~/.config/nvim/init.vim'
-alias vimcolor='vim ~/.vim/colors/mycolor.vim'
-alias p10k='vim ~/.p10k.zsh'
-alias zconfig="vim ~/.zshrc"
-alias zalias='vim ~/.zsh/aliases'
-alias zfn='vim ~/.zsh/functions'
-alias zupdate='source ~/.zshrc'
+
+alias zconfig="nvim ~/.zshrc"
+alias zalias='nvim ~/.zsh/aliases'
+alias zfn='nvim ~/.zsh/functions'
+alias zupdate='source ~/.zshrc && source ~/.zshenv'
+
 alias chrome="open -a 'Google Chrome'"
-alias ra='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
-alias -g lolcat='lolcat'
+alias startMongo="brew services start mongodb-community"
+alias stopMongo="brew services stop mongodb-community"
 
-alias activate-tf='source ~/./venv/bin/activate'
+alias gwcd='(
+	./gw clean deploy risk
+	cd distributions/risk*
+	mkdir logs
+	mkdir logs/events
+	cp ../../../all-goals-license.txt conf/license.txt
+	cp ../../../all-goals-license.txt conf/license.txt.default
+	cd ../..
+)'
 
-alias php='/opt/homebrew/bin/php'
+alias gwcdr="gwcd && ./run.sh risk"
+
+alias gwd="./gw deploy risk"
+alias gwdr="gwd && ./run.sh risk"

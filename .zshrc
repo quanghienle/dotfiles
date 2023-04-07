@@ -16,7 +16,7 @@ fi
 #foobar
 
 # neofetch --ascii_distro arch | lolcat
-neofetch | lolcat
+# neofetch | lolcat
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -44,21 +44,11 @@ source ~/.zsh/functions
 # source ~/.zsh/prompt
 source ~/.zsh/history
 source ~/.zsh/key-bindings
+source /Users/u1117687/Documents/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 set -o emacs
-
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
-export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
-export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
-export PATH="/opt/homebrew/opt/php@7.2/bin:$PATH"
-export PATH="/opt/homebrew/opt/php@7.2/sbin:$PATH"
-
-alias luamake=/Users/hienle/.config/nvim/lua-language-server/3rd/luamake/luamake
+alias luamake=/Users/u1117687/Documents/dotfiles/nvim/lua-language-server/3rd/luamake/luamake

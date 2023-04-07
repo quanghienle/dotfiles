@@ -1,16 +1,26 @@
 --vim.cmd('colorscheme iceberg')
+--vim.cmd('colorscheme catppuccin-mocha')
 vim.cmd('colorscheme nord')
 
 local green = "#0be80d"
-local darkblue = "#414882"
+local darkblue = "#5E66A6"
 local purple = "#f802ea"
 
---vim.highlight.create('Normal', { guibg = "None" }, false);
---vim.cmd[[highlight! link BufferLineFill Normal]];
-vim.highlight.create('TelescopeBorder', { guifg = green, gui = "bold" }, false);
-vim.highlight.create('CursorLineNr', { guifg = purple, guibg = "None"}, false);
-vim.highlight.create('BufferLineBufferSelected', { guifg = green }, false);
---vim.highlight.create('LineNr', { guifg = darkblue, guibg = "None"}, false);
---vim.highlight.create('SignColumn', { guibg = "None"}, false);
-vim.highlight.create('VertSplit', { guifg = darkblue, gui = "bold" }, false);
+local bg_color = "#27272B"
+--local bg_color = "#191b24"
+--local bg_color = "#191c23"
+vim.api.nvim_set_hl(0, 'Normal', { bg = bg_color });
 
+---- transparent background
+--vim.api.nvim_set_hl(0, 'Normal', {bg = "None"});
+
+vim.api.nvim_set_hl(0, 'SignColumn', { link = "Normal" })
+
+vim.api.nvim_set_hl(0, 'TelescopeNormal', { link = "Normal" })
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = green, bold = true });
+vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { fg = green });
+vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { fg = green });
+vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = green });
+
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = purple, bg = "None" });
+vim.api.nvim_set_hl(0, 'VertSplit', { fg = darkblue, bold = true });

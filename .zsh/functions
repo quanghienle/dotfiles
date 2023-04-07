@@ -83,7 +83,7 @@ function extract() {
 function fnlist() {
 	grep -B 1 "^function" $HOME/.zsh/functions | \
 	grep -v "^\-\-$" | \
-	awk '{ if(/^#/) { gsub(/^#[:space:]*/, ""); ht=$0 }; getline; gsub(/ ?\(\)/, ":"); printf("-> %-20s %s\n", $2, ht); }' | \
+	awk '{ if(/^#/) { gsub(/^#[:space:]*/, ""); ht=$0 }; getline; gsub(/ ?\(\)/, ":"); printf(" -> %-20s %s\n", $2, ht); }' | \
 	sort -u -k 3
 }
 
