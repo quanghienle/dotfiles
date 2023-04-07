@@ -49,7 +49,7 @@ Plug 'folke/trouble.nvim'
 Plug 'preservim/nerdcommenter'
 --Plug 'github/copilot.vim'
 
---Plug "folke/which-key.nvim"
+Plug "folke/which-key.nvim"
 
 --Plug 'flazz/vim-colorschemes'
 Plug 'shaunsingh/nord.nvim'

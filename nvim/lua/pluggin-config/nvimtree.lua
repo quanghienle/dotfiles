@@ -1,3 +1,5 @@
+-- :help nvim-tree-setup
+
 require 'nvim-tree'.setup {
   open_on_setup = true,
   --actions = {
@@ -7,7 +9,7 @@ require 'nvim-tree'.setup {
   --},
   view = {
     width = {
-      min = 30,
+      min = 25,
       max = 50
     },
     hide_root_folder = false,
@@ -24,7 +26,7 @@ require 'nvim-tree'.setup {
         --file = false
       }
     },
-    indent_width = 2,
+    indent_width = 1,
     indent_markers = {
       enable = true,
       inline_arrows = false,

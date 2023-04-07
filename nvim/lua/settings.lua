@@ -43,6 +43,8 @@ local options = {
   encoding = 'utf-8',
   wildmode = 'longest,list,full',
   wildignore = 'log/**,node_modules/**,target/**,tmp/**,*.rbc',
+  --spell = true,
+  --spelllang = 'en_us'
 }
 
 local globals = {

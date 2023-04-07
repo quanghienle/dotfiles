@@ -10,10 +10,11 @@ lua require('pluggin-config.treesitter')
 lua require('pluggin-config.toggleterm')
 lua require('pluggin-config.lualine')
 lua require('pluggin-config.bufferline')
-lua require('pluggin-config.lsp-config')
-lua require('pluggin-config.cmp-config')
+lua require('pluggin-config.lsp')
+lua require('pluggin-config.cmp')
 lua require('pluggin-config.gitsigns')
 lua require('pluggin-config.autopairs')
+lua require('pluggin-config.which-key')
 
 lua require('colorscheme')
 

@@ -6,8 +6,8 @@ local lazygit = require('toggleterm.terminal').Terminal:new({
   direction = 'float'
 })
 
-local function keymap(modes, lhs, rhs, description)
   -- :help vim.keymap.set()
+local function keymap(modes, lhs, rhs, description)
   vim.keymap.set(modes, lhs, rhs, { buffer = bufnr, remap = false, silent = true, desc = description })
 end
 
