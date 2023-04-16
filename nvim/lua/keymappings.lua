@@ -1,77 +1,109 @@
-local telescope_builtin = require('telescope.builtin')
-
-local lazygit = require('toggleterm.terminal').Terminal:new({
-  cmd = 'lazygit',
-  hidden = true,
-  direction = 'float'
-})
-
-  -- :help vim.keymap.set()
-local function keymap(modes, lhs, rhs, description)
-  vim.keymap.set(modes, lhs, rhs, { buffer = bufnr, remap = false, silent = true, desc = description })
+-- :help vim.keymap.set()
+local function map(modes, lhs, rhs, description)
+  vim.keymap.set(modes, lhs, rhs, { remap = false, silent = true, desc = description })
 end
 
+map('n', '<esc>', ':noh<cr><esc>', 'Escape and Remove highlight')
 
-keymap('n', '<esc>', ':noh<cr><esc>', 'Escape and Remove highlight')
-keymap('n', '<leader>ws', ':w<cr>:source %<cr>:nohl<cr>', 'Write and source current file')
+map('n', '<C-h>', '<C-w>h', 'Navigate to the Left pane')
+map('n', '<C-j>', '<C-w>j', 'Navigate to the Bottom pane')
+map('n', '<C-k>', '<C-w>k', 'Navigate to the Upper pane')
+map('n', '<C-l>', '<C-w>l', 'Navigate to the Right pane')
 
-keymap('n', '<C-h>', '<C-w>h', 'Navigate to the Left pane')
-keymap('n', '<C-j>', '<C-w>j', 'Navigate to the Bottom pane')
-keymap('n', '<C-k>', '<C-w>k', 'Navigate to the Upper pane')
-keymap('n', '<C-l>', '<C-w>l', 'Navigate to the Right pane')
+map('x', 'K', ":move '<-2<cr>gv-gv", 'Move Visual Block up one line')
+map('x', 'J', ":move '>+1<cr>gv-gv", 'Move Visual Block down one line')
 
-keymap('x', 'K', ":move '<-2<cr>gv-gv", 'Move Visual Block up one line')
-keymap('x', 'J', ":move '>+1<cr>gv-gv", 'Move Visual Block down one line')
+map('v', '<', '<gv', 'Indent to the left')
+map('v', '>', '>gv', 'Indent to the right')
 
-keymap('v', '<', '<gv', 'Indent to the left')
-keymap('v', '>', '>gv', 'Indent to the right')
-
-keymap('n', 'G', 'Gzz', 'Go to bottom of file and center')
-keymap('n', 'n', 'nzz', 'Go to next match and center')
-keymap('n', 'N', 'Nzz', 'Go to previous match and center')
+map('n', 'G', 'Gzz', 'Go to bottom of file and center')
+map('n', 'n', 'nzz', 'Go to next match and center')
+map('n', 'N', 'Nzz', 'Go to previous match and center')
 
 
-keymap('n', 'Y', 'y$', 'Yank to the end of line')
-keymap('x', 'p', '\"_dP', 'Paste without yanking the visual text')
+map('n', 'Y', 'y$', 'Yank to the end of line')
+map('x', 'p', '\"_dP', 'Paste without yanking the visual text')
 
-keymap('n', '<Tab>', ':bn<cr>', 'Go to the next buffer')
-keymap('n', '<S-Tab>', ':bp<cr>', 'Go to the previous buffer')
 
-keymap('n', '<leader>db', ':bp<cr>:sp<cr>:bn<cr>:bd<cr>', 'Delete current buffer')
 
 -- Don't yank on delete char
-keymap({ 'n', 'v' }, 'x', '"_x', 'Delete character without yanking')
-keymap({ 'n', 'v' }, 'X', '"_X', 'Delete character without yanking')
-keymap({ 'n', 'v' }, 's', '"_s', 'Change character without yanking')
+map({ 'n', 'v' }, 'x', '"_x', 'Delete character without yanking')
+map({ 'n', 'v' }, 'X', '"_X', 'Delete character without yanking')
+map({ 'n', 'v' }, 's', '"_s', 'Change character without yanking')
 
 -- write and souce
 
+local telescope = require('telescope.builtin')
+local telescope_extensions = require('telescope').extensions
+local spectre = require("spectre")
+local noice = require("noice")
+local notify = require("notify")
+local lsp = vim.lsp.buf
 
-keymap('n', '<leader>fp', telescope_builtin.builtin, 'Find Pickers (Telescope built-in functions)')
-keymap('n', '<leader>ff', telescope_builtin.find_files, 'Find Files')
-keymap('n', '<leader>fw', telescope_builtin.live_grep, 'Find Words')
-keymap({ 'n', 'v' }, '<leader>fs', telescope_builtin.grep_string, 'Find String under cursor (normal and visual)')
-keymap('n', '<leader>fb', telescope_builtin.buffers, 'Find Buffers')
-keymap('n', '<leader>fm', telescope_builtin.marks, 'Find Marks')
-keymap('n', '<leader>fc', telescope_builtin.commands, 'Find Commands')
-keymap('n', '<leader>fk', telescope_builtin.keymaps, 'Find Keymaps')
-keymap('n', '<leader>fh', telescope_builtin.help_tags, 'Find Help-tags')
 
-keymap('n', '<leader>su', telescope_builtin.lsp_references, 'Show Usages for current word under cursor')
-keymap('n', '<leader>ss', telescope_builtin.lsp_document_symbols, 'Show Symbols in the current buffer')
-keymap('n', '<leader>sd', telescope_builtin.diagnostics, 'Show Diagnostics in the current buffer')
-keymap('n', '<leader>se', vim.diagnostic.open_float, 'Show Errors for current word under cursor')
-keymap('n', '<leader>sa', vim.lsp.buf.code_action, 'Show Actions for current word under cursor')
-keymap('n', '<leader>sh', vim.lsp.buf.hover, 'Show Hover information for current word under cursor')
-keymap('n', '<leader>st', ':NvimTreeToggle<cr>', 'Show Tree (Toggle Nvim-Tree)')
-keymap('n', '<leader>sg', function() lazygit:toggle() end, 'Show Git Status/Commits/Branches/Stashes')
+-- Buffers
+map('n', '<leader>bd', ':bp<cr>:sp<cr>:bn<cr>:bd<cr>', 'Delete Buffer')
+map('n', '<leader>bn', ':bn<cr>', 'Next Buffer')
+map('n', '<Tab>', ':bn<cr>', 'Next Buffer')
+map('n', '<leader>bp', ':bn<cr>', 'Previous Buffer')
+map('n', '<S-Tab>', ':bn<cr>', 'Previous Buffer')
+map('n', '<leader>br', ':bufdo e<cr>', 'Refresh Buffers')
 
-keymap('n', '<leader>gd', vim.lsp.buf.definition, 'Go to Definition of the word under cursor')
-keymap('n', '<leader>gi', vim.lsp.buf.implementation, 'Go to Implementation of the word under cursor')
 
-keymap('n', '<leader>rn', vim.lsp.buf.rename, 'Rename the word under cursor')
-keymap({ 'n', 'v' }, '<leader>rf', vim.lsp.buf.format, 'Reformat code (normal and visual)')
-keymap({ 'n', 'v' }, '<leader>rs', ':vertical resize ', 'Resize window')
-keymap({ 'n', 'v' }, '<leader>r+', ':vertical resize +20<cr>', 'Resize window')
-keymap({ 'n', 'v' }, '<leader>r-', ':vertical resize -20<cr>', 'Resize window')
-keymap({ 'n', 'v' }, '<leader>r=', '<C-w>=', 'Resize window')
+-- Find
+map('n', '<leader>ft', telescope.builtin, 'Find Telescope Pickers')
+map('n', '<leader>ff', telescope.find_files, 'Find Files')
+map('n', '<leader>fw', telescope.live_grep, 'Find Words')
+map('n', '<leader>fa', telescope_extensions.live_grep_args.live_grep_args, 'Find Words with arguments')
+
+map('n', '<leader>fb', telescope.buffers, 'Find Buffers')
+map('n', '<leader>fm', telescope.marks, 'Find Marks')
+map('n', '<leader>fc', telescope.commands, 'Find Commands')
+map('n', '<leader>fk', telescope.keymaps, 'Find Keymaps')
+map('n', '<leader>fh', telescope.help_tags, 'Find Help-tags')
+
+map('n', "<leader>fr", function() spectre.open() end, "Find and Replace in Project")
+map('v', "<leader>fr", function() spectre.open_visual({ select_word = true }) end, "Find and Replace in Project")
+
+map({ 'n', 'v' }, '<leader>fs', telescope.grep_string, 'Find String under cursor')
+
+
+-- Show
+map('n', '<leader>su', telescope.lsp_references, 'Show Usages for string under cursor')
+map('n', '<leader>ss', telescope.spell_suggest, 'Show Spelling suggestions')
+map('n', '<leader>sd', telescope.diagnostics, 'Show Diagnostics in the current buffer')
+map('n', '<leader>se', vim.diagnostic.open_float, 'Show Errors for string under cursor')
+map('n', '<leader>sa', lsp.code_action, 'Show Actions for string under cursor')
+map('n', '<leader>sh', lsp.hover, 'Show Hover information for string under cursor')
+map('n', '<leader>st', ':NvimTreeToggle<cr>', 'Show Tree (Toggle Nvim-Tree)')
+map('n', '<leader>sg', function() LazyGitToggle() end, 'Show Git Status/Commits/Branches/Stashes')
+
+
+-- Notifications
+map('n', "<leader>na", function() noice.cmd("all") end, "Show all notifications")
+map('n', "<leader>nl", function() noice.cmd("last") end, "Show last notification")
+map('n', "<leader>nh", function() notify.dismiss({ silent = true, pending = true }) end, "Hide all notifications")
+
+
+-- Go To
+map('n', '<leader>gd', lsp.definition, 'Go to Definition of string under cursor')
+map('n', '<leader>gi', lsp.implementation, 'Go to Implementation of string under cursor')
+map('n', '<leader>gt', ':NvimTreeFocus<cr>', 'Go to NvimTree')
+
+-- Window
+map('n', '<leader>wm', ':vertical resize +15<cr>', 'Resize window more')
+map('n', '<leader>wl', ':vertical resize -15<cr>', 'Resize window less')
+map('n', '<leader>we', '<C-w>=', 'Resize window evenly')
+
+-- Reformat, Rename
+map({ 'n', 'v' }, '<leader>rf', lsp.format, 'Reformat code')
+map('n', '<leader>rn', lsp.rename, 'Rename the string under cursor')
+map('n', '<leader>rt',
+  function()
+    local width = tonumber(vim.fn.input("Tab Width: "))
+    vim.opt.shiftwidth = width
+    vim.opt.softtabstop = width
+    vim.opt.tabstop = width
+  end,
+  'Reset Tab Size'
+)

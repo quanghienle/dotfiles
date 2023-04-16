@@ -27,10 +27,10 @@ export PATH="$HOME/bin:$PATH"
 # add 'globalias' for alias expansion
 plugins=(
    git 
-   lein
    shrink-path
    colored-man-pages
    macos
+   zsh-vi-mode
    zsh-syntax-highlighting
 )
 

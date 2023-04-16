@@ -18,31 +18,17 @@ components:
     progress (%progress in file)
     tabs (shows currently available tabs)
 ]]
-require 'lualine'.setup {
-  options = {
-    icons_enabled = true,
-    theme = 'nord',
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
-    disabled_filetypes = {},
-    always_divide_middle = true,
-  },
+require "lualine".setup {
   sections = {
-    lualine_a = { 'mode' },
-    lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp', 'coc' } } },
-    lualine_c = { 'filename' },
-    lualine_x = { 'filetype' },
-    lualine_y = { 'progress' },
-    lualine_z = { 'location' }
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { 'filename' },
-    lualine_x = { 'filetype' },
-    lualine_y = { 'location' },
-    lualine_z = {}
-  },
-  tabline = {},
-  extensions = {}
+    lualine_a = { "mode" },
+    lualine_b = { "branch" },
+    lualine_c = {
+      "diagnostics",
+      { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+      { "filename", path = 1 }
+    },
+    lualine_x = { "diff" },
+    lualine_y = { "progress" },
+    lualine_z = { "location" }
+  }
 }

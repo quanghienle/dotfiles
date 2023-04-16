@@ -1,26 +1,41 @@
---vim.cmd('colorscheme iceberg')
---vim.cmd('colorscheme catppuccin-mocha')
-vim.cmd('colorscheme nord')
+local function SetHighlights(highlight_list, setting)
+  for _, hl in ipairs(highlight_list) do
+    vim.api.nvim_set_hl(0, hl, setting)
+  end
+end
 
-local green = "#0be80d"
-local darkblue = "#5E66A6"
-local purple = "#f802ea"
+function SetColorScheme(colorscheme)
+  vim.cmd('colorscheme ' .. colorscheme)
 
-local bg_color = "#27272B"
---local bg_color = "#191b24"
---local bg_color = "#191c23"
-vim.api.nvim_set_hl(0, 'Normal', { bg = bg_color });
+  SetHighlights(
+    { 'NormalFloat', 'WhichKeyFloat', 'Pmenu' },
+    { link = "Normal" }
+  )
 
----- transparent background
---vim.api.nvim_set_hl(0, 'Normal', {bg = "None"});
+  SetHighlights(
+    {
+      'FloatBorder', 'LspFloatWinBorder',
+      'NoiceCmdlinePopupBorderSearch',
+      'LspSagaCodeActionBorder', 'LspSagaHoverBorder', 'CmpDocumentationBorder',
+      'TelescopePreviewBorder', 'TelescopePromptBorder', 'TelescopeResultsBorder',
+    },
+    { fg = 'CornFlowerBlue' }
+  )
 
-vim.api.nvim_set_hl(0, 'SignColumn', { link = "Normal" })
+  SetHighlights(
+    {
+      'BufferLineBufferSelected', 'TelescopeBorder',
+      'Cursor', 'TermCursor', 'MiniAnimateCursor', 'CursorLineNr'
+    },
+    { fg = 'DarkSeaGreen', bold = true }
+  )
 
-vim.api.nvim_set_hl(0, 'TelescopeNormal', { link = "Normal" })
-vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = green, bold = true });
-vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { fg = green });
-vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { fg = green });
-vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = green });
+  SetHighlights(
+    { 'MiniIndentscopeSymbol', },
+    { fg = 'MediumPurple' }
+  )
 
-vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = purple, bg = "None" });
-vim.api.nvim_set_hl(0, 'VertSplit', { fg = darkblue, bold = true });
+  --SetHighlights({ 'VertSplit' }, { fg = '#5E66A6' });
+end
+
+SetColorScheme('nightfox')

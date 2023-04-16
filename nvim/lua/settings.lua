@@ -3,6 +3,8 @@ vim.cmd [[
     filetype plugin indent on
 ]]
 
+vim.g.mapleader = ","
+
 local options = {
   background = 'dark',
   termguicolors = true,
@@ -17,7 +19,8 @@ local options = {
   expandtab = true,
   autoindent = true,
   autoread = true,
-  smartcase = true,
+  ignorecase = true,
+  --smartcase = true,
   hidden = true,
   backup = false,
   writebackup = false,
@@ -45,21 +48,15 @@ local options = {
   wildignore = 'log/**,node_modules/**,target/**,tmp/**,*.rbc',
   --spell = true,
   --spelllang = 'en_us'
+	--guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
 }
 
-local globals = {
-  mapleader = ",",
-}
 
 local appendOpts = {
   shortmess = 'c',
   path = '**',
-  fillchars = 'vert:│'
+  --fillchars = 'vert:│'
 }
-
---vim.opt.shortmess:append('c');
---vim.opt.path:append('**');
---vim.opt.fillchars:append('vert:│');
 
 -- vim.opt.shellcmdflag:remove('c');
 vim.opt.directory:remove('.');
@@ -68,10 +65,11 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
-for k, v in pairs(globals) do
-  vim.g[k] = v
-end
-
 for k, v in pairs(appendOpts) do
   vim.opt[k]:append(v)
 end
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'TelescopePreviewerLoaded',
+  command = 'setlocal wrap number'
+})

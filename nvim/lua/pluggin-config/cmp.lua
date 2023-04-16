@@ -12,22 +12,31 @@ local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 cmp.setup {
+  window = {
+    completion = {
+      border = 'rounded'
+    },
+    documentation = {
+      border = 'rounded'
+    }
+  },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-u>'] = cmp.mapping.scroll_docs(4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(1),
+    ['<C-u>'] = cmp.mapping.scroll_docs(-1),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }),
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'calc' },
+    { name = 'calc' }
   },
 }
+
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {

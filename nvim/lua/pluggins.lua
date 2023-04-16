@@ -1,6 +1,5 @@
 local Plug = vim.fn['plug#']
 
---vim.call('plug#begin', '~/.config/nvim/plugged')
 vim.call('plug#begin', '~/.nvim-plugins')
 
 Plug 'lewis6991/gitsigns.nvim'
@@ -15,14 +14,18 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'akinsho/bufferline.nvim'
 
---Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'echasnovski/mini.indentscope'
+Plug 'echasnovski/mini.animate'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
---Plug('nvim-telescope/telescope-fzf-native.nvim', {['do'] = vim.fn['make']})
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn[':TSUpdate']})
 Plug 'p00f/nvim-ts-rainbow'
+
+Plug 'NvChad/nvim-colorizer.lua'
 
 Plug 'akinsho/toggleterm.nvim'
 
@@ -44,18 +47,24 @@ Plug 'L3MON4D3/LuaSnip'
 
 Plug('VonHeikemen/lsp-zero.nvim', {branch = 'v2.x'})
 
+Plug 'windwp/nvim-spectre'
 Plug 'folke/trouble.nvim'
 
+Plug 'MunifTanjim/nui.nvim'
+Plug 'rcarriga/nvim-notify'
+Plug 'folke/noice.nvim'
+Plug 'stevearc/dressing.nvim'
+
+
 Plug 'preservim/nerdcommenter'
---Plug 'github/copilot.vim'
 
 Plug "folke/which-key.nvim"
 
---Plug 'flazz/vim-colorschemes'
-Plug 'shaunsingh/nord.nvim'
-Plug('catppuccin/nvim', { as = 'catppuccin' })
---Plug 'drewtempelmeyer/palenight.vim'
+--Plug 'folke/persistence.nvim'
 
---Plug 'mbbill/undotree'
+Plug 'shaunsingh/nord.nvim'
+Plug 'folke/tokyonight.nvim'
+Plug 'EdenEast/nightfox.nvim'
+
 
 vim.call('plug#end')

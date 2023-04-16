@@ -1,30 +1,23 @@
 local actions = require('telescope.actions')
-local patterns_to_ignore = {
-  "vendor/*", "%.lock", "__pycache__/*", "%.sqlite3", "%.ipynb", "node_modules/*", "%.jpg", "%.jpeg",
-  "%.png", "%.svg", "%.otf", "%.ttf", ".git/", "%.webp", ".dart_tool/", ".github/", ".gradle/", ".idea/",
-  ".settings/", ".vscode/", "__pycache__/", "build/", "env/", "gradle/", "node_modules/", "target/", "%.pdb",
-  "%.dll", "%.class", "%.exe", "%.cache", "%.ico", "%.pdf", "%.dylib", "%.jar", "%.docx", "%.met",
-  "smalljre_*/*", ".vale/", "%.burp", "%.mp4", "%.mkv", "%.rar", "%.zip", "%.7z", "%.tar", "%.bz2", "%.epub",
-  "%.flac", "%.tar.gz",
-}
+local lga_actions = require("telescope-live-grep-args.actions")
 
 require('telescope').setup {
   defaults = {
-    path_display         = { 'smart', 'shorten' },
+    path_display         = { 'smart' },
+    layout_strategy = 'horizontal',
     layout_config        = {
       prompt_position = "bottom",
-      height = 0.7,
+      height = 0.5,
       width = 0.7,
       scroll_speed = 1
     },
-    file_sorter          = require('telescope.sorters').get_fzy_sorter,
-    file_ignore_patterns = patterns_to_ignore,
-    prompt_prefix        = ' 🔍   ',
+    prompt_prefix        = '    ',
     selection_caret      = '➤ ',
     color_devicons       = true,
     scroll_strategy      = "limit",
-    --initial_mode = "normal",
+    dynamic_preview_title = true,
 
+    --initial_mode = "normal",
     preview              = {
       timeout = 1000
     },
@@ -34,6 +27,8 @@ require('telescope').setup {
         ["<C-k>"] = actions.move_selection_previous,
       },
       n = {
+        ["<C-d>"] = actions.preview_scrolling_down,
+        ["<C-u>"] = actions.preview_scrolling_up,
         ["J"] = actions.preview_scrolling_down,
         ["K"] = actions.preview_scrolling_up,
       }
@@ -42,20 +37,24 @@ require('telescope').setup {
   pickers = {
     lsp_references = {
       show_line = false,
-      --initial_mode = "normal",
     },
-    --diagnostics = {
-    --  initial_mode = "normal",
-    --},
-    --grep_string = {
-    --  initial_mode = "normal",
-    --},
-    --buffers = {
-    --  initial_mode = "normal",
-    --},
-    --marks = {
-    --  initial_mode = "normal",
-    --}
+    diagnostics = {
+      line_width = 1000
+    }
   },
-  extensions = {}
+  extensions = {
+    live_grep_args = {
+      auto_quoting = true, -- enable/disable auto-quoting
+      mappings = {
+        i = {
+          ["<C-k>"] = lga_actions.quote_prompt(),
+        },
+        n = {
+          ["<C-k>"] = lga_actions.quote_prompt(),
+        },
+      },
+    }
+  }
 }
+
+require("telescope").load_extension("live_grep_args")

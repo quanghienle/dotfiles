@@ -8,14 +8,11 @@ require 'nvim-tree'.setup {
   --  }
   --},
   view = {
-    width = {
-      min = 25,
-      max = 50
-    },
+    width = { min = 40, max = 80 },
     hide_root_folder = false,
     side = 'left',
-    number = true,
-    relativenumber = true,
+    number = false,
+    relativenumber = false,
     preserve_window_proportions = true, -- do not resize windows
     centralize_selection = true
   },
@@ -23,10 +20,11 @@ require 'nvim-tree'.setup {
     icons = {
       show = {
         git = false,
-        --file = false
+        file = true,
+        folder = true,
       }
     },
-    indent_width = 1,
+    indent_width = 2,
     indent_markers = {
       enable = true,
       inline_arrows = false,
