@@ -28,7 +28,7 @@ wk.register(
     f = { name = " Find..." },
     g = { name = " Go to..." },
     n = { name = " Notification..." },
-    r = { name = " Reformat, Rename, Reset..." },
+    r = { name = " Re-...(reformat, rename...)" },
     s = { name = " Show..." },
     w = { name = " Window..." },
   },

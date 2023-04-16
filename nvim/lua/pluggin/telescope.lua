@@ -13,7 +13,7 @@ local function dropdown_horizontal(options)
     layout_strategy = 'horizontal',
     layout_config   = layout_options
   }
-  for k, v in pairs(options) do
+  for k, v in pairs(options or {}) do
     conf[k] = v
   end
   return conf
@@ -47,7 +47,7 @@ require('telescope').setup {
     }
   },
   pickers = {
-    builtin = dropdown_horizontal({}),
+    builtin = dropdown_horizontal(),
     find_files = dropdown_horizontal({
       dynamic_preview_title = true
     }),
@@ -56,33 +56,25 @@ require('telescope').setup {
     }),
     grep_string = dropdown_horizontal({
       dynamic_preview_title = true,
-      initial_mode = "normal"
     }),
     buffers = {
       theme = "dropdown",
       previewer = false,
-      initial_mode = "normal"
     },
-    marks = dropdown_horizontal({
-      initial_mode = "normal"
-    }),
+    marks = dropdown_horizontal(),
     commands = {
       theme = "dropdown",
     },
     keymaps = {
       theme = "dropdown",
     },
-    help_tags = dropdown_horizontal({}),
+    help_tags = dropdown_horizontal(),
     lsp_references = dropdown_horizontal({
       show_line = false,
-      initial_mode = "normal"
     }),
-    diagnostics = dropdown_horizontal({
-      initial_mode = "normal"
-    }),
+    diagnostics = dropdown_horizontal(),
     spell_suggest = {
       theme = 'cursor',
-      initial_mode = "normal"
     },
   },
   extensions = {

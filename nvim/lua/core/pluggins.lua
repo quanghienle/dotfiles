@@ -29,6 +29,8 @@ Plug 'NvChad/nvim-colorizer.lua'
 
 Plug 'akinsho/toggleterm.nvim'
 
+Plug 'simrat39/symbols-outline.nvim'
+
 Plug 'neovim/nvim-lspconfig'
 Plug('williamboman/mason.nvim', {['do'] = vim.fn[':MasonUpdate']})
 Plug 'williamboman/mason-lspconfig.nvim'

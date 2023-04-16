@@ -14,13 +14,3 @@ require("toggleterm").setup {
     },
   }
 }
-
-local lazygit = require('toggleterm.terminal').Terminal:new({
-  cmd = 'lazygit',
-  hidden = true,
-  direction = 'float'
-})
-
-function LazyGitToggle()
-  lazygit:toggle()
-end
