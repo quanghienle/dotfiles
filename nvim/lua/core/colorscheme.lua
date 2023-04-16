@@ -7,6 +7,12 @@ end
 function SetColorScheme(colorscheme)
   vim.cmd('colorscheme ' .. colorscheme)
 
+  local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+  for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
+
   SetHighlights(
     { 'NormalFloat', 'WhichKeyFloat', 'Pmenu' },
     { link = "Normal" }
@@ -23,16 +29,18 @@ function SetColorScheme(colorscheme)
   )
 
   SetHighlights(
-    {
-      'BufferLineBufferSelected', 'TelescopeBorder',
-      'Cursor', 'TermCursor', 'MiniAnimateCursor', 'CursorLineNr'
-    },
+    { 'BufferLineBufferSelected', 'TelescopeBorder', },
     { fg = 'DarkSeaGreen', bold = true }
   )
 
   SetHighlights(
-    { 'MiniIndentscopeSymbol', },
+    { 'MiniIndentscopeSymbol', 'CursorLineNr' },
     { fg = 'MediumPurple' }
+  )
+
+  SetHighlights(
+    { 'Cursor', 'TermCursor', 'MiniAnimateCursor' },
+    { fg = 'Black', bg = 'MediumPurple' }
   )
 
   --SetHighlights({ 'VertSplit' }, { fg = '#5E66A6' });

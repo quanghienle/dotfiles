@@ -9,7 +9,7 @@ for _, scroll in ipairs({ "Up", "Down" }) do
   end, { expr = true })
 end
 
-local timing_func = animate.gen_timing.linear({ duration = 150, unit = "total" })
+local timing_func = animate.gen_timing.linear({ duration = 200, unit = "total" })
 
 animate.setup({
   cursor = {

@@ -20,7 +20,7 @@ Plug 'echasnovski/mini.animate'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn[':TSUpdate']})
 Plug 'p00f/nvim-ts-rainbow'

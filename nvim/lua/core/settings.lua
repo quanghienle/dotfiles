@@ -48,7 +48,9 @@ local options = {
   wildignore = 'log/**,node_modules/**,target/**,tmp/**,*.rbc',
   --spell = true,
   --spelllang = 'en_us'
-	--guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
+  --guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
+  --
+  completeopt = 'menuone,noselect' -- Set completeopt to have a better completion experience
 }
 
 

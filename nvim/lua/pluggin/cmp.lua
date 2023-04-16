@@ -1,11 +1,5 @@
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
-
--- luasnip setup
-local luasnip = require 'luasnip'
-
 -- nvim-cmp setup
-local cmp = require 'cmp'
+local cmp = require('cmp')
 
 -- Insert `(` after select function or method item
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
@@ -22,17 +16,19 @@ cmp.setup {
   },
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(1),
     ['<C-u>'] = cmp.mapping.scroll_docs(-1),
+    ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }),
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'path' },
     { name = 'calc' }
   },
 }
