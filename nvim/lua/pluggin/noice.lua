@@ -16,3 +16,11 @@ require("noice").setup({
     lsp_doc_border = true,        -- add a border to hover docs and signature help
   }
 })
+require('dressing').setup({
+  select = {
+    backend = { "nui" },
+    nui = {
+      min_height = 2
+    },
+  }
+})

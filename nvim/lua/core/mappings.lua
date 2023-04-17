@@ -1,19 +1,11 @@
-local telescope = require('telescope.builtin')
-local spectre = require("spectre")
-local noice = require("noice")
-local notify = require("notify")
-local lsp = vim.lsp.buf
-local nvimtree = require("nvim-tree.api")
-
 function FindInPath()
   local path = vim.fn.expand('%:p')
   if vim.api.nvim_buf_get_option(vim.api.nvim_get_current_buf(), "filetype") == "NvimTree" then
     path = require("nvim-tree.api").tree.get_node_under_cursor().absolute_path
   end
-  vim.ui.input(
-    { prompt = 'Search in directory', default = path },
-    function(input) require('telescope.builtin').live_grep({ cwd = input }) end
-  )
+
+  local function callback(input) require('telescope.builtin').live_grep({ cwd = input }) end
+  vim.ui.input({ prompt = 'Search in directory', default = path }, callback)
 end
 
 function ShowPopupInfo()
@@ -25,12 +17,13 @@ function ShowPopupInfo()
 end
 
 function SetTabWidth()
-  vim.ui.input({ prompt = 'Enter value for shiftwidth' }, function(input)
+  local function callback(input)
     local width = tonumber(input)
     vim.opt.shiftwidth = width
     vim.opt.softtabstop = width
     vim.opt.tabstop = width
-  end)
+  end
+  vim.ui.input({ prompt = 'Enter value for shiftwidth' }, callback)
 end
 
 function LazyGitToggle()
@@ -79,53 +72,64 @@ map({ 'n', 'v' }, 's', '"_s', 'Change character without yanking')
 -- Buffers
 map('n', '<leader>bd', ':bp<cr>:sp<cr>:bn<cr>:bd<cr>', 'Buffer: Delete')
 map('n', '<leader>bn', ':bn<cr>', 'Buffer: Next')
-map('n', '<Tab>', ':bn<cr>', 'Next Buffer')
-map('n', '<leader>bp', ':bn<cr>', 'Buffer: Previous')
-map('n', '<S-Tab>', ':bp<cr>', 'Previous Buffer')
+map('n', '<leader>bp', ':bp<cr>', 'Buffer: Previous')
 map('n', '<leader>br', ':bufdo e<cr>', 'Buffer: Refresh')
 
+-- Buffer number: <leader>1..9 to jump to buffer
+for i = 1, 10, 1 do
+  map('n', '<leader>' .. i, function() require("bufferline").go_to_buffer(i) end, 'Go to buffer ' .. i)
+end
+
+map('n', '<Tab>', ':bn<cr>', 'Next Buffer')
+map('n', '<S-Tab>', ':bp<cr>', 'Previous Buffer')
+
 -- Find
-map('n', '<leader>ft', telescope.builtin, 'Find Telescope Pickers')
-map('n', '<leader>ff', telescope.find_files, 'Find Files')
-map('n', '<leader>fw', telescope.live_grep, 'Find Words (Live Grep)')
-map('n', '<leader>fb', telescope.buffers, 'Find Buffers')
-map('n', '<leader>fm', telescope.marks, 'Find Marks')
-map('n', '<leader>fc', telescope.commands, 'Find Commands')
-map('n', '<leader>fk', telescope.keymaps, 'Find Keymaps')
-map('n', '<leader>fh', telescope.help_tags, 'Find Help-tags')
-map('n', "<leader>fr", spectre.open, "Find and Replace in Project")
+map('n', '<leader>ft', require("telescope.builtin").builtin, 'Find Telescope Pickers')
+map('n', '<leader>ff', require("telescope.builtin").find_files, 'Find Files')
+map('n', '<leader>fw', require("telescope.builtin").live_grep, 'Find Word (Live Grep)')
+map('n', '<leader>fm', require("telescope.builtin").marks, 'Find Marks')
+map('n', '<leader>fc', require("telescope.builtin").commands, 'Find Commands')
+map('n', '<leader>fh', require("telescope.builtin").help_tags, 'Find Help-tags')
+map('n', "<leader>fr", require("spectre").open, "Find and Replace in Project")
 map('n', '<leader>fp', FindInPath, 'Find in Path (Live Grep)')
 
 -- Show
-map({ 'n', 'v' }, '<leader>sw', telescope.grep_string, 'Show Word occurences (under cursor)')
-map('n', '<leader>su', telescope.lsp_references, 'Show Usages (under cursor)')
-map('n', '<leader>ss', telescope.spell_suggest, 'Show Spelling suggestions (under cursor)')
+map('n', '<leader>sw', require("telescope.builtin").grep_string, 'Show Word occurences (under cursor)')
+map('v', '<leader>sw', require("telescope.builtin").grep_string, 'Show Word occurences (under cursor)')
+
+map('n', '<leader>su', require("telescope.builtin").lsp_references, 'Show Usages (under cursor)')
+map('n', '<leader>ss', require("telescope.builtin").spell_suggest, 'Show Spelling suggestions (under cursor)')
 map('n', '<leader>se', vim.diagnostic.open_float, 'Show Errors (under cursor)')
-map('n', '<leader>sa', lsp.code_action, 'Show code-Actions (under cursor)')
-map('n', '<leader>sd', function() telescope.diagnostics({ bufnr = 0 }) end, 'Show Diagnostics (current buffer)')
+map('n', '<leader>sa', vim.lsp.buf.code_action, 'Show code-Actions (under cursor)')
+map('n', '<leader>sd', function() require("telescope.builtin").diagnostics({ bufnr = 0 }) end,
+'Show Diagnostics (current buffer)')
 map('n', '<leader>si', ShowPopupInfo, 'Show Information (under cursor)')
-map('n', '<leader>st', nvimtree.tree.toggle, 'Show NvimTree')
+map('n', '<leader>st', require("nvim-tree.api").tree.toggle, 'Show NvimTree')
 map('n', '<leader>sg', LazyGitToggle, 'Show LazyGit')
 map('n', '<leader>so', ':SymbolsOutline<cr>', 'Show Outline')
 
 -- Notifications
-map('n', "<leader>na", function() noice.cmd("all") end, "Notifications: Show all")
-map('n', "<leader>nl", function() noice.cmd("last") end, "Notifications: Show last")
-map('n', "<leader>nh", function() notify.dismiss({ silent = true, pending = true }) end, "Notifications: Hide all")
+map('n', "<leader>na", ":NoiceTelescope<cr>", "Notifications: Show all")
+map('n', "<leader>nl", ":NoiceLast<cr>", "Notifications: Show last")
+map('n', "<leader>nh", function() require("notify").dismiss({ silent = true, pending = true }) end,
+  "Notifications: Hide all")
 
 -- Go To
-map('n', '<leader>gd', lsp.definition, 'Go-to: Definition (under cursor)')
-map('n', '<leader>gi', lsp.implementation, 'Go-to: Implementation (under cursor)')
-map('n', '<leader>gt', nvimtree.tree.focus, 'Go-to: nvimTree')
+map('n', '<leader>gd', vim.lsp.buf.definition, 'Go-to: Definition (under cursor)')
+map('n', '<leader>gi', vim.lsp.buf.implementation, 'Go-to: Implementation (under cursor)')
+map('n', '<leader>gt', require("nvim-tree.api").tree.focus, 'Go-to: nvimTree')
 
 -- Window
-map('n', '<leader>wm', ':vertical resize +15<cr>', 'Window: Resize more (vertically)')
-map('n', '<leader>wl', ':vertical resize -15<cr>', 'Window: Resize less (vertically)')
-map('n', '<leader>wM', ':resize +10<cr>', 'Window: Resize more (horizontally)')
-map('n', '<leader>wL', ':resize -10<cr>', 'Window: resize less (horizontally)')
-map('n', '<leader>we', '<C-w>=', 'Window: resize evenly')
+map('n', '<leader>w+', ':vertical resize +15<cr>', 'Window: Increase vertically')
+map('n', '<leader>w-', ':vertical resize -15<cr>', 'Window: Descrease vertically')
+map('n', '<leader>w>', ':resize +10<cr>', 'Window: Increase horizontally')
+map('n', '<leader>w<', ':resize -10<cr>', 'Window: Decrease horizontally')
+map('n', '<leader>we', '<C-w>=', 'Window: Resize evenly')
 
 -- Reformat, Rename
-map({ 'n', 'v' }, '<leader>rf', lsp.format, 'Re-format code')
-map('n', '<leader>rn', lsp.rename, 'Re-name the string under cursor')
-map('n', '<leader>rt', SetTabWidth, 'Re-size tab width')
+map('n', '<leader>rf', vim.lsp.buf.format, 'Reformat code')
+map('v', '<leader>rf', vim.lsp.buf.format, 'Reformat code')
+
+map('n', '<leader>rn', vim.lsp.buf.rename, 'Rename symbol under cursor')
+map('n', '<leader>rt', SetTabWidth, 'Reset tab width')
+map("n", "<leader>rs", require("persistence").load, "Restore Session")

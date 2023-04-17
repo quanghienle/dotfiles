@@ -57,15 +57,8 @@ require('telescope').setup {
     grep_string = dropdown_horizontal({
       dynamic_preview_title = true,
     }),
-    buffers = {
-      theme = "dropdown",
-      previewer = false,
-    },
     marks = dropdown_horizontal(),
     commands = {
-      theme = "dropdown",
-    },
-    keymaps = {
       theme = "dropdown",
     },
     help_tags = dropdown_horizontal(),
@@ -77,11 +70,4 @@ require('telescope').setup {
       theme = 'cursor',
     },
   },
-  extensions = {
-    ["ui-select"] = {
-      require("telescope.themes").get_cursor({})
-    }
-  }
 }
-
-require("telescope").load_extension("ui-select")

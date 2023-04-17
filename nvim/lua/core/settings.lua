@@ -33,7 +33,7 @@ local options = {
   cursorlineopt = 'both',
   updatetime = 300,
   mouse = 'a',
-  textwidth = 100,
+  textwidth = 140,
   --tab
   shiftwidth = 2,
   softtabstop = 2,

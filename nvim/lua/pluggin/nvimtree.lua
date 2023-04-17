@@ -1,12 +1,12 @@
 require 'nvim-tree'.setup {
-  open_on_setup = true,
+  --open_on_setup = true,
   --actions = {
   --  open_file = {
   --    quit_on_open = true
   --  }
   --},
   view = {
-    width = { min = 40, max = 80 },
+    width = { min = 40, max = 60 },
     hide_root_folder = false,
     side = 'left',
     number = false,
