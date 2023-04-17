@@ -13,36 +13,45 @@ function SetColorScheme(colorscheme)
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
 
-  SetHighlights(
-    { 'NormalFloat', 'WhichKeyFloat', 'Pmenu' },
-    { link = "Normal" }
-  )
 
-  SetHighlights(
-    {
-      'FloatBorder', 'LspFloatWinBorder',
-      'NoiceCmdlinePopupBorderSearch',
-      'LspSagaCodeActionBorder', 'LspSagaHoverBorder', 'CmpDocumentationBorder',
-      'TelescopePreviewBorder', 'TelescopePromptBorder', 'TelescopeResultsBorder',
-    },
-    { fg = 'CornFlowerBlue' }
-  )
+  local float_bg_color = "#131a24"
+  local accent_color = 'MediumPurple'
+  local border_color = 'CornFlowerBlue'
 
-  SetHighlights(
-    { 'BufferLineBufferSelected', 'TelescopeBorder', },
-    { fg = 'DarkSeaGreen', bold = true }
-  )
+  local float_normals = {
+    'NormalFloat',
+    'WhichKeyFloat',
+    'Pmenu',
+    'TelescopeNormal',
+    'NoiceCmdlinePopup'
+  }
+  local float_borders = {
+    'FloatBorder',
+    'LspFloatWinBorder',
+    'NoiceCmdlinePopupBorderSearch',
+    'LspSagaCodeActionBorder',
+    'LspSagaHoverBorder',
+    'CmpDocumentationBorder',
+    'TelescopePreviewBorder',
+    'TelescopePromptBorder',
+    'TelescopeResultsBorder',
+  }
+  local accents = {
+    'BufferLineBufferSelected',
+    'TelescopeBorder',
+    'CursorLineNr',
+  }
+  local cursors = {
+    'Cursor',
+    'TermCursor',
+    'MiniAnimateCursor'
+  }
 
-  SetHighlights(
-    { 'MiniIndentscopeSymbol', 'CursorLineNr' },
-    { fg = 'MediumPurple' }
-  )
 
-  SetHighlights(
-    { 'Cursor', 'TermCursor', 'MiniAnimateCursor' },
-    { fg = 'Black', bg = 'MediumPurple' }
-  )
-
+  SetHighlights(float_normals, { bg = float_bg_color })
+  SetHighlights(float_borders, { fg = border_color, bg = float_bg_color })
+  SetHighlights(accents, { fg = accent_color, bold = true })
+  SetHighlights(cursors, { fg = 'Black', bg = accent_color })
   --SetHighlights({ 'VertSplit' }, { fg = '#5E66A6' });
 end
 

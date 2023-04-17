@@ -14,13 +14,40 @@ require("noice").setup({
     long_message_to_split = true, -- long messages will be sent to a split
     inc_rename = false,           -- enables an input dialog for inc-rename.nvim
     lsp_doc_border = true,        -- add a border to hover docs and signature help
-  }
+  },
+  views = {
+    cmdline_popup = {
+      position = {
+        row = "40%",
+        col = "50%",
+      },
+    },
+  },
 })
 require('dressing').setup({
+  input = {
+    relative = "editor",
+    win_options = {
+      winblend = 0
+    },
+  },
   select = {
     backend = { "nui" },
     nui = {
-      min_height = 2
+      min_height = 2,
+      win_options = {
+        winblend = 0
+      }
     },
-  }
+    get_config = function(opts)
+      if opts and opts.custom then
+        return opts.custom
+      end
+    end
+  },
+  builtin = {
+    win_options = {
+      winblend = 0
+    }
+  },
 })

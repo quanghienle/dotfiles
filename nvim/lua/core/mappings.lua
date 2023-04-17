@@ -5,7 +5,10 @@ function FindInPath()
   end
 
   local function callback(input) require('telescope.builtin').live_grep({ cwd = input }) end
-  vim.ui.input({ prompt = 'Search in directory', default = path }, callback)
+  vim.ui.input(
+    { prompt = ' Search in directory ', default = path},
+    callback
+  )
 end
 
 function ShowPopupInfo()
@@ -76,7 +79,7 @@ map('n', '<leader>bp', ':bp<cr>', 'Buffer: Previous')
 map('n', '<leader>br', ':bufdo e<cr>', 'Buffer: Refresh')
 
 -- Buffer number: <leader>1..9 to jump to buffer
-for i = 1, 10, 1 do
+for i = 1, 9, 1 do
   map('n', '<leader>' .. i, function() require("bufferline").go_to_buffer(i) end, 'Go to buffer ' .. i)
 end
 
@@ -96,13 +99,12 @@ map('n', '<leader>fp', FindInPath, 'Find in Path (Live Grep)')
 -- Show
 map('n', '<leader>sw', require("telescope.builtin").grep_string, 'Show Word occurences (under cursor)')
 map('v', '<leader>sw', require("telescope.builtin").grep_string, 'Show Word occurences (under cursor)')
-
 map('n', '<leader>su', require("telescope.builtin").lsp_references, 'Show Usages (under cursor)')
 map('n', '<leader>ss', require("telescope.builtin").spell_suggest, 'Show Spelling suggestions (under cursor)')
 map('n', '<leader>se', vim.diagnostic.open_float, 'Show Errors (under cursor)')
 map('n', '<leader>sa', vim.lsp.buf.code_action, 'Show code-Actions (under cursor)')
 map('n', '<leader>sd', function() require("telescope.builtin").diagnostics({ bufnr = 0 }) end,
-'Show Diagnostics (current buffer)')
+  'Show Diagnostics (current buffer)')
 map('n', '<leader>si', ShowPopupInfo, 'Show Information (under cursor)')
 map('n', '<leader>st', require("nvim-tree.api").tree.toggle, 'Show NvimTree')
 map('n', '<leader>sg', LazyGitToggle, 'Show LazyGit')
@@ -132,4 +134,4 @@ map('v', '<leader>rf', vim.lsp.buf.format, 'Reformat code')
 
 map('n', '<leader>rn', vim.lsp.buf.rename, 'Rename symbol under cursor')
 map('n', '<leader>rt', SetTabWidth, 'Reset tab width')
-map("n", "<leader>rs", require("persistence").load, "Restore Session")
+map("n", "<leader>rs", require("session_manager").load_current_dir_session, "Restore Session")

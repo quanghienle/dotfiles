@@ -33,6 +33,7 @@ Plug 'simrat39/symbols-outline.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug('williamboman/mason.nvim', {['do'] = vim.fn[':MasonUpdate']})
 Plug 'williamboman/mason-lspconfig.nvim'
+
  -- Autocompletion plugin
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -60,7 +61,9 @@ Plug 'preservim/nerdcommenter'
 
 Plug "folke/which-key.nvim"
 
-Plug 'folke/persistence.nvim'
+-- Sessions
+--Plug 'folke/persistence.nvim'
+Plug 'Shatur/neovim-session-manager'
 
 Plug 'shaunsingh/nord.nvim'
 Plug 'folke/tokyonight.nvim'

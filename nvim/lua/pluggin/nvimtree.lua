@@ -6,12 +6,12 @@ require 'nvim-tree'.setup {
   --  }
   --},
   view = {
-    width = { min = 40, max = 60 },
+    width = { min = 35, max = 45 },
     hide_root_folder = false,
     side = 'left',
     number = false,
     relativenumber = false,
-    preserve_window_proportions = true, -- do not resize windows
+    preserve_window_proportions = false, -- do not resize windows
     centralize_selection = true
   },
   renderer = {
