@@ -28,7 +28,7 @@ require("mason").setup({
 })
 
 
-require('nvim-treesitter.configs').setup({
+require("nvim-treesitter.configs").setup({
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   sync_install = false,     -- install languages synchronously (only applied to `ensure_installed`)
   highlight = { enable = true },
@@ -40,43 +40,43 @@ require('nvim-treesitter.configs').setup({
 })
 
 -- nvim-cmp setup
-local cmp = require('cmp')
+local cmp = require("cmp")
 
-local cmp_autopairs = require('nvim-autopairs.completion.cmp') -- Insert `(` after select function or method item
-cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+local cmp_autopairs = require("nvim-autopairs.completion.cmp") -- Insert `(` after select function or method item
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 cmp.setup {
   --window = {
-  --  completion = { border = 'rounded' },
-  --  documentation = { border = 'rounded' }
+  --  completion = { border = "rounded" },
+  --  documentation = { border = "rounded" }
   --},
   snippet = {
-    expand = function(args) require('luasnip').lsp_expand(args.body) end,
+    expand = function(args) require("luasnip").lsp_expand(args.body) end,
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-d>'] = cmp.mapping.scroll_docs(1),
-    ['<C-u>'] = cmp.mapping.scroll_docs(-1),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ["<C-d>"] = cmp.mapping.scroll_docs(1),
+    ["<C-u>"] = cmp.mapping.scroll_docs(-1),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
   }),
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = 'path' },
-    { name = 'calc' }
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+    { name = "path" },
+    { name = "calc" }
   },
 }
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
+-- Use buffer source for `/` (if you enabled `native_menu`, this won"t work anymore).
+cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = { { name = 'buffer' } }
+  sources = { { name = "buffer" } }
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
+-- Use cmdline & path source for ":" (if you enabled `native_menu`, this won"t work anymore).
+cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = "path" }
   }, {
-    { name = 'cmdline' }
+    { name = "cmdline" }
   })
 })

@@ -21,7 +21,7 @@ require("noice").setup({
   },
 })
 
-require('dressing').setup({
+require("dressing").setup({
   input = {
     relative = "editor",
     win_options = { winblend = 0 },
@@ -38,11 +38,11 @@ require('dressing').setup({
   },
 })
 
-require('gitsigns').setup {
+require("gitsigns").setup {
   current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
     virt_text = true,
-    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    virt_text_pos = "eol", -- "eol" | "overlay" | "right_align"
     delay = 500,
     ignore_whitespace = false,
   },
@@ -73,7 +73,7 @@ require("indent_blankline").setup {
   show_current_context_start = false,
 }
 
-require('mini.indentscope').setup({
+require("mini.indentscope").setup({
   symbol = "│",
   options = { try_as_border = true },
 })

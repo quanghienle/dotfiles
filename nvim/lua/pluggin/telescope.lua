@@ -1,4 +1,4 @@
-local actions = require('telescope.actions')
+local actions = require("telescope.actions")
 
 local layout_options = {
   prompt_position = "top",
@@ -10,22 +10,23 @@ local layout_options = {
 local function dropdown_horizontal(options)
   local conf = {
     theme = "dropdown",
-    layout_strategy = 'horizontal',
+    layout_strategy = "horizontal",
     layout_config = layout_options
   }
   for k, v in pairs(options or {}) do conf[k] = v end
   return conf
 end
 
-require('telescope').setup {
+require("telescope").setup {
   defaults = {
-    path_display = { 'smart' },
-    layout_strategy = 'horizontal',
+    path_display = { "smart" },
+    layout_strategy = "horizontal",
     layout_config = layout_options,
-    prompt_prefix = '    ',
-    selection_caret = '➤ ',
+    prompt_prefix = "    ",
+    selection_caret = "➤ ",
     color_devicons = true,
     scroll_strategy = "limit",
+    dynamic_preview_title = true,
     sorting_strategy = "ascending",
     preview = { timeout = 1000 },
     mappings = {
@@ -43,14 +44,15 @@ require('telescope').setup {
   },
   pickers = {
     builtin = dropdown_horizontal(),
-    find_files = dropdown_horizontal({ dynamic_preview_title = true }),
-    live_grep = dropdown_horizontal({ dynamic_preview_title = true }),
-    grep_string = dropdown_horizontal({ dynamic_preview_title = true }),
+    find_files = dropdown_horizontal(),
+    live_grep = dropdown_horizontal(),
+    grep_string = dropdown_horizontal(),
     marks = dropdown_horizontal(),
     commands = { theme = "dropdown" },
+    buffers = dropdown_horizontal(),
     help_tags = dropdown_horizontal(),
     lsp_references = dropdown_horizontal({ show_line = false }),
     diagnostics = dropdown_horizontal(),
-    spell_suggest = { theme = "dropdown"},
+    spell_suggest = { theme = "dropdown" },
   },
 }

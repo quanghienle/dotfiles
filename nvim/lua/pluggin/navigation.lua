@@ -1,4 +1,4 @@
-require 'nvim-tree'.setup {
+require "nvim-tree".setup {
   view = {
     width = { min = 35, max = 45 },
     centralize_selection = true
@@ -16,7 +16,7 @@ require 'nvim-tree'.setup {
   }
 }
 
-require("symbols-outline").setup()
+require("symbols-outline").setup({})
 
 require("bufferline").setup({
   options = {
@@ -50,22 +50,22 @@ require("lualine").setup({
 })
 
 require("toggleterm").setup {
-  shading_factor = '1',
+  shading_factor = "1",
   start_in_insert = true,
-  direction = 'float', -- | 'horizontal' | 'window' | 'float',
-  float_opts = { border = 'curved', width = 170, height = 30 },
+  direction = "float", -- | "horizontal" | "window" | "float",
+  float_opts = { border = "curved", width = 170, height = 30 },
   highlights = {
-    Normal = { link = 'Normal' },
-    NormalFloat = { link = 'NormalFoat' },
-    FloatBorder = { link = 'FloatBorder' },
+    Normal = { link = "Normal" },
+    NormalFloat = { link = "NormalFoat" },
+    FloatBorder = { link = "FloatBorder" },
   },
 }
 
 local wk = require("which-key")
-vim.o.timeoutlen = 200
+vim.opt.timeoutlen = 200
 wk.setup({
   plugins = {
-    marks = false,      -- shows a list of your marks on ' and `
+    marks = false,      -- shows a list of your marks on " and `
     registers = false,  -- shows your registers on " in NORMAL or <C-r> in INSERT mode
     spelling = { enabled = false }
   },

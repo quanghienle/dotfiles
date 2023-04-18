@@ -2,7 +2,7 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
 local options = {
-  background = 'dark',
+  background = "dark",
   termguicolors = true,
   splitbelow = true,
   splitright = true,
@@ -23,12 +23,12 @@ local options = {
   errorbells = false,
   wildmenu = true,
   number = true,
-  signcolumn = 'yes',
+  signcolumn = "yes",
   relativenumber = true,
   cursorline = true,
-  cursorlineopt = 'both',
+  cursorlineopt = "both",
   updatetime = 300,
-  mouse = 'a',
+  mouse = "a",
   textwidth = 140,
   --tab
   shiftwidth = 2,
@@ -38,15 +38,15 @@ local options = {
   scrolloff = 8,
   laststatus = 2,
   backspace = "indent,eol,start",
-  clipboard = 'unnamed',
-  encoding = 'utf-8',
-  wildmode = 'longest,list,full',
-  wildignore = 'log/**,node_modules/**,target/**,tmp/**,*.rbc',
+  clipboard = "unnamed",
+  encoding = "utf-8",
+  wildmode = "longest,list,full",
+  wildignore = "log/**,node_modules/**,target/**,tmp/**,*.rbc",
   --spell = true,
-  spelllang = {'en'},
-  --guicursor='n-c-v:block,i-ci-ve:ver25,r-cr:hor20,o:hor50',
+  spelllang = {"en"},
+  --guicursor="n-c-v:block,i-ci-ve:ver25,r-cr:hor20,o:hor50",
   --
-  completeopt = 'menuone,noselect', -- Set completeopt to have a better completion experience
+  completeopt = "menuone,noselect", -- Set completeopt to have a better completion experience
 }
 
 if vim.fn.has("nvim-0.9.0") == 1 then
