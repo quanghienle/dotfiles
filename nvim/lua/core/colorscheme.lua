@@ -52,7 +52,7 @@ function SetColorScheme(colorscheme)
   SetHighlights(float_borders, { fg = border_color, bg = float_bg_color })
   SetHighlights(accents, { fg = accent_color, bold = true })
   SetHighlights(cursors, { fg = 'Black', bg = accent_color })
-  --SetHighlights({ 'VertSplit' }, { fg = '#5E66A6' });
+  SetHighlights({ 'VertSplit' }, { fg = 'DarkSlateBlue' });
 end
 
 SetColorScheme('nightfox')

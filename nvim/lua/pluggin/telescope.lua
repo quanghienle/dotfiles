@@ -9,13 +9,11 @@ local layout_options = {
 
 local function dropdown_horizontal(options)
   local conf = {
-    theme           = "dropdown",
+    theme = "dropdown",
     layout_strategy = 'horizontal',
-    layout_config   = layout_options
+    layout_config = layout_options
   }
-  for k, v in pairs(options or {}) do
-    conf[k] = v
-  end
+  for k, v in pairs(options or {}) do conf[k] = v end
   return conf
 end
 
@@ -29,10 +27,7 @@ require('telescope').setup {
     color_devicons = true,
     scroll_strategy = "limit",
     sorting_strategy = "ascending",
-    --dynamic_preview_title = true,
-    preview = {
-      timeout = 1000
-    },
+    preview = { timeout = 1000 },
     mappings = {
       i = {
         ["<C-j>"] = actions.move_selection_next,
@@ -48,26 +43,14 @@ require('telescope').setup {
   },
   pickers = {
     builtin = dropdown_horizontal(),
-    find_files = dropdown_horizontal({
-      dynamic_preview_title = true
-    }),
-    live_grep = dropdown_horizontal({
-      dynamic_preview_title = true
-    }),
-    grep_string = dropdown_horizontal({
-      dynamic_preview_title = true,
-    }),
+    find_files = dropdown_horizontal({ dynamic_preview_title = true }),
+    live_grep = dropdown_horizontal({ dynamic_preview_title = true }),
+    grep_string = dropdown_horizontal({ dynamic_preview_title = true }),
     marks = dropdown_horizontal(),
-    commands = {
-      theme = "dropdown",
-    },
+    commands = { theme = "dropdown" },
     help_tags = dropdown_horizontal(),
-    lsp_references = dropdown_horizontal({
-      show_line = false,
-    }),
+    lsp_references = dropdown_horizontal({ show_line = false }),
     diagnostics = dropdown_horizontal(),
-    spell_suggest = {
-      theme = 'cursor',
-    },
+    spell_suggest = { theme = 'cursor' },
   },
 }

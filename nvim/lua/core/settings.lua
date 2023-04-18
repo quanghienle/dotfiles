@@ -50,7 +50,7 @@ local options = {
   --spelllang = 'en_us'
   --guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
   --
-  completeopt = 'menuone,noselect' -- Set completeopt to have a better completion experience
+  completeopt = 'menuone,noselect', -- Set completeopt to have a better completion experience
 }
 
 

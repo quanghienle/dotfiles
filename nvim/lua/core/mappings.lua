@@ -6,7 +6,7 @@ function FindInPath()
 
   local function callback(input) require('telescope.builtin').live_grep({ cwd = input }) end
   vim.ui.input(
-    { prompt = ' Search in directory ', default = path},
+    { prompt = ' Search in directory ', default = path },
     callback
   )
 end
@@ -103,8 +103,10 @@ map('n', '<leader>su', require("telescope.builtin").lsp_references, 'Show Usages
 map('n', '<leader>ss', require("telescope.builtin").spell_suggest, 'Show Spelling suggestions (under cursor)')
 map('n', '<leader>se', vim.diagnostic.open_float, 'Show Errors (under cursor)')
 map('n', '<leader>sa', vim.lsp.buf.code_action, 'Show code-Actions (under cursor)')
-map('n', '<leader>sd', function() require("telescope.builtin").diagnostics({ bufnr = 0 }) end,
-  'Show Diagnostics (current buffer)')
+map('n', '<leader>sd',
+  function() require("telescope.builtin").diagnostics({ bufnr = 0 }) end,
+  "Show Diagnostics (current buffer)"
+)
 map('n', '<leader>si', ShowPopupInfo, 'Show Information (under cursor)')
 map('n', '<leader>st', require("nvim-tree.api").tree.toggle, 'Show NvimTree')
 map('n', '<leader>sg', LazyGitToggle, 'Show LazyGit')
@@ -113,8 +115,10 @@ map('n', '<leader>so', ':SymbolsOutline<cr>', 'Show Outline')
 -- Notifications
 map('n', "<leader>na", ":NoiceTelescope<cr>", "Notifications: Show all")
 map('n', "<leader>nl", ":NoiceLast<cr>", "Notifications: Show last")
-map('n', "<leader>nh", function() require("notify").dismiss({ silent = true, pending = true }) end,
-  "Notifications: Hide all")
+map('n', "<leader>nh",
+  function() require("notify").dismiss({ silent = true, pending = true }) end,
+  "Notifications: Hide all"
+)
 
 -- Go To
 map('n', '<leader>gd', vim.lsp.buf.definition, 'Go-to: Definition (under cursor)')
@@ -122,16 +126,14 @@ map('n', '<leader>gi', vim.lsp.buf.implementation, 'Go-to: Implementation (under
 map('n', '<leader>gt', require("nvim-tree.api").tree.focus, 'Go-to: nvimTree')
 
 -- Window
-map('n', '<leader>w+', ':vertical resize +15<cr>', 'Window: Increase vertically')
-map('n', '<leader>w-', ':vertical resize -15<cr>', 'Window: Descrease vertically')
-map('n', '<leader>w>', ':resize +10<cr>', 'Window: Increase horizontally')
-map('n', '<leader>w<', ':resize -10<cr>', 'Window: Decrease horizontally')
+map('n', '<leader>w>', ':vertical resize +15<cr>', 'Window: Increase vertically')
+map('n', '<leader>w<', ':vertical resize -15<cr>', 'Window: Descrease vertically')
+map('n', '<leader>w+', ':resize +10<cr>', 'Window: Increase horizontally')
+map('n', '<leader>w-', ':resize -10<cr>', 'Window: Decrease horizontally')
 map('n', '<leader>we', '<C-w>=', 'Window: Resize evenly')
 
 -- Reformat, Rename
-map('n', '<leader>rf', vim.lsp.buf.format, 'Reformat code')
-map('v', '<leader>rf', vim.lsp.buf.format, 'Reformat code')
-
+map({ 'n', 'v' }, '<leader>rf', vim.lsp.buf.format, 'Reformat code')
 map('n', '<leader>rn', vim.lsp.buf.rename, 'Rename symbol under cursor')
 map('n', '<leader>rt', SetTabWidth, 'Reset tab width')
 map("n", "<leader>rs", require("session_manager").load_current_dir_session, "Restore Session")
