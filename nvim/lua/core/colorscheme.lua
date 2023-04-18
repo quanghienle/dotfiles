@@ -1,58 +1,81 @@
-local function SetHighlights(highlight_list, setting)
-  for _, hl in ipairs(highlight_list) do
-    vim.api.nvim_set_hl(0, hl, setting)
-  end
-end
+require("nightfox").setup()
 
-function SetColorScheme(colorscheme)
+function SetColorScheme(colorscheme, transparent)
   vim.cmd('colorscheme ' .. colorscheme)
 
+  local float_bg_color = "#131a24"
+  local highlights = {
+    {
+      groups = {
+        'NotifyBackground',
+        'NormalFloat',
+        'WhichKeyFloat',
+        'Pmenu',
+        'TelescopeNormal',
+        'NoiceCmdlinePopup'
+      },
+      opts = { bg = float_bg_color}
+    },
+    {
+      groups = {
+        'FloatBorder',
+        'LspFloatWinBorder',
+        'NoiceCmdlinePopupBorderSearch',
+        'NoiceCmdlinePopupBorder',
+        'LspSagaCodeActionBorder',
+        'LspSagaHoverBorder',
+        'CmpDocumentationBorder',
+        'TelescopePreviewBorder',
+        'TelescopePromptBorder',
+        'TelescopeResultsBorder',
+      },
+      --opts = { fg = 'CornFlowerBlue', bg = float_bg_color }
+      opts = { fg = float_bg_color, bg = float_bg_color } -- no border
+    },
+    {
+      groups = { 'Cursor', 'TermCursor', 'MiniAnimateCursor' },
+      opts = { fg = 'Black', bg = 'MediumPurple' }
+    },
+    {
+      groups = {
+        'Title', 'FloatTitle',
+        'BufferLineBufferSelected',
+        'TelescopeBorder',
+        --'VertSplit',
+        'CursorLineNr',
+      },
+      opts = { fg = 'DarkSeaGreen', bold = true }
+    },
+  }
+
+  if transparent == true then
+    table.insert(highlights, 1,
+      {
+        groups = { 'Normal', 'NormalNC', 'NvimTreeNormal' },
+        opts = { bg = "None" }
+      }
+    )
+    table.insert(highlights,
+      {
+        groups = { 'BufferLineTabSeparator', 'BufferlineFill'},
+        opts = {  bg = "#131a24" }
+      }
+    )
+  end
+
+  for _, hl in ipairs(highlights) do
+    for _, group in ipairs(hl.groups) do
+      vim.api.nvim_set_hl(0, group, hl.opts)
+    end
+  end
+
+  -- set diagnostic signs
   local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
-
-
-  local float_bg_color = "#131a24"
-  local accent_color = 'MediumPurple'
-  local border_color = 'CornFlowerBlue'
-
-  local float_normals = {
-    'NormalFloat',
-    'WhichKeyFloat',
-    'Pmenu',
-    'TelescopeNormal',
-    'NoiceCmdlinePopup'
-  }
-  local float_borders = {
-    'FloatBorder',
-    'LspFloatWinBorder',
-    'NoiceCmdlinePopupBorderSearch',
-    'LspSagaCodeActionBorder',
-    'LspSagaHoverBorder',
-    'CmpDocumentationBorder',
-    'TelescopePreviewBorder',
-    'TelescopePromptBorder',
-    'TelescopeResultsBorder',
-  }
-  local accents = {
-    'BufferLineBufferSelected',
-    'TelescopeBorder',
-    'CursorLineNr',
-  }
-  local cursors = {
-    'Cursor',
-    'TermCursor',
-    'MiniAnimateCursor'
-  }
-
-
-  SetHighlights(float_normals, { bg = float_bg_color })
-  SetHighlights(float_borders, { fg = border_color, bg = float_bg_color })
-  SetHighlights(accents, { fg = accent_color, bold = true })
-  SetHighlights(cursors, { fg = 'Black', bg = accent_color })
-  SetHighlights({ 'VertSplit' }, { fg = 'DarkSlateBlue' });
 end
 
-SetColorScheme('nightfox')
+
+SetColorScheme('nightfox', false)

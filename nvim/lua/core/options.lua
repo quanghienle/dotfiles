@@ -1,9 +1,5 @@
-vim.cmd [[
-    syntax enable
-    filetype plugin indent on
-]]
-
 vim.g.mapleader = ","
+vim.g.maplocalleader = ","
 
 local options = {
   background = 'dark',
@@ -47,31 +43,18 @@ local options = {
   wildmode = 'longest,list,full',
   wildignore = 'log/**,node_modules/**,target/**,tmp/**,*.rbc',
   --spell = true,
-  --spelllang = 'en_us'
-  --guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
+  spelllang = {'en'},
+  --guicursor='n-c-v:block,i-ci-ve:ver25,r-cr:hor20,o:hor50',
   --
   completeopt = 'menuone,noselect', -- Set completeopt to have a better completion experience
 }
 
-
-local appendOpts = {
-  shortmess = 'c',
-  path = '**',
-  --fillchars = 'vert:│'
-}
-
--- vim.opt.shellcmdflag:remove('c');
-vim.opt.directory:remove('.');
+if vim.fn.has("nvim-0.9.0") == 1 then
+  vim.opt.splitkeep = "screen"
+  vim.opt.shortmess:append({ C = true })
+end
 
 for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
-for k, v in pairs(appendOpts) do
-  vim.opt[k]:append(v)
-end
-
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'TelescopePreviewerLoaded',
-  command = 'setlocal wrap number'
-})

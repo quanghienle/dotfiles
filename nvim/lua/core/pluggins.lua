@@ -16,7 +16,7 @@ Plug 'akinsho/bufferline.nvim'
 
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'echasnovski/mini.indentscope'
-Plug 'echasnovski/mini.animate'
+--Plug 'echasnovski/mini.animate'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'

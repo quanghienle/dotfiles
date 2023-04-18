@@ -23,18 +23,9 @@ require("bufferline").setup({
     separator_style = "slope",
     numbers = "ordinal",
     show_close_icon = false,
-    always_show_bufferline = true,
     show_buffer_close_icons = false,
     show_buffer_icons = false,
-    diagnostics = false,
-    offsets = {
-      {
-        filetype = "NvimTree",
-        text = "",
-        text_align = "left",
-        separator = false
-      }
-    },
+    offsets = { { filetype = "NvimTree", text = "" } },
   },
 })
 
@@ -63,7 +54,11 @@ require("toggleterm").setup {
   start_in_insert = true,
   direction = 'float', -- | 'horizontal' | 'window' | 'float',
   float_opts = { border = 'curved', width = 170, height = 30 },
-  highlights = { FloatBorder = { link = 'FloatBorder' } }
+  highlights = {
+    Normal = { link = 'Normal' },
+    NormalFloat = { link = 'NormalFoat' },
+    FloatBorder = { link = 'FloatBorder' },
+  },
 }
 
 local wk = require("which-key")

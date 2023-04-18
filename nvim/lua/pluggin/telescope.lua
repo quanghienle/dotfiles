@@ -51,6 +51,6 @@ require('telescope').setup {
     help_tags = dropdown_horizontal(),
     lsp_references = dropdown_horizontal({ show_line = false }),
     diagnostics = dropdown_horizontal(),
-    spell_suggest = { theme = 'cursor' },
+    spell_suggest = { theme = "dropdown"},
   },
 }

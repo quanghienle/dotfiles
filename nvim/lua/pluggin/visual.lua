@@ -38,14 +38,6 @@ require('dressing').setup({
   },
 })
 
-local animate = require("mini.animate")
-local timing_func = animate.gen_timing.linear({ duration = 200, unit = "total" })
-animate.setup({
-  cursor = { timing = timing_func },
-  resize = { timing = timing_func },
-  scroll = { enable = false },
-})
-
 require('gitsigns').setup {
   current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
