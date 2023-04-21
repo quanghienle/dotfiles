@@ -796,13 +796,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.99998724460601807</real>
+				<real>0.747467041015625</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>1</real>
+				<real>0.343474883120507</real>
 				<key>Red Component</key>
-				<real>0.99997633695602417</real>
+				<real>0.60024809700239246</real>
 			</dict>
 			<key>Cursor Guide Color</key>
 			<dict>
@@ -1333,7 +1333,7 @@
 	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.01</real>
+	<real>0.098786407766990311</real>
 	<key>TabStyleWithAutomaticOption</key>
 	<integer>5</integer>
 	<key>TabsHaveCloseButton</key>

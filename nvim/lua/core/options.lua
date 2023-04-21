@@ -36,7 +36,7 @@ local options = {
   tabstop = 2,
   pumheight = 10,
   scrolloff = 8,
-  laststatus = 2,
+  laststatus = 0,
   backspace = "indent,eol,start",
   clipboard = "unnamed",
   encoding = "utf-8",
@@ -57,4 +57,3 @@ end
 for k, v in pairs(options) do
   vim.opt[k] = v
 end
-

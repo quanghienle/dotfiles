@@ -45,10 +45,10 @@ local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp") -- Insert `(` after select function or method item
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 cmp.setup {
-  --window = {
-  --  completion = { border = "rounded" },
-  --  documentation = { border = "rounded" }
-  --},
+  window = {
+    completion = { border = "rounded" },
+    documentation = { border = "rounded" }
+  },
   snippet = {
     expand = function(args) require("luasnip").lsp_expand(args.body) end,
   },
@@ -59,6 +59,7 @@ cmp.setup {
   }),
   sources = {
     { name = "nvim_lsp" },
+    { name = 'nvim_lsp_signature_help' },
     { name = "luasnip" },
     { name = "path" },
     { name = "calc" }

@@ -3,7 +3,7 @@ local actions = require("telescope.actions")
 local layout_options = {
   prompt_position = "top",
   height = 0.5,
-  width = 0.7,
+  width = 0.75,
   scroll_speed = 1
 }
 
@@ -48,11 +48,26 @@ require("telescope").setup {
     live_grep = dropdown_horizontal(),
     grep_string = dropdown_horizontal(),
     marks = dropdown_horizontal(),
-    commands = { theme = "dropdown" },
-    buffers = dropdown_horizontal(),
+    buffers = {
+      theme = "dropdown",
+      initial_mode = "normal",
+      previewer = false,
+      path_display = function(opts, path)
+        local tail = require("telescope.utils").path_tail(path)
+        return string.format("%s (%s)", tail, path)
+      end,
+    },
     help_tags = dropdown_horizontal(),
-    lsp_references = dropdown_horizontal({ show_line = false }),
-    diagnostics = dropdown_horizontal(),
-    spell_suggest = { theme = "dropdown" },
+    lsp_references = dropdown_horizontal({
+      show_line = false,
+      initial_mode = "normal",
+    }),
+    diagnostics = dropdown_horizontal({
+      initial_mode = "normal",
+    }),
+    spell_suggest = {
+      theme = "dropdown",
+      initial_mode = "normal",
+    },
   },
 }

@@ -1,6 +1,4 @@
-local function augroup(name)
-  return vim.api.nvim_create_augroup("custom_augroup_" .. name, { clear = true })
-end
+local utils = require("core.utils")
 
 -- wrap lines for Telescope Preview
 vim.api.nvim_create_autocmd("User", {
@@ -8,33 +6,42 @@ vim.api.nvim_create_autocmd("User", {
   command = "setlocal wrap number"
 })
 
--- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
+-- Set highlight group for SymbolsOutline
+vim.api.nvim_set_hl(0, "MyOutlineNormal", { bg = utils.color.darker_bg })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "Outline",
   callback = function()
-    vim.highlight.on_yank()
-  end,
+    vim.opt_local.winhighlight = "Normal:MyOutlineNormal,NormalNC:MyOutlineNormal"
+    vim.opt.signcolumn = "no"
+  end
 })
 
-vim.api.nvim_create_autocmd(
-  "VimEnter",
-  {
-  group = augroup("session_autoload"),
-    callback = function()
-      require("nvim-tree.api").tree.toggle()
-      if require("session_manager.config").dir_to_session_filename():exists() then
-        vim.ui.select(
-          { "Yes", "No" },
-          {
-            prompt = " Load previously saved session? ",
-            format_item = function(item) return "   " .. item end
-          },
-          function(choice)
-            if choice == "Yes" then require("session_manager").load_current_dir_session() end
-          end
-        )
-      end
-    end,
-    nested = true,
-  }
-)
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = utils.augroup("highlight_yank"),
+  callback = function() vim.highlight.on_yank() end,
+})
+
+
+-- show cursorline for active window only
+local cursorline_group = utils.augroup("set_cursorline")
+vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
+  group = cursorline_group,
+  callback = function() vim.opt.cursorline = true end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+  group = cursorline_group,
+  pattern = "TelescopePrompt",
+  callback = function() vim.opt.cursorline = false end,
+})
+vim.api.nvim_create_autocmd("WinLeave", {
+  group = cursorline_group,
+  callback = function() vim.opt.cursorline = false end,
+})
+
+-- auto load session
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = utils.augroup("session_autoload"),
+  callback = utils.load_session,
+  nested = true,
+})

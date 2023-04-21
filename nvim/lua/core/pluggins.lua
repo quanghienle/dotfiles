@@ -14,9 +14,15 @@ Plug "kyazdani42/nvim-tree.lua"
 Plug "nvim-lualine/lualine.nvim"
 Plug "akinsho/bufferline.nvim"
 
+--Plug "SmiteshP/nvim-navic"
+--Plug "utilyre/barbecue.nvim"
+
+
+
 Plug "lukas-reineke/indent-blankline.nvim"
 Plug "echasnovski/mini.indentscope"
---Plug "echasnovski/mini.animate"
+
+Plug "RRethy/vim-illuminate"
 
 Plug "nvim-lua/plenary.nvim"
 Plug "nvim-telescope/telescope.nvim"
@@ -26,9 +32,9 @@ Plug "p00f/nvim-ts-rainbow"
 
 Plug "NvChad/nvim-colorizer.lua"
 
-Plug "akinsho/toggleterm.nvim"
-
 Plug "simrat39/symbols-outline.nvim"
+
+Plug "folke/zen-mode.nvim"
 
 Plug "neovim/nvim-lspconfig"
 Plug("williamboman/mason.nvim", {["do"] = vim.fn[":MasonUpdate"]})
@@ -41,6 +47,7 @@ Plug "hrsh7th/cmp-buffer"
 Plug "hrsh7th/cmp-path"
 Plug "hrsh7th/cmp-cmdline"
 Plug "hrsh7th/cmp-calc"
+Plug "hrsh7th/cmp-nvim-lsp-signature-help"
 
 -- lua snip
 Plug "saadparwaiz1/cmp_luasnip"
@@ -56,18 +63,18 @@ Plug "rcarriga/nvim-notify"
 Plug "folke/noice.nvim"
 Plug "stevearc/dressing.nvim"
 
-
 Plug "preservim/nerdcommenter"
 
 Plug "folke/which-key.nvim"
 
 -- Sessions
---Plug "folke/persistence.nvim"
 Plug "Shatur/neovim-session-manager"
+
+--Plug "nvim-zh/colorful-winsep.nvim"
 
 Plug "shaunsingh/nord.nvim"
 Plug "folke/tokyonight.nvim"
 Plug "EdenEast/nightfox.nvim"
-
+Plug( 'catppuccin/nvim', {['as'] = 'catppuccin'} )
 
 vim.call("plug#end")

@@ -1,5 +1,6 @@
 require("noice").setup({
-  lsp = { -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
     override = {
       ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
       ["vim.lsp.util.stylize_markdown"] = true,
@@ -23,6 +24,7 @@ require("noice").setup({
 
 require("dressing").setup({
   input = {
+    prefer_width = 60,
     relative = "editor",
     win_options = { winblend = 0 },
   },
@@ -47,25 +49,21 @@ require("gitsigns").setup {
     ignore_whitespace = false,
   },
   signs = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "" },
-        topdelete = { text = "" },
-        changedelete = { text = "▎" },
-        untracked = { text = "▎" },
+    add = { text = "▎" },
+    change = { text = "▎" },
+    delete = { text = "" },
+    topdelete = { text = "" },
+    changedelete = { text = "▎" },
+    untracked = { text = "▎" }, -- █ or ▎
   }
 }
 
 require("colorizer").setup({
-  user_default_options = {
-    mode = "virtualtext" -- Available modes for `mode`: foreground, background,  virtualtext
-  }
+  filetypes = { "*", "!NvimTree", "!mason" }, -- exclude NvimTree
+  user_default_options = { mode = "virtualtext" } -- foreground, background,  virtualtext
 })
 
-local excluded_filetypes = {
-  "help", "alpha", "dashboard", "neo-tree",
-  "Trouble", "lazy", "NvimTree", "mason"
-}
+local excluded_filetypes = { "help", "neo-tree", "Trouble", "lazy", "NvimTree", "mason" }
 
 require("indent_blankline").setup {
   filetype_exclude = excluded_filetypes,
@@ -81,7 +79,5 @@ require("mini.indentscope").setup({
 -- exclude filetypes for mini.indentscope
 vim.api.nvim_create_autocmd("FileType", {
   pattern = excluded_filetypes,
-  callback = function()
-    vim.b.miniindentscope_disable = true
-  end,
+  callback = function() vim.b.miniindentscope_disable = true end,
 })

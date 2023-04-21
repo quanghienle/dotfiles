@@ -7,6 +7,8 @@ require "nvim-tree".setup {
     icons = { show = { git = false } },
     indent_markers = { enable = true, inline_arrows = false },
   },
+  filters = { dotfiles = false, }, --'false' to show dot files
+  git = { ignore = false, },       --'false' to show gitignore files
   trash = { cmd = "trash" },
   ui = {
     confirm = { remove = true, trash = true, },
@@ -16,57 +18,73 @@ require "nvim-tree".setup {
   }
 }
 
-require("symbols-outline").setup({})
+require("symbols-outline").setup({
+  relative_width = false,
+  width = 35,
+})
 
 require("bufferline").setup({
   options = {
     separator_style = "slope",
-    numbers = "ordinal",
+    --numbers = "ordinal",
+    numbers = function(opts)
+      return opts.raise(opts.ordinal)
+    end,
     show_close_icon = false,
     show_buffer_close_icons = false,
     show_buffer_icons = false,
-    offsets = { { filetype = "NvimTree", text = "" } },
+    offsets = {
+      {
+        filetype = "NvimTree",
+        text = "File Explorer",
+        highlight = "Directory",
+        separator = false
+      }
+    },
   },
 })
 
 require("lualine").setup({
+  options = { globalstatus = true, },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { "branch" },
-    lualine_c = {
-      "diagnostics",
+    lualine_b = { "branch", "diff" },
+    lualine_c = { "diagnostics", { "filename", path = 1 } },
+    lualine_x = {
       {
-        "filetype",
-        icon_only = true,
-        separator = "",
-        padding = { left = 1, right = 0 }
+        require("noice").api.status.command.get,
+        cond = require("noice").api.status.command.has,
       },
-      { "filename", path = 1 }
+      {
+        require("noice").api.status.mode.get,
+        cond = require("noice").api.status.mode.has
+      },
+      require("core.utils").list_lsp,
+      "filetype",
     },
-    lualine_x = { "diff" },
     lualine_y = { "progress" },
     lualine_z = { "location" }
-  }
+  },
 })
 
-require("toggleterm").setup {
-  shading_factor = "1",
-  start_in_insert = true,
-  direction = "float", -- | "horizontal" | "window" | "float",
-  float_opts = { border = "curved", width = 170, height = 30 },
-  highlights = {
-    Normal = { link = "Normal" },
-    NormalFloat = { link = "NormalFoat" },
-    FloatBorder = { link = "FloatBorder" },
+
+require("core.winbar").set_winbar()
+
+require("zen-mode").setup({
+  window = {
+    backdrop = 0.80, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+    width = 0.85,    -- width of the Zen window
+    height = 0.9,    -- height of the Zen window
   },
-}
+})
+
 
 local wk = require("which-key")
 vim.opt.timeoutlen = 200
 wk.setup({
   plugins = {
-    marks = false,      -- shows a list of your marks on " and `
-    registers = false,  -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+    marks = false,     -- shows a list of your marks on " and `
+    registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
     spelling = { enabled = false }
   },
   layout = {
