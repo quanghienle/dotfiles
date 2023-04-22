@@ -1,3 +1,5 @@
+local utils = require("core.utils")
+
 require "nvim-tree".setup {
   view = {
     width = { min = 35, max = 45 },
@@ -20,52 +22,73 @@ require "nvim-tree".setup {
 
 require("symbols-outline").setup({
   relative_width = false,
-  width = 35,
+  width = 40,
 })
 
 require("bufferline").setup({
   options = {
-    separator_style = "slope",
-    --numbers = "ordinal",
+    --separator_style = "slope",
     numbers = function(opts)
       return opts.raise(opts.ordinal)
     end,
     show_close_icon = false,
     show_buffer_close_icons = false,
     show_buffer_icons = false,
-    offsets = {
-      {
-        filetype = "NvimTree",
-        text = "File Explorer",
-        highlight = "Directory",
-        separator = false
-      }
-    },
   },
 })
 
-require("lualine").setup({
-  options = { globalstatus = true, },
+
+local vim_icon = function() return " " end
+local space = {
+  function() return " " end,
+  color = { bg = utils.color.darker_bg },
+  --color = { bg = utils.color.none },
+}
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
+    always_divide_middle = true,
+    globalstatus = true,
+  },
+
   sections = {
-    lualine_a = { "mode" },
-    lualine_b = { "branch", "diff" },
-    lualine_c = { "diagnostics", { "filename", path = 1 } },
-    lualine_x = {
+    lualine_a = {
+      utils.customize_lualine_section({ "mode" }),
+      utils.customize_lualine_section({ vim_icon }, "lighter_bg", "blue"),
+      space,
+      utils.customize_lualine_section({ "branch" }, "green", "black"),
+      utils.customize_lualine_section({ "diff" }, "lighter_bg", "none"),
+      space,
+      utils.customize_lualine_section({ "filename" }, "blue", "black"),
+      utils.customize_lualine_section({ "filetype", color = true }, "lighter_bg", "blue")
+    },
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {
+      {
+        require("noice").api.status.mode.get,
+        cond = require("noice").api.status.mode.has,
+        color = { bg = utils.color.darker_bg, fg = utils.color.blue },
+      },
+      space,
       {
         require("noice").api.status.command.get,
         cond = require("noice").api.status.command.has,
+        color = { bg = utils.color.darker_bg, fg = utils.color.blue },
       },
-      {
-        require("noice").api.status.mode.get,
-        cond = require("noice").api.status.mode.has
-      },
-      require("core.utils").list_lsp,
-      "filetype",
-    },
-    lualine_y = { "progress" },
-    lualine_z = { "location" }
+      space,
+      utils.customize_lualine_section({ "diagnostics" }, "lighter_bg", "blue"),
+      utils.customize_lualine_section({ utils.get_lsp_name }, "green", "black"),
+      space,
+      utils.customize_lualine_section({ "progress" }, "lighter_bg", "blue"),
+      utils.customize_lualine_section({ "location" }, "blue", "black"),
+    }
   },
-})
+}
 
 
 require("core.winbar").set_winbar()

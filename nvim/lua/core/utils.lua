@@ -1,9 +1,15 @@
 local M = {}
 
 M.color = {
+  none = "None",
+  black = "#000000",
+  light_bg = "#303142",
+  lighter_bg = "#3D3E4E",
+  dark_bg = "#121a24",
   darker_bg = "#131a24",
   purple = "MediumPurple",
   green = "DarkSeaGreen",
+  blue = "#80A7EA",
   slate_blue = "SlateBlue",
 }
 
@@ -14,6 +20,37 @@ M.signs = {
   Info = " "
 }
 
+M.separator = {
+  left = "",
+  right = ""
+}
+
+M.customize_lualine_section = function(opts, bg, fg)
+  if bg or fg then
+    opts.color = { bg = M.color[bg], fg = M.color[fg] }
+  end
+
+  opts.separator = M.separator
+  return opts
+end
+
+
+
+M.get_lsp_name = function()
+  local msg = 'No Active LSP'
+  local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+  local clients = vim.lsp.get_active_clients()
+  if next(clients) == nil then
+    return msg
+  end
+  for _, client in ipairs(clients) do
+    local filetypes = client.config.filetypes
+    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+      return "  " .. client.name
+    end
+  end
+  return "  " .. msg
+end
 
 M.list_lsp = function()
   local buf_clients = vim.lsp.buf_get_clients()
@@ -37,38 +74,6 @@ M.set_diagnostic_signs = function()
   end
 end
 
-M.finetune_colorscheme = function(colorscheme)
-  vim.cmd.colorscheme(colorscheme)
-
-  local highlights = {
-    {
-      groups = {
-        "NotifyBackground", "NormalFloat", "WhichKeyFloat",
-        "Pmenu", "TelescopeNormal", "NoiceCmdlinePopup"
-      },
-      opts = { link = "Normal" }
-    },
-    {
-      groups = {
-        "WinSeparator", "FloatBorder", "LspFloatWinBorder", "CmpDocumentationBorder",
-        "NoiceCmdlinePopupBorderSearch", "NoiceCmdlinePopupBorder",
-        "LspSagaCodeActionBorder", "LspSagaHoverBorder",
-        "TelescopePreviewBorder", "TelescopePromptBorder", "TelescopeResultsBorder",
-      },
-      opts = { fg = M.color.slate_blue, bg = "None" }
-    },
-    {
-      groups = { "BufferLineBufferSelected", "CursorLineNr", "Title", "FloatTitle", "TelescopeBorder" },
-      opts = { fg = M.color.green }
-    },
-  }
-
-  for _, hl in ipairs(highlights) do
-    for _, group in ipairs(hl.groups) do
-      vim.api.nvim_set_hl(0, group, hl.opts)
-    end
-  end
-end
 
 M.load_session = function()
   require("nvim-tree.api").tree.toggle()
@@ -99,7 +104,11 @@ M.find_in_path = function()
     path = require("nvim-tree.api").tree.get_node_under_cursor().absolute_path
   end
 
-  local function callback(input) require("telescope.builtin").live_grep({ cwd = input }) end
+  local function callback(input)
+    if input then
+      require("telescope.builtin").live_grep({ cwd = input })
+    end
+  end
   vim.ui.input(
     { prompt = " Search in directory ", default = path },
     callback
@@ -136,10 +145,12 @@ end
 
 M.set_tabwidth = function()
   local function callback(input)
-    local width = tonumber(input)
-    vim.opt.shiftwidth = width
-    vim.opt.softtabstop = width
-    vim.opt.tabstop = width
+    if input then
+      local width = tonumber(input)
+      vim.opt.shiftwidth = width
+      vim.opt.softtabstop = width
+      vim.opt.tabstop = width
+    end
   end
   vim.ui.input({ prompt = "Enter value for shiftwidth" }, callback)
 end
