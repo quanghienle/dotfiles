@@ -55,6 +55,9 @@ Plug "L3MON4D3/LuaSnip"
 
 Plug("VonHeikemen/lsp-zero.nvim", {branch = "v2.x"})
 
+Plug("onsails/lspkind.nvim")
+
+
 Plug "windwp/nvim-spectre"
 Plug "folke/trouble.nvim"
 

@@ -15,7 +15,7 @@
 	<key>ColoredSelectedTabOutlineStrength</key>
 	<real>0.5</real>
 	<key>CompactMinimalTabBarHeight</key>
-	<real>20</real>
+	<real>22</real>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>tokyonight-storm</key>
@@ -363,7 +363,7 @@
 	<key>Default Bookmark Guid</key>
 	<string>E5FDFB05-C479-4119-B35F-1041FBF1CEE2</string>
 	<key>DefaultTabBarHeight</key>
-	<real>20</real>
+	<real>22</real>
 	<key>DimBackgroundWindows</key>
 	<false/>
 	<key>DimOnlyText</key>
@@ -796,13 +796,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.96078431606292725</real>
+				<real>0.861724853515625</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.7921568751335144</real>
+				<real>0.45760724414139986</real>
 				<key>Red Component</key>
-				<real>0.75294119119644165</real>
+				<real>0.67816508490216165</real>
 			</dict>
 			<key>Cursor Guide Color</key>
 			<dict>

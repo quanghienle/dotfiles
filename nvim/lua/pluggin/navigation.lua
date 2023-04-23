@@ -27,10 +27,19 @@ require("symbols-outline").setup({
 
 require("bufferline").setup({
   options = {
-    --separator_style = "slope",
-    numbers = function(opts)
-      return opts.raise(opts.ordinal)
-    end,
+    modified_icon = '⟡',
+    tab_size = 12,
+    max_name_length = 15,
+    separator_style = "slope",
+    --separator_style = {
+    --  utils.separator.left,
+    --  utils.separator.right,
+    --},
+    --numbers = "ordinal",
+    --numbers = function(opts)
+    --  return opts.raise(opts.ordinal)
+    --end,
+    indicator = { style = 'none', },
     show_close_icon = false,
     show_buffer_close_icons = false,
     show_buffer_icons = false,
@@ -38,31 +47,29 @@ require("bufferline").setup({
 })
 
 
-local vim_icon = function() return " " end
+local vim_icon = function() return "" end
 local space = {
   function() return " " end,
-  color = { bg = utils.color.darker_bg },
-  --color = { bg = utils.color.none },
+  color = { bg = utils.color.none },
 }
 require('lualine').setup {
   options = {
-    icons_enabled = true,
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
-    always_divide_middle = true,
     globalstatus = true,
   },
-
   sections = {
     lualine_a = {
       utils.customize_lualine_section({ "mode" }),
       utils.customize_lualine_section({ vim_icon }, "lighter_bg", "blue"),
       space,
-      utils.customize_lualine_section({ "branch" }, "green", "black"),
-      utils.customize_lualine_section({ "diff" }, "lighter_bg", "none"),
+      utils.customize_lualine_section({ "filetype", colored = false, icon_only = true }, "blue", "black"),
+      utils.customize_lualine_section({ "filename" }, "lighter_bg", "blue"),
       space,
-      utils.customize_lualine_section({ "filename" }, "blue", "black"),
-      utils.customize_lualine_section({ "filetype", color = true }, "lighter_bg", "blue")
+      utils.customize_lualine_section({ utils.get_lsp_name }, "green", "black"),
+      utils.customize_lualine_section({ "diagnostics" }, "lighter_bg", "blue"),
+      space,
+      { utils.get_diagnostic_message, cond = utils.has_diagnostic, color = utils.get_diagnostic_hl },
     },
     lualine_b = {},
     lualine_c = {},
@@ -72,23 +79,24 @@ require('lualine').setup {
       {
         require("noice").api.status.mode.get,
         cond = require("noice").api.status.mode.has,
-        color = { bg = utils.color.darker_bg, fg = utils.color.blue },
+        color = { bg = utils.color.none, fg = utils.color.blue },
       },
       space,
       {
         require("noice").api.status.command.get,
         cond = require("noice").api.status.command.has,
-        color = { bg = utils.color.darker_bg, fg = utils.color.blue },
+        color = { bg = utils.color.none, fg = utils.color.blue },
       },
       space,
-      utils.customize_lualine_section({ "diagnostics" }, "lighter_bg", "blue"),
-      utils.customize_lualine_section({ utils.get_lsp_name }, "green", "black"),
+      utils.customize_lualine_section({ "diff" }, "lighter_bg", "none"),
+      utils.customize_lualine_section({ "branch" }, "green", "black"),
       space,
       utils.customize_lualine_section({ "progress" }, "lighter_bg", "blue"),
       utils.customize_lualine_section({ "location" }, "blue", "black"),
     }
   },
 }
+vim.api.nvim_set_hl(0, "lualine_c_normal", { link = "Normal" })
 
 
 require("core.winbar").set_winbar()
@@ -127,9 +135,8 @@ wk.register(
     n = { name = " Notification..." },
     r = { name = " Re-...(reformat, rename...)" },
     s = { name = " Show..." },
+    t = { name = " Tab..." },
     w = { name = " Window..." },
   },
-  {
-    prefix = "<leader>"
-  }
+  { prefix = "<leader>" }
 )

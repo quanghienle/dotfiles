@@ -23,29 +23,26 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- show cursorline for active window only
---local cursorline_group = utils.augroup("set_cursorline")
---vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
---  group = cursorline_group,
---  callback = function()
---    --vim.opt.cursorline = true
---    vim.opt.relativenumber = true
---  end,
---})
---vim.api.nvim_create_autocmd("FileType", {
---  group = cursorline_group,
---  pattern = "TelescopePrompt",
---  callback = function()
---    --vim.opt.cursorline = false
---    vim.opt.relativenumber = false
---  end,
---})
---vim.api.nvim_create_autocmd("WinLeave", {
---  group = cursorline_group,
---  callback = function()
---    --vim.opt.cursorline = false
---    vim.opt.relativenumber = false
---  end,
---})
+local cursorline_group = utils.augroup("set_cursorline")
+vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
+  group = cursorline_group,
+  callback = function()
+    vim.opt.cursorline = true
+  end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+  group = cursorline_group,
+  pattern = "TelescopePrompt",
+  callback = function()
+    vim.opt.cursorline = false
+  end,
+})
+vim.api.nvim_create_autocmd("WinLeave", {
+  group = cursorline_group,
+  callback = function()
+    vim.opt.cursorline = false
+  end,
+})
 
 -- auto load session
 vim.api.nvim_create_autocmd("VimEnter", {

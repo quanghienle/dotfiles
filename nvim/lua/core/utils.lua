@@ -3,6 +3,7 @@ local M = {}
 M.color = {
   none = "None",
   black = "#000000",
+  normal_bg = "#192330",
   light_bg = "#303142",
   lighter_bg = "#3D3E4E",
   dark_bg = "#121a24",
@@ -11,13 +12,25 @@ M.color = {
   green = "DarkSeaGreen",
   blue = "#80A7EA",
   slate_blue = "SlateBlue",
+  coral = "#f7768e",
+  ERROR = "#c94f6d",
+  WARN = "#dbc074",
+  INFO = "#719cd6",
+  HINT = "#81b29a",
 }
 
 M.signs = {
   Error = " ",
   Warn = " ",
+  Info = " ",
   Hint = " ",
-  Info = " "
+}
+
+M.signs_lower = {
+  error = "",
+  warn = "",
+  info = "",
+  hint = "",
 }
 
 M.separator = {
@@ -34,6 +47,44 @@ M.customize_lualine_section = function(opts, bg, fg)
   return opts
 end
 
+M.has_diagnostic = function()
+  local diagnostics = vim.lsp.diagnostic.get_line_diagnostics()
+  if not next(diagnostics) then
+    return false
+  else
+    return true
+  end
+end
+
+M.get_diagnostic_hl = function()
+  local diagnostics = vim.lsp.diagnostic.get_line_diagnostics()
+  if not next(diagnostics) then
+    return { link = "Normal" }
+  else
+    local severity_level = diagnostics[1].severity
+    local severity = vim.diagnostic.severity[severity_level]
+    return { bg = M.color.none, fg = M.color[severity] }
+  end
+end
+
+
+M.get_diagnostic_message = function()
+  local diagnostics = vim.lsp.diagnostic.get_line_diagnostics()
+  if not next(diagnostics) then
+    return nil
+  else
+    local severity_level = diagnostics[1].severity
+    local severity = vim.diagnostic.severity[severity_level]
+    local icon = M.signs_lower[string.lower(severity)]
+
+    local msg = diagnostics[1].message
+    if string.len(msg) > 50 then
+      msg = string.sub(msg, 0, 50) .. "..."
+    end
+    --return "[" .. icon .. " " .. severity .. "] " .. msg
+    return icon .. " " .. msg
+  end
+end
 
 
 M.get_lsp_name = function()

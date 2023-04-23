@@ -32,16 +32,14 @@ map({ "n", "v" }, "s", "\"_s", "Change character without yanking")
 
 
 -- Buffers
+map("n", "<leader>tn", ":tabnext<cr>", "Tab: Next")
+map("n", "<leader>tp", ":tabprevious<cr>", "Tab: Previous")
+
+-- Buffers
 map("n", "<leader>bd", ":bp<cr>:sp<cr>:bn<cr>:bd<cr>", "Buffer: Delete")
 map("n", "<leader>bn", ":bn<cr>", "Buffer: Next")
 map("n", "<leader>bp", ":bp<cr>", "Buffer: Previous")
-map("n", "<leader>br", ":bufdo e<cr>", "Buffer: Refresh")
 map("n", "<leader>bb", require("telescope.builtin").buffers, "Buffer: List")
-
--- Buffer number: <leader>1..9 to jump to buffer
-for i = 1, 9, 1 do
-  map("n", "<leader>" .. i, function() require("bufferline").go_to_buffer(i) end, "Go to buffer " .. i)
-end
 
 map("n", "<Tab>", ":bn<cr>", "Next Buffer")
 map("n", "<S-Tab>", ":bp<cr>", "Previous Buffer")

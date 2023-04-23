@@ -9,7 +9,7 @@ lsp.ensure_installed({
 })
 lsp.set_preferences({
   suggest_lsp_servers = false,
-  sign_icons = { error = " ", warn = " ", hint = " ", info = " " }
+  sign_icons = require("core.utils").signs_lower
 })
 lsp.setup()
 
@@ -41,13 +41,10 @@ require("nvim-treesitter.configs").setup({
 
 -- nvim-cmp setup
 local cmp = require("cmp")
-
 local cmp_autopairs = require("nvim-autopairs.completion.cmp") -- Insert `(` after select function or method item
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 cmp.setup {
   window = {
-    --completion = { border = "rounded" },
-    --documentation = { border = "rounded" }
     completion = cmp.config.window.bordered({
       winhighlight = "Normal:Normal,FloatBorder:FloatBorder,Search:None"
     }),
@@ -58,7 +55,17 @@ cmp.setup {
   snippet = {
     expand = function(args) require("luasnip").lsp_expand(args.body) end,
   },
+  formatting = {
+    format = require('lspkind').cmp_format({
+      mode = 'symbol_text',
+      preset = "codicons",
+      maxwidth = 50,
+      ellipsis_char = '...'
+    })
+  },
   mapping = cmp.mapping.preset.insert({
+    ['<Tab>'] = nil,
+    ['<S-Tab>'] = nil,
     ["<C-d>"] = cmp.mapping.scroll_docs(1),
     ["<C-u>"] = cmp.mapping.scroll_docs(-1),
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
