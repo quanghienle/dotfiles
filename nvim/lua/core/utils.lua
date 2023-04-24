@@ -3,20 +3,15 @@ local M = {}
 M.color = {
   none = "None",
   black = "#000000",
+  almost_black = "#121212",
   normal_bg = "#192330",
-  light_bg = "#303142",
-  lighter_bg = "#3D3E4E",
-  dark_bg = "#121a24",
   darker_bg = "#131a24",
-  purple = "MediumPurple",
-  green = "DarkSeaGreen",
-  blue = "#80A7EA",
-  slate_blue = "SlateBlue",
-  coral = "#f7768e",
-  ERROR = "#c94f6d",
-  WARN = "#dbc074",
-  INFO = "#719cd6",
-  HINT = "#81b29a",
+  diagnostic = {
+    ERROR = "#c94f6d",
+    WARN = "#dbc074",
+    INFO = "#719cd6",
+    HINT = "#81b29a",
+  }
 }
 
 M.signs = {
@@ -40,7 +35,7 @@ M.separator = {
 
 M.customize_lualine_section = function(opts, bg, fg)
   if bg or fg then
-    opts.color = { bg = M.color[bg], fg = M.color[fg] }
+    opts.color = { bg = bg, fg = fg }
   end
 
   opts.separator = M.separator
@@ -63,7 +58,7 @@ M.get_diagnostic_hl = function()
   else
     local severity_level = diagnostics[1].severity
     local severity = vim.diagnostic.severity[severity_level]
-    return { bg = M.color.none, fg = M.color[severity] }
+    return { fg = M.color.diagnostic[severity] }
   end
 end
 
@@ -78,9 +73,9 @@ M.get_diagnostic_message = function()
     local icon = M.signs_lower[string.lower(severity)]
 
     local msg = diagnostics[1].message
-    if string.len(msg) > 50 then
-      msg = string.sub(msg, 0, 50) .. "..."
-    end
+    --if string.len(msg) > 50 then
+    --  msg = string.sub(msg, 0, 50) .. "..."
+    --end
     --return "[" .. icon .. " " .. severity .. "] " .. msg
     return icon .. " " .. msg
   end
@@ -97,10 +92,10 @@ M.get_lsp_name = function()
   for _, client in ipairs(clients) do
     local filetypes = client.config.filetypes
     if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-      return "  " .. client.name
+      return " " .. client.name
     end
   end
-  return "  " .. msg
+  return " " .. msg
 end
 
 M.list_lsp = function()
@@ -121,7 +116,8 @@ end
 M.set_diagnostic_signs = function()
   for type, icon in pairs(M.signs) do
     local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    --vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    vim.fn.sign_define(hl, { text = icon, texthl = hl })
   end
 end
 

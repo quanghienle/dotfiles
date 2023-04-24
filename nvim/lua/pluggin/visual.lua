@@ -43,10 +43,7 @@ require("dressing").setup({
 require("gitsigns").setup {
   current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
-    virt_text = true,
-    virt_text_pos = "eol", -- "eol" | "overlay" | "right_align"
-    delay = 500,
-    ignore_whitespace = false,
+    virt_text = true
   },
   signs = {
     add = { text = "▎" },
@@ -66,6 +63,7 @@ require("colorizer").setup({
 local excluded_filetypes = { "help", "neo-tree", "Trouble", "lazy", "NvimTree", "mason" }
 
 require("indent_blankline").setup {
+  char = "",
   filetype_exclude = excluded_filetypes,
   show_current_context = false,
   show_current_context_start = false,

@@ -6,8 +6,14 @@ require "nvim-tree".setup {
     centralize_selection = true
   },
   renderer = {
-    icons = { show = { git = false } },
-    indent_markers = { enable = true, inline_arrows = false },
+    icons = {
+      show = {
+        git = false,
+        file = false,
+        folder = false,
+      }
+    },
+    indent_markers = { enable = true, inline_arrows = true },
   },
   filters = { dotfiles = false, }, --'false' to show dot files
   git = { ignore = false, },       --'false' to show gitignore files
@@ -27,9 +33,9 @@ require("symbols-outline").setup({
 
 require("bufferline").setup({
   options = {
-    modified_icon = '⟡',
+    modified_icon = '◈',
     tab_size = 12,
-    max_name_length = 15,
+    max_name_length = 18,
     separator_style = "slope",
     --separator_style = {
     --  utils.separator.left,
@@ -47,57 +53,56 @@ require("bufferline").setup({
 })
 
 
-local vim_icon = function() return "" end
-local space = {
-  function() return " " end,
-  color = { bg = utils.color.none },
-}
 require('lualine').setup {
   options = {
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
+    theme = "nightfox",
     globalstatus = true,
   },
   sections = {
-    lualine_a = {
-      utils.customize_lualine_section({ "mode" }),
-      utils.customize_lualine_section({ vim_icon }, "lighter_bg", "blue"),
-      space,
-      utils.customize_lualine_section({ "filetype", colored = false, icon_only = true }, "blue", "black"),
-      utils.customize_lualine_section({ "filename" }, "lighter_bg", "blue"),
-      space,
-      utils.customize_lualine_section({ utils.get_lsp_name }, "green", "black"),
-      utils.customize_lualine_section({ "diagnostics" }, "lighter_bg", "blue"),
-      space,
-      { utils.get_diagnostic_message, cond = utils.has_diagnostic, color = utils.get_diagnostic_hl },
-    },
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {
+    lualine_a = { 'mode' },
+    lualine_b = { { utils.list_lsp } },
+    lualine_c = {
       {
-        require("noice").api.status.mode.get,
-        cond = require("noice").api.status.mode.has,
-        color = { bg = utils.color.none, fg = utils.color.blue },
+        "filetype",
+        icon_only = true,
+        separator = "",
+        padding = { left = 1, right = 0 }
       },
-      space,
+      "filename",
+      {
+        'diagnostics',
+        padding = { left = 2, right = 2 }
+      },
+      {
+        utils.get_diagnostic_message,
+        cond = utils.has_diagnostic,
+        color = utils.get_diagnostic_hl,
+        padding = { left = 2, right = 0 }
+      },
+    },
+    lualine_x = {
+      --'b:gitsigns_blame_line',
       {
         require("noice").api.status.command.get,
         cond = require("noice").api.status.command.has,
-        color = { bg = utils.color.none, fg = utils.color.blue },
+        color = { fg = "CornFlowerBlue" },
       },
-      space,
-      utils.customize_lualine_section({ "diff" }, "lighter_bg", "none"),
-      utils.customize_lualine_section({ "branch" }, "green", "black"),
-      space,
-      utils.customize_lualine_section({ "progress" }, "lighter_bg", "blue"),
-      utils.customize_lualine_section({ "location" }, "blue", "black"),
+      {
+        require("noice").api.status.mode.get,
+        cond = require("noice").api.status.mode.has,
+        color = { fg = "CornFlowerBlue" },
+      },
+      'diff'
+    },
+    lualine_y = {
+      'branch'
+    },
+    lualine_z = {
+      { 'location', separator = "/" },
+      { function() return vim.api.nvim_buf_line_count(0) end }
     }
   },
 }
-vim.api.nvim_set_hl(0, "lualine_c_normal", { link = "Normal" })
-
 
 require("core.winbar").set_winbar()
 

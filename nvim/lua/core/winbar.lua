@@ -19,10 +19,11 @@ M.get_winbar = function()
     local file_name = "%-t"
     local separtor_hl = "%#MyWinBarSeparator#"
     local filename_hl = "%#MyWinBarNormal#"
-    return right_align ..
-        separtor_hl .. utils.separator.left ..
-        filename_hl .. " " .. icon .. filename_hl .. file_name .. " " ..
-        separtor_hl .. utils.separator.right .. "  "
+    --return right_align ..
+        --separtor_hl .. utils.separator.left ..
+        --filename_hl .. " " .. icon .. file_name .. " " ..
+        --separtor_hl .. utils.separator.right .. "  "
+    return right_align .. filename_hl .. "[ " .. file_name .. " ]  "
   end
 end
 

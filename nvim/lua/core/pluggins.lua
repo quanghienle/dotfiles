@@ -79,5 +79,8 @@ Plug "shaunsingh/nord.nvim"
 Plug "folke/tokyonight.nvim"
 Plug "EdenEast/nightfox.nvim"
 Plug( 'catppuccin/nvim', {['as'] = 'catppuccin'} )
+Plug "cocopon/iceberg.vim"
+Plug "rmehri01/onenord.nvim"
+Plug "marko-cerovac/material.nvim"
 
 vim.call("plug#end")
