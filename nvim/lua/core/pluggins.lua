@@ -17,8 +17,6 @@ Plug "akinsho/bufferline.nvim"
 --Plug "SmiteshP/nvim-navic"
 --Plug "utilyre/barbecue.nvim"
 
-
-
 Plug "lukas-reineke/indent-blankline.nvim"
 Plug "echasnovski/mini.indentscope"
 
@@ -35,6 +33,8 @@ Plug "NvChad/nvim-colorizer.lua"
 Plug "simrat39/symbols-outline.nvim"
 
 Plug "folke/zen-mode.nvim"
+
+--Plug "mfussenegger/nvim-dap"
 
 Plug "neovim/nvim-lspconfig"
 Plug("williamboman/mason.nvim", {["do"] = vim.fn[":MasonUpdate"]})
@@ -82,5 +82,10 @@ Plug( 'catppuccin/nvim', {['as'] = 'catppuccin'} )
 Plug "cocopon/iceberg.vim"
 Plug "rmehri01/onenord.nvim"
 Plug "marko-cerovac/material.nvim"
+Plug "Mofiqul/vscode.nvim"
+Plug "rafamadriz/neon"
+Plug "mhartington/oceanic-next"
+Plug "andersevenrud/nordic.nvim"
+Plug "RRethy/nvim-base16"
 
 vim.call("plug#end")

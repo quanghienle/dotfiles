@@ -7,23 +7,14 @@ require "nvim-tree".setup {
   },
   renderer = {
     icons = {
-      show = {
-        git = false,
-        file = false,
-        folder = false,
-      }
+      show = { git = false, file = false, folder = false }
     },
     indent_markers = { enable = true, inline_arrows = true },
   },
   filters = { dotfiles = false, }, --'false' to show dot files
   git = { ignore = false, },       --'false' to show gitignore files
   trash = { cmd = "trash" },
-  ui = {
-    confirm = { remove = true, trash = true, },
-  },
-  update_focused_file = {
-    enable = true
-  }
+  update_focused_file = { enable = true }
 }
 
 require("symbols-outline").setup({
@@ -35,17 +26,8 @@ require("bufferline").setup({
   options = {
     modified_icon = '◈',
     tab_size = 12,
-    max_name_length = 18,
     separator_style = "slope",
-    --separator_style = {
-    --  utils.separator.left,
-    --  utils.separator.right,
-    --},
-    --numbers = "ordinal",
-    --numbers = function(opts)
-    --  return opts.raise(opts.ordinal)
-    --end,
-    indicator = { style = 'none', },
+    indicator = { style = 'none' },
     show_close_icon = false,
     show_buffer_close_icons = false,
     show_buffer_icons = false,
@@ -53,14 +35,18 @@ require("bufferline").setup({
 })
 
 
+local section_hl = { bg = "#2f4159", fg = "White", bold = true }
 require('lualine').setup {
-  options = {
-    theme = "nightfox",
-    globalstatus = true,
-  },
+  options = { globalstatus = true, },
   sections = {
     lualine_a = { 'mode' },
-    lualine_b = { { utils.list_lsp } },
+    lualine_b = {
+      {
+        utils.list_lsp,
+        separator = { right = '' },
+        color = section_hl
+      }
+    },
     lualine_c = {
       {
         "filetype",
@@ -69,19 +55,21 @@ require('lualine').setup {
         padding = { left = 1, right = 0 }
       },
       "filename",
-      {
-        'diagnostics',
-        padding = { left = 2, right = 2 }
-      },
+      'diagnostics',
       {
         utils.get_diagnostic_message,
         cond = utils.has_diagnostic,
+        fmt = function(str)
+          if string.len(str) > 100 then
+            return string.sub(str, 0, 100) .. "..."
+          end
+          return str
+        end,
         color = utils.get_diagnostic_hl,
         padding = { left = 2, right = 0 }
       },
     },
     lualine_x = {
-      --'b:gitsigns_blame_line',
       {
         require("noice").api.status.command.get,
         cond = require("noice").api.status.command.has,
@@ -89,17 +77,21 @@ require('lualine').setup {
       },
       {
         require("noice").api.status.mode.get,
-        cond = require("noice").api.status.mode.has,
+        cond = function()
+          return require("noice").api.status.mode.has() and
+              string.sub(require("noice").api.status.mode.get(), 1, 2) ~= "--"
+        end,
         color = { fg = "CornFlowerBlue" },
       },
+      --'b:gitsigns_blame_line',
       'diff'
     },
     lualine_y = {
-      'branch'
+      { 'branch', color = section_hl }
     },
     lualine_z = {
-      { 'location', separator = "/" },
-      { function() return vim.api.nvim_buf_line_count(0) end }
+      { 'location',                                                        separator = "" },
+      { function() return "[" .. vim.api.nvim_buf_line_count(0) .. "]" end }
     }
   },
 }

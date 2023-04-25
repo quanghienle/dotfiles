@@ -15,14 +15,17 @@ M.get_winbar = function()
     -- :help statusline
     local icon = "" --require("nvim-web-devicons").get_icon_by_filetype(vim.bo.filetype) or ""
 
+    --local gitblame = "%{get(b:,'gitsigns_blame_line','')}"
     local right_align = "%="
     local file_name = "%-t"
     local separtor_hl = "%#MyWinBarSeparator#"
     local filename_hl = "%#MyWinBarNormal#"
+    --local gitblame_hl = "%#MyWinBarGitBlame#"
     --return right_align ..
         --separtor_hl .. utils.separator.left ..
         --filename_hl .. " " .. icon .. file_name .. " " ..
         --separtor_hl .. utils.separator.right .. "  "
+    --return right_align .. gitblame_hl .. "Git Blame: \"" .. gitblame .."\" " .. filename_hl .. "[ " .. file_name .. " ]  "
     return right_align .. filename_hl .. "[ " .. file_name .. " ]  "
   end
 end

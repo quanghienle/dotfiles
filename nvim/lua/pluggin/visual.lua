@@ -26,6 +26,7 @@ require("dressing").setup({
   input = {
     prefer_width = 60,
     relative = "editor",
+    title_pos = "center",
     win_options = { winblend = 0 },
   },
   select = {
@@ -56,7 +57,7 @@ require("gitsigns").setup {
 }
 
 require("colorizer").setup({
-  filetypes = { "*", "!NvimTree", "!mason" }, -- exclude NvimTree
+  filetypes = { "*", "!NvimTree", "!mason" },     -- exclude NvimTree
   user_default_options = { mode = "virtualtext" } -- foreground, background,  virtualtext
 })
 

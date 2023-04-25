@@ -69,11 +69,10 @@ map("n", "<leader>st", require("nvim-tree.api").tree.toggle, "Show/Toggle NvimTr
 map("n", "<leader>so", ":SymbolsOutline<cr>", "Show/Toggle Outline")
 map("n", "<leader>sz", ":ZenMode<cr>", "Show/Toggle Zen Mode")
 map("n", "<leader>sg",
-  function() require("telescope.builtin").git_status({ initial_mode = "normal", }) end,
+  function() require("telescope.builtin").git_status({ initial_mode = "normal" }) end,
   "Show Git"
 )
 map("n", "<leader>sb", require("core.utils").toggle_bufferline, "Show/Toggle Bufferline ")
-
 
 
 -- Notifications

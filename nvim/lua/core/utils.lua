@@ -73,8 +73,8 @@ M.get_diagnostic_message = function()
     local icon = M.signs_lower[string.lower(severity)]
 
     local msg = diagnostics[1].message
-    --if string.len(msg) > 50 then
-    --  msg = string.sub(msg, 0, 50) .. "..."
+    --if string.len(msg) > 60 then
+    --  msg = string.sub(msg, 0, 60) .. "..."
     --end
     --return "[" .. icon .. " " .. severity .. "] " .. msg
     return icon .. " " .. msg
@@ -101,7 +101,7 @@ end
 M.list_lsp = function()
   local buf_clients = vim.lsp.buf_get_clients()
   if next(buf_clients) == nil then
-    return "[-]"
+    return "No Active LSP"
   end
   local buf_client_names = {}
   for _, client in pairs(buf_clients) do

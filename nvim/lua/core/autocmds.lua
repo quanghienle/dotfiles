@@ -7,11 +7,11 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- Set highlight group for SymbolsOutline
---vim.api.nvim_set_hl(0, "MyOutlineNormal", { bg = utils.color.darker_bg })
+vim.api.nvim_set_hl(0, "MyOutlineNormal", { bg = utils.color.darker_bg })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "Outline",
   callback = function()
-    --vim.opt_local.winhighlight = "Normal:MyOutlineNormal,NormalNC:MyOutlineNormal"
+    vim.opt_local.winhighlight = "Normal:MyOutlineNormal,NormalNC:MyOutlineNormal,WinBar:MyOutlineNormal"
     vim.opt.signcolumn = "no"
   end
 })

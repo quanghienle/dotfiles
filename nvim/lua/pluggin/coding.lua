@@ -13,7 +13,7 @@ lsp.set_preferences({
 })
 lsp.setup()
 
-vim.diagnostic.config({ virtual_text = false }) -- show diagnostics at the end of line
+vim.diagnostic.config({ virtual_text = false, underline = false }) -- show diagnostics at the end of line
 --vim.o.updatetime = 250
 --vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 --vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.lsp.buf.hover()]]
@@ -41,27 +41,32 @@ require("nvim-treesitter.configs").setup({
 
 -- nvim-cmp setup
 local cmp = require("cmp")
-local cmp_autopairs = require("nvim-autopairs.completion.cmp") -- Insert `(` after select function or method item
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+local bordered_win = cmp.config.window.bordered({
+  winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,Search:None"
+})
+-- Insert `(` after select function or method item
+cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 cmp.setup {
+  view = {
+    entries = { name = 'custom', selection_order = 'near_cursor' }
+  },
   window = {
-    completion = cmp.config.window.bordered({
-      winhighlight = "Normal:Normal,FloatBorder:FloatBorder,Search:None"
-    }),
-    documentation = cmp.config.window.bordered({
-      winhighlight = "Normal:Normal,FloatBorder:FloatBorder,Search:None",
-    }),
+    completion = bordered_win,
+    documentation = bordered_win
   },
   snippet = {
     expand = function(args) require("luasnip").lsp_expand(args.body) end,
   },
   formatting = {
-    format = require('lspkind').cmp_format({
-      mode = 'symbol_text',
-      preset = "codicons",
-      maxwidth = 50,
-      ellipsis_char = '...'
-    })
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, vim_item)
+      local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+      local strings = vim.split(kind.kind, "%s", { trimempty = true })
+      kind.kind = " " .. (strings[1] or "") .. " "
+      kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+      return kind
+    end,
   },
   mapping = cmp.mapping.preset.insert({
     ['<Tab>'] = nil,
