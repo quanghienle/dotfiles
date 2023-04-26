@@ -45,7 +45,7 @@ local options = {
   wildmode = "longest,list,full",
   wildignore = "log/**,node_modules/**,target/**,tmp/**,*.rbc",
   --spell = true,
-  spelllang = {"en"},
+  spelllang = { "en" },
   --guicursor="n-c-v:block,i-ci-ve:ver25,r-cr:hor20,o:hor50",
   --
   completeopt = "menuone,noselect", -- Set completeopt to have a better completion experience

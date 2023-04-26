@@ -15,10 +15,10 @@ M.color = {
 }
 
 M.signs = {
-  Error = " ",
-  Warn = " ",
-  Info = " ",
-  Hint = " ",
+  Error = "",
+  Warn = "",
+  Info = "",
+  Hint = "",
 }
 
 M.signs_lower = {
@@ -123,7 +123,7 @@ end
 
 
 M.load_session = function()
-  require("nvim-tree.api").tree.toggle()
+  --require("nvim-tree.api").tree.toggle()
   if require("session_manager.config").dir_to_session_filename():exists() then
     vim.ui.select(
       { "Yes", "No" },
