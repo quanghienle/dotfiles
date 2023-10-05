@@ -32,7 +32,7 @@ local float_hl = function(border_color, title_color)
     },
     {
       groups = {
-        "WinSeparator", "FloatBorder", "LspFloatWinBorder", "CmpDocumentationBorder",
+        "WinSeparator", "FloatBorder", "LspInfoBorder", "LspFloatWinBorder", "CmpDocumentationBorder",
         "NoiceCmdlinePopupBorderSearch", "NoiceCmdlinePopupBorder",
         "LspSagaCodeActionBorder", "LspSagaHoverBorder",
         "TelescopePreviewBorder", "TelescopePromptBorder", "TelescopeResultsBorder",
@@ -61,10 +61,10 @@ local other_hl = function()
       groups = { "MyOutlineNormal" },
       opts = { link = "NvimTreeNormal" }
     },
-    {
-      groups = { "GitSignsCurrentLineBlame" },
-      opts = { link = "Comment" }
-    },
+    --{
+    --  groups = { "GitSignsCurrentLineBlame" },
+    --  opts = { link = "Comment" }
+    --},
     {
       groups = { "WinSeparator" },
       opts = { fg = "DarkSlateBlue" }
@@ -72,6 +72,10 @@ local other_hl = function()
     {
       groups = { "BufferlineBufferSelected" },
       opts = { fg = "CornFlowerBlue", bold = true }
+    },
+    {
+      groups = { "NvimTreeWindowPicker" },
+      opts = { fg = "White", bg = "DarkSlateBlue", bold = true }
     },
     {
       groups = { "@define", "@include" },

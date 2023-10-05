@@ -7,12 +7,18 @@ require "nvim-tree".setup {
   },
   renderer = {
     icons = {
-      show = { git = false, file = false, folder = false }
+      show = { git = false, file = false, folder = false },
+      glyphs = {
+        folder = {
+          arrow_closed = "⏵",
+          arrow_open = "⏷",
+        }
+      },
     },
     indent_markers = { enable = true, inline_arrows = true },
   },
-  filters = { dotfiles = false, }, --'false' to show dot files
-  git = { ignore = false, },       --'false' to show gitignore files
+  filters = { dotfiles = false, }, --"false" to show dot files
+  git = { ignore = false, },       --"false" to show gitignore files
   trash = { cmd = "trash" },
   update_focused_file = { enable = true }
 }
@@ -24,10 +30,9 @@ require("symbols-outline").setup({
 
 require("bufferline").setup({
   options = {
-    modified_icon = '◈',
     tab_size = 12,
     separator_style = "slope",
-    indicator = { style = 'none' },
+    indicator = { style = "none" },
     show_close_icon = false,
     show_buffer_close_icons = false,
     show_buffer_icons = false,
@@ -36,14 +41,14 @@ require("bufferline").setup({
 
 
 local section_hl = { bg = "#2f4159", fg = "White", bold = true }
-require('lualine').setup {
+require("lualine").setup {
   options = { globalstatus = true, },
   sections = {
-    lualine_a = { 'mode' },
+    lualine_a = { "mode" },
     lualine_b = {
       {
         utils.list_lsp,
-        separator = { right = '' },
+        separator = { right = "" },
         color = section_hl
       }
     },
@@ -55,13 +60,13 @@ require('lualine').setup {
         padding = { left = 1, right = 0 }
       },
       "filename",
-      'diagnostics',
+      "diagnostics",
       {
         utils.get_diagnostic_message,
         cond = utils.has_diagnostic,
         fmt = function(str)
           if string.len(str) > 100 then
-            return string.sub(str, 0, 100) .. "..."
+            return string.sub(str, 0, 100) .. "…"
           end
           return str
         end,
@@ -83,14 +88,21 @@ require('lualine').setup {
         end,
         color = { fg = "CornFlowerBlue" },
       },
-      --'b:gitsigns_blame_line',
-      'diff'
+      --"b:gitsigns_blame_line",
+      "diff"
     },
     lualine_y = {
-      { 'branch', color = section_hl }
+      { "branch", color = section_hl }
     },
     lualine_z = {
-      { 'location',                                                        separator = "" },
+      {
+        "location",
+        separator = "",
+        padding = {
+          left = 0,
+          right = 0
+        }
+      },
       { function() return "[" .. vim.api.nvim_buf_line_count(0) .. "]" end }
     }
   },
@@ -102,7 +114,7 @@ require("zen-mode").setup({
   window = {
     backdrop = 0.80, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
     width = 0.85,    -- width of the Zen window
-    height = 0.9,    -- height of the Zen window
+    height = 0.95,   -- height of the Zen window
   },
 })
 

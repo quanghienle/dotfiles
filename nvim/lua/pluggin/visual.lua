@@ -22,6 +22,11 @@ require("noice").setup({
   },
 })
 
+require("scrollbar").setup({
+  handlers = { gitsigns = true },
+  excluded_filetypes = { "prompt", "TelescopePrompt", "noice", "NvimTree" },
+})
+
 require("dressing").setup({
   input = {
     prefer_width = 60,
@@ -61,7 +66,7 @@ require("colorizer").setup({
   user_default_options = { mode = "virtualtext" } -- foreground, background,  virtualtext
 })
 
-local excluded_filetypes = { "help", "neo-tree", "Trouble", "lazy", "NvimTree", "mason" }
+local excluded_filetypes = { "help", "Trouble", "NvimTree", "mason" }
 
 require("indent_blankline").setup {
   char = "",
@@ -72,37 +77,29 @@ require("indent_blankline").setup {
 
 require("mini.indentscope").setup({
   symbol = "│",
-  options = { try_as_border = true },
-})
-
--- exclude filetypes for mini.indentscope
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = excluded_filetypes,
-  callback = function() vim.b.miniindentscope_disable = true end,
 })
 
 
 
+--function StatusColumn()
+--  local buf = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
+--  local signs = vim.tbl_map(
+--    function(sign) return vim.fn.sign_getdefined(sign.name)[1] end,
+--    vim.fn.sign_getplaced(buf, { group = "*", lnum = vim.v.lnum })[1].signs
+--  )
 
-function StatusColumn()
-  local buf = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
-  local signs = vim.tbl_map(
-    function(sign) return vim.fn.sign_getdefined(sign.name)[1] end, 
-    vim.fn.sign_getplaced(buf, { group = "*", lnum = vim.v.lnum })[1].signs
-  )
+--  local sign, git_sign
+--  for _, s in ipairs(signs) do
+--    if s.name:find("GitSign") then git_sign = s else sign = s end
+--  end
 
-  local sign, git_sign
-  for _, s in ipairs(signs) do
-    if s.name:find("GitSign") then git_sign = s else sign = s end
-  end
+--  local components = {
+--    sign and ("%#" .. sign.texthl .. "#" .. sign.text .. "%*") or " ",
+--    [[%=]],
+--    [[%{&nu?(&rnu&&v:relnum?v:relnum:v:lnum):''} ]],
+--    git_sign and ("%#" .. git_sign.texthl .. "#" .. git_sign.text .. "%*") or "  ",
+--  }
+--  return table.concat(components, "")
+--end
 
-  local components = {
-    sign and ("%#" .. sign.texthl .. "#" .. sign.text .. "%*") or " ",
-    [[%=]],
-    [[%{&nu?(&rnu&&v:relnum?v:relnum:v:lnum):''} ]],
-    git_sign and ("%#" .. git_sign.texthl .. "#" .. git_sign.text .. "%*") or "  ",
-  }
-  return table.concat(components, "")
-end
-
-vim.opt.statuscolumn = [[%!v:lua.StatusColumn()]]
+--vim.opt.statuscolumn = [[%!v:lua.StatusColumn()]]

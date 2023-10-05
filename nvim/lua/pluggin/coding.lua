@@ -1,5 +1,20 @@
 require("nvim-autopairs").setup {}
 require("nvim-ts-autotag").setup {}
+require("copilot_cmp").setup()
+
+require("copilot").setup({
+  suggestion = {enabled = false },
+  panel = { enabled = false },
+  server_opts_overrides = {
+    trace = "verbose",
+    settings = {
+      advanced = {
+        listCount = 10,         -- #completions for panel
+        inlineSuggestCount = 3, -- #completions for getCompletions
+      }
+    },
+  }
+})
 
 local lsp = require("lsp-zero")
 lsp.preset("recommended")
@@ -11,6 +26,10 @@ lsp.set_preferences({
   suggest_lsp_servers = false,
   sign_icons = require("core.utils").signs_lower
 })
+
+--fix undefined vim
+require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
+
 lsp.setup()
 
 vim.diagnostic.config({ virtual_text = false, underline = false }) -- show diagnostics at the end of line
@@ -27,7 +46,6 @@ require("mason").setup({
   }
 })
 
-
 require("nvim-treesitter.configs").setup({
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   sync_install = false,     -- install languages synchronously (only applied to `ensure_installed`)
@@ -41,14 +59,24 @@ require("nvim-treesitter.configs").setup({
 
 -- nvim-cmp setup
 local cmp = require("cmp")
-local bordered_win = cmp.config.window.bordered({
-  winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,Search:None"
-})
+local bordered_win = cmp.config.window.bordered({ winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,Search:None" })
+local cmp_mappings = cmp.mapping.preset.insert({
+  ["<C-d>"] = cmp.mapping.scroll_docs(1),
+  ["<C-u>"] = cmp.mapping.scroll_docs(-1),
+  ["<CR>"] = cmp.mapping.confirm({ select = true }),
+});
+cmp_mappings['<Tab>'] = vim.NIL
+cmp_mappings['<S-Tab>'] = vim.NIL
+
 -- Insert `(` after select function or method item
 cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 cmp.setup {
   view = {
-    entries = { name = 'custom', selection_order = 'near_cursor' }
+    entries = {
+      name = 'custom',
+      vertial_positioning = 'below', -- 'below' | 'above' | 'auto'
+      selection_order = 'top_down'   -- 'top_down' | 'near_cursor
+    }
   },
   window = {
     completion = bordered_win,
@@ -60,7 +88,11 @@ cmp.setup {
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
-      local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+      local kind = require("lspkind").cmp_format({
+        mode = "symbol_text",
+        maxwidth = 60,
+        symbol_map = { Copilot = "" }
+      })(entry, vim_item)
       local strings = vim.split(kind.kind, "%s", { trimempty = true })
       kind.kind = " " .. (strings[1] or "") .. " "
       kind.menu = "    (" .. (strings[2] or "") .. ")"
@@ -68,14 +100,9 @@ cmp.setup {
       return kind
     end,
   },
-  mapping = cmp.mapping.preset.insert({
-    ['<Tab>'] = nil,
-    ['<S-Tab>'] = nil,
-    ["<C-d>"] = cmp.mapping.scroll_docs(1),
-    ["<C-u>"] = cmp.mapping.scroll_docs(-1),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-  }),
+  mapping = cmp_mappings,
   sources = {
+    { name = "copilot" },
     { name = "nvim_lsp" },
     { name = 'nvim_lsp_signature_help' },
     { name = "luasnip" },
@@ -83,7 +110,6 @@ cmp.setup {
     { name = "calc" }
   },
 }
-
 -- Use buffer source for `/` (if you enabled `native_menu`, this won"t work anymore).
 cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),

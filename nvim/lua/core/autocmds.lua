@@ -6,6 +6,13 @@ vim.api.nvim_create_autocmd("User", {
   command = "setlocal wrap number"
 })
 
+
+-- exclude filetypes for mini.indentscope
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "help", "Trouble", "NvimTree", "mason" },
+  callback = function() vim.b.miniindentscope_disable = true end,
+})
+
 -- Set highlight group for SymbolsOutline
 vim.api.nvim_set_hl(0, "MyOutlineNormal", { bg = utils.color.darker_bg })
 vim.api.nvim_create_autocmd("FileType", {

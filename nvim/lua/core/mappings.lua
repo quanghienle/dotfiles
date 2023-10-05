@@ -9,8 +9,8 @@ map("n", "<C-h>", "<C-w>h", "Navigate to the Left pane")
 map("n", "<C-j>", "<C-w>j", "Navigate to the Bottom pane")
 map("n", "<C-k>", "<C-w>k", "Navigate to the Upper pane")
 map("n", "<C-l>", "<C-w>l", "Navigate to the Right pane")
-map("x", "K", ":move '<-2<cr>gv-gv", "Move Visual Block up one line")
 map("x", "J", ":move '>+1<cr>gv-gv", "Move Visual Block down one line")
+map("x", "K", ":move '<-2<cr>gv-gv", "Move Visual Block up one line")
 
 map("v", "<", "<gv", "Indent to the left")
 map("v", ">", ">gv", "Indent to the right")
@@ -68,10 +68,7 @@ map("n", "<leader>si", require("core.utils").show_popup_info, "Show Information 
 map("n", "<leader>st", require("nvim-tree.api").tree.toggle, "Show/Toggle NvimTree")
 map("n", "<leader>so", ":SymbolsOutline<cr>", "Show/Toggle Outline")
 map("n", "<leader>sz", ":ZenMode<cr>", "Show/Toggle Zen Mode")
-map("n", "<leader>sg",
-  function() require("telescope.builtin").git_status({ initial_mode = "normal" }) end,
-  "Show Git"
-)
+map("n", "<leader>sg", require("telescope.builtin").git_status, "Show Git")
 map("n", "<leader>sb", require("core.utils").toggle_bufferline, "Show/Toggle Bufferline ")
 
 

@@ -66,6 +66,9 @@ require("telescope").setup {
     diagnostics = dropdown_horizontal({
       initial_mode = "normal",
     }),
+    git_status = dropdown_horizontal({
+      initial_mode = "normal",
+    }),
     spell_suggest = {
       theme = "dropdown",
       initial_mode = "normal",

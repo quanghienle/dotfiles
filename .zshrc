@@ -52,3 +52,7 @@ set -o emacs
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 alias luamake=/Users/u1117687/Documents/dotfiles/nvim/lua-language-server/3rd/luamake/luamake
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
