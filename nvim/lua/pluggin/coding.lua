@@ -2,8 +2,23 @@ require("nvim-autopairs").setup {}
 require("nvim-ts-autotag").setup {}
 require("copilot_cmp").setup()
 
+require("actions-preview").setup {
+  backend = { "telescope", "nui" },
+  telescope = {
+    theme = "dropdown",
+    initial_mode = "normal",
+    layout_strategy = "horizontal",
+    layout_config = {
+      prompt_position = "top",
+      height = 0.5,
+      width = 0.75,
+      scroll_speed = 1
+    }
+  },
+}
+
 require("copilot").setup({
-  suggestion = {enabled = false },
+  suggestion = { enabled = false },
   panel = { enabled = false },
   server_opts_overrides = {
     trace = "verbose",

@@ -33,6 +33,8 @@ Plug "simrat39/symbols-outline.nvim"
 
 Plug "folke/zen-mode.nvim"
 
+Plug 'nacro90/numb.nvim'
+
 --Plug "mfussenegger/nvim-dap"
 
 Plug "neovim/nvim-lspconfig"
@@ -47,6 +49,8 @@ Plug "hrsh7th/cmp-path"
 Plug "hrsh7th/cmp-cmdline"
 Plug "hrsh7th/cmp-calc"
 Plug "hrsh7th/cmp-nvim-lsp-signature-help"
+
+Plug "aznhe21/actions-preview.nvim"
 
 -- lua snip
 Plug "saadparwaiz1/cmp_luasnip"

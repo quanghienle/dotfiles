@@ -118,6 +118,7 @@ require("zen-mode").setup({
   },
 })
 
+require('numb').setup()
 
 local wk = require("which-key")
 vim.opt.timeoutlen = 200

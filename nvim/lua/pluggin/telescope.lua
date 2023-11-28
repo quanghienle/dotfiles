@@ -60,6 +60,17 @@ require("telescope").setup {
     },
     help_tags = dropdown_horizontal(),
     lsp_references = dropdown_horizontal({
+      jump_type = "never",
+      show_line = false,
+      initial_mode = "normal",
+    }),
+    lsp_definitions = dropdown_horizontal({
+      jump_type = "never",
+      show_line = false,
+      initial_mode = "normal",
+    }),
+    lsp_implementations = dropdown_horizontal({
+      jump_type = "never",
       show_line = false,
       initial_mode = "normal",
     }),
