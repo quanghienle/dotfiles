@@ -139,14 +139,18 @@ wk.setup({
 wk.register(
   {
     b = { name = " Buffer..." },
-    c = { name = " Comment..." },
+    c = {
+      name = " Comment...",
+      b = { name = " Comment-Box" },
+    },
     f = { name = " Find..." },
-    g = { name = " Go to..." },
+    g = { name = " GoTo..." },
     n = { name = " Notification..." },
-    r = { name = " Re-...(reformat, rename...)" },
+    a = { name = " Action..." },
     s = { name = " Show..." },
     t = { name = " Tab..." },
     w = { name = " Window..." },
+    m = { name = " Marks..." },
   },
   { prefix = "<leader>" }
 )

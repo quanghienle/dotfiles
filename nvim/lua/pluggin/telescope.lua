@@ -1,3 +1,6 @@
+require("harpoon").setup({})
+--require('telescope').load_extension('lazygit')
+
 local actions = require("telescope.actions")
 
 local layout_options = {
@@ -16,6 +19,7 @@ local function dropdown_horizontal(options)
   for k, v in pairs(options or {}) do conf[k] = v end
   return conf
 end
+
 
 require("telescope").setup {
   defaults = {
@@ -83,6 +87,21 @@ require("telescope").setup {
     spell_suggest = {
       theme = "dropdown",
       initial_mode = "normal",
-    },
+    }
+  },
+  extensions = {
+    advanced_git_search = {
+      telescope_theme = {
+        diff_commit_file = dropdown_horizontal({
+          initial_mode = "normal",
+        }),
+        diff_commit_line = dropdown_horizontal({
+          initial_mode = "normal",
+        }),
+      }
+    }
   },
 }
+
+require("telescope").load_extension("advanced_git_search")
+require("telescope").load_extension('harpoon')

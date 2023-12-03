@@ -34,6 +34,7 @@ Plug "simrat39/symbols-outline.nvim"
 Plug "folke/zen-mode.nvim"
 
 Plug 'nacro90/numb.nvim'
+Plug "LudoPinelli/comment-box.nvim"
 
 --Plug "mfussenegger/nvim-dap"
 
@@ -80,6 +81,10 @@ Plug("catppuccin/nvim", { as = "catppuccin" })
 --Plug "github/copilot.v"zbirenbaum/copilot.lua
 Plug "zbirenbaum/copilot.lua"
 Plug "zbirenbaum/copilot-cmp"
+Plug 'renerocksai/telekasten.nvim'
 
+Plug 'ThePrimeagen/harpoon'
+Plug "kdheepak/lazygit.nvim"
+Plug "aaronhallaert/advanced-git-search.nvim"
 
 vim.call("plug#end")

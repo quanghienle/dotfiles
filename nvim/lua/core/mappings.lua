@@ -3,10 +3,10 @@ local function map(modes, lhs, rhs, description)
   vim.keymap.set(modes, lhs, rhs, { remap = false, silent = true, desc = description })
 end
 
-local _ni = { "n", "i" }
-local _nv = { "n", "v" }
+local ni = { "n", "i" }
+local nv = { "n", "v" }
 
-map(_ni, "<esc>", "<cmd>noh<cr><esc>", "Escape and Remove highlight")
+map(ni, "<esc>", "<cmd>noh<cr><esc>", "Escape and Remove highlight")
 
 map("n", "<C-h>", "<C-w>h", "Navigate to the Left pane")
 map("n", "<C-j>", "<C-w>j", "Navigate to the Bottom pane")
@@ -27,11 +27,11 @@ map("x", "p", "\"_dP", "Paste without yanking the visual text")
 
 
 -- Don't yank on delete char
-map(_nv, "x", "\"_x", "Delete character without yanking")
-map(_nv, "X", "\"_X", "Delete character without yanking")
-map(_nv, "c", "\"_c", "Delete character without yanking")
-map(_nv, "C", "\"_C", "Delete character without yanking")
-map(_nv, "s", "\"_s", "Change character without yanking")
+map(nv, "x", "\"_x", "Delete character without yanking")
+map(nv, "X", "\"_X", "Delete character without yanking")
+map(nv, "c", "\"_c", "Delete character without yanking")
+map(nv, "C", "\"_C", "Delete character without yanking")
+map(nv, "s", "\"_s", "Change character without yanking")
 
 
 -- Tabs
@@ -39,65 +39,79 @@ map("n", "<leader>tn", ":tabnext<cr>", "Tab: Next")
 map("n", "<leader>tp", ":tabprevious<cr>", "Tab: Previous")
 
 -- Buffers
-map("n", "<leader>bd", ":bp<cr>:sp<cr>:bn<cr>:bd<cr>", "Buffer: Delete")
-map("n", "<leader>bn", ":bn<cr>", "Buffer: Next")
-map("n", "<leader>bp", ":bp<cr>", "Buffer: Previous")
-map("n", "<leader>bb", require("telescope.builtin").buffers, "Buffer: List")
-
+map("n", "<leader>bd", ":bp<cr>:sp<cr>:bn<cr>:bd<cr>", "[B]uffer: [D]elete")
+map("n", "<leader>bn", ":bn<cr>", "[B]uffer: [N]ext")
+map("n", "<leader>bp", ":bp<cr>", "[B]uffer: [P]revious")
+map("n", "<leader>bb", require("telescope.builtin").buffers, "[B]uffer: [L]ist")
 map("n", "<Tab>", ":bn<cr>", "Next Buffer")
 map("n", "<S-Tab>", ":bp<cr>", "Previous Buffer")
 
 -- Find
-map("n", "<leader>ft", require("telescope.builtin").builtin, "Find Telescope Pickers")
-map("n", "<leader>ff", require("telescope.builtin").find_files, "Find Files")
-map("n", "<leader>fw", require("telescope.builtin").live_grep, "Find Word (Live Grep)")
-map(_nv, "<leader>fc", require("core.utils").live_grep_cursor, "Find Cursor word (Live Grep)")
-map("n", "<leader>fm", require("telescope.builtin").marks, "Find Marks")
-map("n", "<leader>fb", require("telescope.builtin").buffers, "Find Buffers")
-map("n", "<leader>fh", require("telescope.builtin").help_tags, "Find Help-tags")
-map("n", "<leader>fr", require("spectre").open, "Find and Replace in Project")
-map("n", "<leader>fp", require("core.utils").find_in_path, "Find in Path (Live Grep)")
+map(nv, "<leader>ft", require("telescope.builtin").builtin, "[F]ind [T]elescope pickers")
+map("n", "<leader>ff", require("telescope.builtin").find_files, "[F]ind [F]iles")
+map("n", "<leader>fw", require("telescope.builtin").live_grep, "[F]ind [W]ord (live grep)")
+map(nv, "<leader>fc", require("core.utils").live_grep_cursor, "[F]ind [C]ursor word (live grep)")
+map("n", "<leader>fm", require("telescope.builtin").marks, "[F]ind [M]arks")
+map("n", "<leader>fb", require("telescope.builtin").buffers, "[F]ind [B]uffers")
+map("n", "<leader>fh", require("telescope.builtin").help_tags, "[F]ind [H]elp-tags")
+map("n", "<leader>fr", require("spectre").open, "[F]ind and [R]eplace in Project")
+map("n", "<leader>fp", require("core.utils").find_in_path, "[F]ind in [P]ath (live grep)")
+map("n", "<leader>fn", ":Telekasten<cr>", "[F]ind [N]otes")
 
 -- Show
 --map("n", "<leader>sa", vim.lsp.buf.code_action, "Show code-Actions (under cursor)")
 --map("n", "<leader>sb", require("core.utils").toggle_bufferline, "Show/Toggle Bufferline")
-map("n", "<leader>su", require("telescope.builtin").lsp_references, "Show Usages (under cursor)")
-map("n", "<leader>ss", require("telescope.builtin").spell_suggest, "Show Spelling suggestions (under cursor)")
-map("n", "<leader>se", vim.diagnostic.open_float, "Show Errors (under cursor)")
-map("n", "<leader>sa", require("actions-preview").code_actions, "Show code-Actions (under cursor)")
-map("n", "<leader>sd", require("telescope.builtin").lsp_definitions, "Show Definition (under cursor)")
-map("n", "<leader>si", require("telescope.builtin").lsp_implementations, "Show Implementation (under cursor)")
-map("n", "<leader>sh", require("core.utils").show_popup_info, "Show Hover information (under cursor)")
-map("n", "<leader>st", require("nvim-tree.api").tree.toggle, "Show/Toggle NvimTree")
-map("n", "<leader>so", ":SymbolsOutline<cr>", "Show/Toggle Outline")
-map("n", "<leader>sf", ":ZenMode<cr>", "Show/Toggle Focus Mode")
-map("n", "<leader>sg", require("telescope.builtin").git_status, "Show Git")
-map("n", "<leader>sp", function() require("telescope.builtin").diagnostics({ bufnr = 0 }) end, "Show Problems/Diagnostics (current buffer)")
+map("n", "<leader>su", require("telescope.builtin").lsp_references, "[S]how [U]sages (under cursor)")
+map("n", "<leader>ss", require("telescope.builtin").spell_suggest, "[S]how [S]pelling suggestions (under cursor)")
+map("n", "<leader>se", vim.diagnostic.open_float, "[S]how [E]rrors (under cursor)")
+map("n", "<leader>sa", require("actions-preview").code_actions, "[S]how code-[A]ctions (under cursor)")
+map("n", "<leader>sd", function() require("telescope.builtin").diagnostics({ bufnr = 0 }) end, "[S]how [D]iagnostics (current buffer)")
+map("n", "<leader>si", require("core.utils").show_popup_info, "[S]how [I]nformation (under cursor)")
+map("n", "<leader>st", require("nvim-tree.api").tree.toggle, "[S]how/toggle File [T]ree")
+map("n", "<leader>so", ":SymbolsOutline<cr>", "[S]how/toggle [O]utline")
+map("n", "<leader>sf", ":ZenMode<cr>", "[S]how/toggle [F]ocus Mode")
+map("n", "<leader>sg", ":LazyGit<cr>", "[S]how [G]it")
+map("n", "<leader>sh", ":AdvancedGitSearch diff_commit_file<cr>", "[S]how Git [H]istory for file")
+map("v", "<leader>sh", ":AdvancedGitSearch diff_commit_line<cr>", "[S]how Git [H]istory for lines")
 
+
+-- Marks
+map("n", "<leader>ma", require('harpoon.mark').add_file, "[M]arks: [A]dd")
+--map("n", "<leader>ms", require('harpoon.ui').toggle_quick_menu, "Marks: Show Marks")
+map("n", "<leader>mm", function ()
+  require('telescope').extensions.harpoon.marks({ initial_mode = "normal" })
+end, "[M]arks: show [M]arks")
+map("n", "<leader>mn", require('harpoon.ui').nav_next, "[M]arks: [N]ext mark")
+map("n", "<leader>mp", require('harpoon.ui').nav_prev, "[M]arks: [P]rev mark")
 
 -- Notifications
-map("n", "<leader>na", ":NoiceTelescope<cr>", "Notifications: Show all")
-map("n", "<leader>nl", ":NoiceLast<cr>", "Notifications: Show last")
-map("n", "<leader>nn", function() require("notify").dismiss({ silent = true, pending = true }) end, "Notifications: Hide all")
-map("n", "<leader>nh", function() require("notify").dismiss({ silent = true, pending = true }) end, "Notifications: Hide all")
+map("n", "<leader>nn", ":NoiceTelescope<cr>", "[N]otifications: show all [N]otifications")
+map("n", "<leader>nd", function() require("notify").dismiss({ silent = true, pending = true }) end, "[N]otifications: [D]ismiss all")
 
 -- Go To
-map("n", "<leader>gd", function() vim.lsp.buf.definition({ reuse_win = true }) end, "Go-to: Definition (under cursor)")
-map("n", "<leader>gi", vim.lsp.buf.implementation, "Go-to: Implementation (under cursor)")
-map("n", "<leader>gt", require("nvim-tree.api").tree.focus, "Go-to: nvimTree")
+--map("n", "<leader>gd", function() vim.lsp.buf.definition({ reuse_win = true }) end, "[G]oTo: [D]efinition (under cursor)")
+--map("n", "<leader>gi", vim.lsp.buf.implementation, "[G]oTo: [I]mplementation (under cursor)")
+map("n", "<leader>gd", require("telescope.builtin").lsp_definitions, "[G]oTo: [D]efinition (under cursor)")
+map("n", "<leader>gi", require("telescope.builtin").lsp_implementations, "[G]oTo: [I]mplementation (under cursor)")
+map("n", "<leader>gt", require("nvim-tree.api").tree.focus, "[G]oTo: file [T]ree")
+
+
+map(nv, "<leader>cbl", ":CBllbox<cr>", "[C]omment-[B]ox: align [L]eft")
+map(nv, "<leader>cbc", ":CBlcbox<cr>", "[C]omment-[B]ox: align [C]enter")
+map(nv, "<leader>cba", ":CBcatalog<cr>", "[C]omment-[B]ox: [A]ll styles")
 
 -- Window
-map("n", "<leader>w>", ":vertical resize +15<cr>", "Window: Increase vertically")
-map("n", "<leader>w<", ":vertical resize -15<cr>", "Window: Descrease vertically")
 map("n", "<C->>", ":vertical resize +15<cr>", "Window: Increase vertically")
 map("n", "<C-<>", ":vertical resize -15<cr>", "Window: Descrease vertically")
+map("n", "<leader>w>", ":vertical resize +15<cr>", "Window: Increase vertically")
+map("n", "<leader>w<", ":vertical resize -15<cr>", "Window: Descrease vertically")
 map("n", "<leader>w+", ":resize +10<cr>", "Window: Increase horizontally")
 map("n", "<leader>w-", ":resize -10<cr>", "Window: Decrease horizontally")
 map("n", "<leader>we", "<C-w>=", "Window: Resize evenly")
 map("n", "<leader>wd", "<C-w>c", "Window: Delete")
 
 -- Reformat, Rename
-map(_nv, "<leader>rf", vim.lsp.buf.format, "Reformat code")
-map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol under cursor")
-map("n", "<leader>rt", require("core.utils").set_tabwidth, "Reset tab width")
-map("n", "<leader>rs", require("session_manager").load_current_dir_session, "Restore Session")
+map(nv, "<leader>af", vim.lsp.buf.format, "[A]ction: [F]ormat code")
+map("n", "<leader>ar", vim.lsp.buf.rename, "[A]ction: [R]ename symbol under cursor")
+map("n", "<leader>at", require("core.utils").set_tabwidth, "[A]ction: [T]ab-width")
+map("n", "<leader>as", require("session_manager").load_current_dir_session, "[A]ction: [S]ession restore")

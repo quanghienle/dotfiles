@@ -2,6 +2,14 @@ require("nvim-autopairs").setup {}
 require("nvim-ts-autotag").setup {}
 require("copilot_cmp").setup()
 
+require('comment-box').setup({
+  box_width = 80,
+})
+
+require('telekasten').setup({
+  home = vim.fn.expand("~/Documents/notes")
+})
+
 require("actions-preview").setup {
   backend = { "telescope", "nui" },
   telescope = {
@@ -16,6 +24,7 @@ require("actions-preview").setup {
     }
   },
 }
+
 
 require("copilot").setup({
   suggestion = { enabled = false },
