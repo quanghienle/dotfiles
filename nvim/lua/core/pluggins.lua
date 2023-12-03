@@ -7,6 +7,7 @@ Plug "lewis6991/gitsigns.nvim"
 Plug "tpope/vim-surround"
 Plug "windwp/nvim-autopairs"
 Plug "windwp/nvim-ts-autotag"
+Plug "p00f/nvim-ts-rainbow"
 
 Plug "kyazdani42/nvim-web-devicons"
 Plug "kyazdani42/nvim-tree.lua"
@@ -19,13 +20,14 @@ Plug "petertriho/nvim-scrollbar"
 Plug "lukas-reineke/indent-blankline.nvim"
 Plug "echasnovski/mini.indentscope"
 
+Plug 'echasnovski/mini.jump'
+
 Plug "RRethy/vim-illuminate"
 
 Plug "nvim-lua/plenary.nvim"
 Plug "nvim-telescope/telescope.nvim"
 
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = vim.fn[":TSUpdate"] })
-Plug "p00f/nvim-ts-rainbow"
 
 Plug "NvChad/nvim-colorizer.lua"
 
@@ -84,6 +86,8 @@ Plug "zbirenbaum/copilot-cmp"
 Plug 'renerocksai/telekasten.nvim'
 
 Plug 'ThePrimeagen/harpoon'
+
+Plug "tpope/vim-fugitive"
 Plug "kdheepak/lazygit.nvim"
 Plug "aaronhallaert/advanced-git-search.nvim"
 

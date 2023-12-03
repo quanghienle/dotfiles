@@ -1,5 +1,7 @@
 require("nvim-autopairs").setup {}
 require("nvim-ts-autotag").setup {}
+require('mini.jump').setup()
+
 require("copilot_cmp").setup()
 
 require('comment-box').setup({

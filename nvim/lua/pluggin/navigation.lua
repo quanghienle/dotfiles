@@ -114,7 +114,7 @@ require("zen-mode").setup({
   window = {
     backdrop = 0.80, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
     width = 0.85,    -- width of the Zen window
-    height = 0.95,   -- height of the Zen window
+    height = 1,   -- height of the Zen window
   },
 })
 
@@ -138,19 +138,18 @@ wk.setup({
 
 wk.register(
   {
-    b = { name = " Buffer..." },
-    c = {
-      name = " Comment...",
-      b = { name = " Comment-Box" },
+    b = { name = " [B]uffer" },
+    c = { name = " [C]omment",
+      b = { name = " [C]omment-[B]ox" },
     },
-    f = { name = " Find..." },
-    g = { name = " GoTo..." },
-    n = { name = " Notification..." },
-    a = { name = " Action..." },
-    s = { name = " Show..." },
-    t = { name = " Tab..." },
-    w = { name = " Window..." },
-    m = { name = " Marks..." },
+    f = { name = " [F]ind" },
+    g = { name = " [G]oTo" },
+    n = { name = " [N]otification" },
+    a = { name = " [A]ction" },
+    s = { name = " [S]how" },
+    t = { name = " [T]ab" },
+    w = { name = " [W]indow" },
+    m = { name = " [M]arks" },
   },
   { prefix = "<leader>" }
 )

@@ -70,6 +70,10 @@ local other_hl = function()
       opts = { fg = "DarkSlateBlue" }
     },
     {
+      groups = { "MiniJump" },
+      opts = { bg = "None", underline = true, bold = true }
+    },
+    {
       groups = { "BufferlineBufferSelected" },
       opts = { fg = "CornFlowerBlue", bold = true }
     },
