@@ -1,5 +1,4 @@
-require("nightfox").setup({
-})
+require("nightfox").setup({})
 
 local utils = require("core.utils")
 
@@ -14,9 +13,9 @@ end
 
 local winbar_hl = function(fg, bg)
   return {
-    { groups = { "MyWinBarNormal" },    opts = { fg = fg, bg = bg } },
-    { groups = { "MyWinBarGitBlame" },  opts = { link = "Comment" } },
+    { groups = { "MyWinBarFileName" },  opts = { fg = fg, bg = bg } },
     { groups = { "MyWinBarSeparator" }, opts = { fg = bg } },
+    { groups = { "MyWinBarGitBlame" },  opts = { fg = "CornFlowerBlue", bg = utils.color.darker_bg } },
   }
 end
 
@@ -24,7 +23,7 @@ local float_hl = function(border_color, title_color)
   return {
     {
       groups = {
-        "NotifyBackground", "NormalFloat", "WhichKeyFloat",
+        "NotifyBackground", "NormalFloat", "WhichKeyFloat", "CopilotChatSuggestion",
         "Pmenu", "TelescopeNormal", "NoiceCmdlinePopup", "TelescopePreviewNormal",
       },
       --opts = { link = "Normal" }
@@ -38,14 +37,61 @@ local float_hl = function(border_color, title_color)
         "TelescopePreviewBorder", "TelescopePromptBorder", "TelescopeResultsBorder",
       },
       opts = { fg = border_color, bg = utils.color.darker_bg }
+      --opts = { fg = utils.color.darker_bg, bg = utils.color.darker_bg }
     },
     {
       groups = { "Title", "FloatTitle", "TelescopeBorder" },
       opts = { fg = title_color, bg = utils.color.darker_bg, bold = true }
+      --opts = { bg = title_color, fg = utils.color.darker_bg, bold = true }
     },
   }
 end
 
+--local buffer_hl = function(accent_color)
+  --return {
+    --{
+      --groups = { "BufferlineBufferSelected",  "BufferlineDuplicateSelected" },
+      --opts = { bg = accent_color, fg = "black", bold = true }
+    --},
+    --{
+      --groups = { "BufferlineModifiedSelected" },
+      --opts = { bg = accent_color, fg = "lime", bold = true }
+    --},
+    --{
+      --groups = { "BufferlineIndicatorSelected" },
+      --opts = { bg = accent_color }
+    --},
+    --{
+      --groups = { "BufferlineIndicatorVisible" },
+      --opts = { bg = utils.color.darker_bg }
+    --},
+    --{
+      --groups = { "BufferlineFill", "BufferlineBufferVisible", "BufferlineBackground" },
+      --opts = { bg = utils.color.darker_bg, fg = accent_color }
+    --},
+  --}
+--end
+
+local buffer_hl = function(accent_color)
+  return {
+    {
+      groups = { "BufferlineBufferSelected",  "BufferlineDuplicateSelected" },
+      opts = { bg = "None", fg = "MediumPurple", bold = true }
+    },
+    {
+      groups = { "BufferlineModifiedSelected" },
+      opts = { bg = "None", fg = "Teal", bold = true }
+    },
+    {
+      groups = { "BufferlineIndicatorSelected", "BufferlineIndicatorVisible", "BufferlineSeparator" },
+      opts = { bg = "None", fg = "black" }
+    },
+    {
+      groups = { "BufferlineFill", "BufferlineBufferVisible", "BufferlineBackground" },
+      opts = { bg = "None", fg = "SlateGray" }
+    },
+  }
+end
 
 local other_hl = function()
   return {
@@ -55,27 +101,23 @@ local other_hl = function()
     --},
     {
       groups = { "Cursor", "CursorLineNr" },
-      opts = { fg = "MediumPurple", bold = true }
+      opts = { fg = "CornFlowerBlue", bold = true }
     },
     {
       groups = { "MyOutlineNormal" },
       opts = { link = "NvimTreeNormal" }
     },
-    --{
-    --  groups = { "GitSignsCurrentLineBlame" },
-    --  opts = { link = "Comment" }
-    --},
     {
       groups = { "WinSeparator" },
       opts = { fg = "DarkSlateBlue" }
     },
     {
-      groups = { "MiniJump" },
-      opts = { bg = "None", underline = true, bold = true }
+      groups = { "MiniIndentscopeSymbol" },
+      opts = { fg = "DarkSlateGray" }
     },
     {
-      groups = { "BufferlineBufferSelected" },
-      opts = { fg = "CornFlowerBlue", bold = true }
+      groups = { "MiniJump" },
+      opts = { bg = "None", underline = true, bold = true }
     },
     {
       groups = { "NvimTreeWindowPicker" },
@@ -90,7 +132,7 @@ local other_hl = function()
       opts = { link = "@keyword" }
     },
     {
-      groups = { "@type", "@lsp.type.type", "@lsp.type.class", "@lsp.type.typeParameter", "@lsp.type.truct" },
+      groups = { "@type", "@constant", "@lsp.type.type", "@lsp.type.class", "@lsp.type.typeParameter", "@lsp.type.truct" },
       opts = { link = "@text" }
     },
   }
@@ -100,8 +142,10 @@ SetColorscheme = function(colorscheme)
   vim.cmd.colorscheme(colorscheme)
   --vim.api.nvim_set_hl(0, "Normal", {bg = utils.color.normal_bg})
 
-  set_hl_groups(float_hl("CornFlowerBlue", "CornFlowerBlue"))
-  set_hl_groups(winbar_hl("CornFlowerBlue", "None"))
+  --set_hl_groups(float_hl(utils.color.darker_bg, "CornFlowerBlue"))
+  set_hl_groups(float_hl( "CornFlowerBlue", "CornFlowerBlue"))
+  set_hl_groups(winbar_hl("black", "DarkSlateGray"))
+  set_hl_groups(buffer_hl("SteelBlue"))
   set_hl_groups(other_hl())
 end
 

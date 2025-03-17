@@ -22,6 +22,16 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.signcolumn = "no"
   end
 })
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = 'copilot-*',
+  callback = function()
+    vim.opt_local.winhighlight = "Normal:MyOutlineNormal,NormalNC:MyOutlineNormal,WinBar:MyOutlineNormal"
+    -- Set buffer-local options
+    vim.opt_local.relativenumber = false
+    vim.opt_local.number = false
+    vim.opt_local.conceallevel = 0
+  end
+})
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -51,9 +61,5 @@ vim.api.nvim_create_autocmd("WinLeave", {
   end,
 })
 
--- auto load session
-vim.api.nvim_create_autocmd("VimEnter", {
-  group = utils.augroup("session_autoload"),
-  callback = utils.load_session,
-  nested = true,
-})
+-- auto-session
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

@@ -49,7 +49,7 @@ local options = {
   spelllang = { "en" },
   --guicursor="n-c-v:block,i-ci-ve:ver25,r-cr:hor20,o:hor50",
   --
-  completeopt = "menuone,noselect", -- Set completeopt to have a better completion experience
+  completeopt = "menuone,noselect,noinsert,popup", -- Set completeopt to have a better completion experience
 }
 
 if vim.fn.has("nvim-0.9.0") == 1 then

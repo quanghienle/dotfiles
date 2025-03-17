@@ -14,19 +14,22 @@ M.get_winbar = function()
   else
     -- :help statusline
     local icon = "" --require("nvim-web-devicons").get_icon_by_filetype(vim.bo.filetype) or ""
+    local diag = "" -- %{%v:lua.require'core.utils'.get_truncated_diagnostic()%}"
 
-    --local gitblame = "%{get(b:,'gitsigns_blame_line','')}"
+    local gitblame = "%{get(b:,'gitsigns_blame_line','')}"
     local right_align = "%="
     local file_name = "%-t"
+    --local file_name = "%-f"
     local separtor_hl = "%#MyWinBarSeparator#"
-    local filename_hl = "%#MyWinBarNormal#"
-    --local gitblame_hl = "%#MyWinBarGitBlame#"
-    --return right_align ..
-    --separtor_hl .. utils.separator.left ..
-    --filename_hl .. " " .. icon .. file_name .. " " ..
-    --separtor_hl .. utils.separator.right .. "  "
-    --return right_align .. gitblame_hl .. "Git Blame: \"" .. gitblame .."\" " .. filename_hl .. "[ " .. file_name .. " ]  "
-    return right_align .. filename_hl .. "⟪ " .. file_name .. " ⟫  "
+    local filename_hl = "%#MyWinBarFileName#"
+    local gitblame_hl = "%#MyWinBarGitBlame#"
+    --return separtor_hl .. utils.separator.left .. filename_hl .. " " .. icon .. file_name .. " " .. separtor_hl .. utils.separator.right .. " " .. diag
+    --return  separtor_hl .. diag .. right_align .. separtor_hl .. utils.separator.left .. filename_hl .. " " .. icon .. file_name .. " " .. separtor_hl .. utils.separator.right
+    return  separtor_hl .. diag .. right_align .. separtor_hl .. utils.separator.left .. filename_hl .. " " .. icon .. file_name .. "  "
+    --return gitblame_hl .. right_align .. "\"" .. gitblame .."\" " ..
+    --  separtor_hl .. utils.separator.left .. filename_hl .. file_name ..
+    --  separtor_hl .. utils.separator.right
+    --return right_align .. filename_hl .. "⟪ " .. file_name .. " ⟫  "
   end
 end
 

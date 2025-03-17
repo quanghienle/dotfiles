@@ -66,17 +66,13 @@ require("colorizer").setup({
   user_default_options = { mode = "virtualtext" } -- foreground, background,  virtualtext
 })
 
-local excluded_filetypes = { "help", "Trouble", "NvimTree", "mason" }
-
-require("indent_blankline").setup {
-  char = "",
-  filetype_exclude = excluded_filetypes,
-  show_current_context = false,
-  show_current_context_start = false,
-}
+require("notify").setup({
+  render = "compact",
+  top_down = false
+})
 
 require("mini.indentscope").setup({
-  symbol = "│",
+  --symbol = "│",
 })
 
 

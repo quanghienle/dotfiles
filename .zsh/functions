@@ -1,6 +1,21 @@
 ##############  DIRECTORY BOOKMARKS  #####################
 export MARKPATH=$HOME/.marks
 
+# quit and restart IQAdmin app
+function adminright() {
+  killall IQAdmin & open /Applications/IQAdmin.app
+}
+
+# open PET UI in browser, example: petui qam30e
+function petui { 
+  open "https://ui.$(echo $1).pet.cloud-privacy-analytics.com/"
+}
+
+# open Airflow UI in browser, example: airflow pa-pet-qam30e
+function airflow { 
+  open "https://localhost:8157/aws_mwaa/aws-console-sso?login=true#$(aws mwaa create-web-login-token --name $1 --query WebToken --output text)"
+}
+
 # go to a marked directory
 function cdx { cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"}
 

@@ -1,6 +1,3 @@
-require("harpoon").setup({})
---require('telescope').load_extension('lazygit')
-
 local actions = require("telescope.actions")
 
 local layout_options = {
@@ -51,7 +48,9 @@ require("telescope").setup {
     find_files = dropdown_horizontal(),
     live_grep = dropdown_horizontal(),
     grep_string = dropdown_horizontal(),
-    marks = dropdown_horizontal(),
+    marks = dropdown_horizontal({
+      initial_mode = "normal",
+    }),
     buffers = {
       theme = "dropdown",
       initial_mode = "normal",
@@ -81,6 +80,9 @@ require("telescope").setup {
     diagnostics = dropdown_horizontal({
       initial_mode = "normal",
     }),
+    resume = dropdown_horizontal({
+      initial_mode = "normal",
+    }),
     git_status = dropdown_horizontal({
       initial_mode = "normal",
     }),
@@ -104,4 +106,3 @@ require("telescope").setup {
 }
 
 require("telescope").load_extension("advanced_git_search")
-require("telescope").load_extension('harpoon')

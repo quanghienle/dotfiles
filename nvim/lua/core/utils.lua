@@ -29,8 +29,10 @@ M.signs_lower = {
 }
 
 M.separator = {
-  left = "",
-  right = ""
+  --left = "",
+  --right = ""
+  right = '',
+  left = ''
 }
 
 M.customize_lualine_section = function(opts, bg, fg)
@@ -81,6 +83,27 @@ M.get_diagnostic_message = function()
   end
 end
 
+M.get_truncated_diagnostic = function()
+  if not M.has_diagnostic() then
+    return ""
+  end
+
+  local diagnostics = vim.lsp.diagnostic.get_line_diagnostics()
+  if not next(diagnostics) then
+    return ""
+  else
+    local severity_level = diagnostics[1].severity
+    local severity = vim.diagnostic.severity[severity_level]
+    local icon = M.signs_lower[string.lower(severity)]
+
+    local msg = diagnostics[1].message
+    if string.len(msg) > 60 then
+      msg = string.sub(msg, 0, 60) .. "..."
+    end
+    return icon .. " " .. msg
+  end
+end
+
 
 M.get_lsp_name = function()
   local msg = 'No Active LSP'
@@ -121,24 +144,6 @@ M.set_diagnostic_signs = function()
   end
 end
 
-
-M.load_session = function()
-  --require("nvim-tree.api").tree.toggle()
-  if require("session_manager.config").dir_to_session_filename():exists() then
-    vim.ui.select(
-      { "Yes", "No" },
-      {
-        prompt = " Load previously saved session? ",
-        format_item = function(item) return "   " .. item end
-      },
-      function(choice)
-        if choice == "Yes" then
-          require("session_manager").load_current_dir_session()
-        end
-      end
-    )
-  end
-end
 
 M.augroup = function(name)
   return vim.api.nvim_create_augroup("custom_augroup_" .. name, { clear = true })

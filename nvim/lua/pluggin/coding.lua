@@ -1,6 +1,32 @@
 require("nvim-autopairs").setup {}
 require("nvim-ts-autotag").setup {}
 require('mini.jump').setup()
+require('mini.files').setup({
+  -- Close explorer after opening file with `l`
+  mappings = {
+    go_in = 'L',
+    go_in_plus = 'l',
+  },
+  -- General options
+  options = {
+    -- Whether to delete permanently or move into module-specific trash
+    -- Whether to use for editing directories
+    use_as_default_explorer = false
+  },
+  -- Customization of explorer windows
+  windows = {
+    -- Maximum number of windows to show side by side
+    max_number = math.huge,
+    -- Whether to show preview of file/directory under cursor
+    preview = true,
+    -- Width of focused window
+    width_focus = 50,
+    -- Width of non-focused window
+    width_nofocus = 25,
+    -- Width of preview window
+    width_preview = 80,
+  },
+})
 
 require("copilot_cmp").setup()
 
@@ -27,7 +53,6 @@ require("actions-preview").setup {
   },
 }
 
-
 require("copilot").setup({
   suggestion = { enabled = false },
   panel = { enabled = false },
@@ -45,7 +70,7 @@ require("copilot").setup({
 local lsp = require("lsp-zero")
 lsp.preset("recommended")
 lsp.ensure_installed({
-  "pyright", "tsserver", "angularls", "intelephense", "tsserver",
+  "pyright", "ts_ls", "angularls", "intelephense",
   "vimls", "html", "bashls", "eslint", "cssls", "jsonls", "dockerls"
 })
 lsp.set_preferences({
@@ -130,6 +155,7 @@ cmp.setup {
   sources = {
     { name = "copilot" },
     { name = "nvim_lsp" },
+    { name = 'render-markdown' },
     { name = 'nvim_lsp_signature_help' },
     { name = "luasnip" },
     { name = "path" },
@@ -150,4 +176,30 @@ cmp.setup.cmdline(":", {
   }, {
     { name = "cmdline" }
   })
+})
+
+require("CopilotChat").setup {
+  -- default window options
+  window = {
+    layout = 'vertical', -- 'vertical', 'horizontal', 'float', 'replace'
+    width = 0.4,         -- fractional width of parent, or absolute width in columns when > 1
+    height = 1,          -- fractional height of parent, or absolute height in rows when > 1
+
+    -- Options below only apply to floating windows
+    relative = 'editor',      -- 'editor', 'win', 'cursor', 'mouse'
+    border = 'single',        -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+    title = 'Copilot Chat',   -- title of chat window
+    zindex = 1,               -- determines if window is on top or below other floating windows
+  },
+  highlight_selection = true, -- Highlight selection
+  highlight_headers = false,
+  mappings = {
+    complete = {
+      insert = '<C-n>',
+    },
+  }
+}
+
+require('render-markdown').setup({
+  file_types = { 'markdown', 'copilot-chat' },
 })
