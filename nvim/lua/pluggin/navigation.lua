@@ -145,10 +145,14 @@ require("auto-session").setup {
   session_lens = {
     load_on_setup = true, -- Initialize on startup (requires Telescope)
     theme_conf = {        -- Pass through for Telescope theme options
-      -- layout_config = { -- As one example, can change width/height of picker
-      --   width = 0.8,    -- percent of window
-      --   height = 0.5,
-      -- },
+      layout_strategy = "horizontal",
+      theme = "dropdown",
+      layout_config = {  -- As one example, can change width/height of picker
+        prompt_position = "top",
+        height = 0.5,
+        width = 0.75,
+        scroll_speed = 1
+      },
     },
     previewer = true, -- File preview for session picker
 

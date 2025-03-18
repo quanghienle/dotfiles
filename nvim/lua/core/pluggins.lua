@@ -44,8 +44,8 @@ Plug("nvim-treesitter/nvim-treesitter", { ["do"] = vim.fn[":TSUpdate"] })
 Plug "neovim/nvim-lspconfig"
 Plug("williamboman/mason.nvim", { ["do"] = vim.fn[":MasonUpdate"] })
 Plug "williamboman/mason-lspconfig.nvim"
-Plug("VonHeikemen/lsp-zero.nvim", { branch = "v2.x" })
-Plug("onsails/lspkind.nvim")
+Plug "VonHeikemen/lsp-zero.nvim"
+Plug "onsails/lspkind.nvim"
 Plug "aznhe21/actions-preview.nvim"
 
 -- Autocompletion plugin

@@ -207,5 +207,23 @@ M.set_tabwidth = function()
   vim.ui.input({ prompt = "Enter value for shiftwidth" }, callback)
 end
 
+M.ai_question = function()
+  vim.ui.input({
+    prompt = 'AI Question> ',
+  }, function(input)
+    if input ~= '' then
+      require('CopilotChat').ask(input)
+    end
+  end)
+end
+
+M.current_diagnostics = function() require("telescope.builtin").diagnostics({ bufnr = 0 }) end
+
+M.nvimtree_current = function() require("nvim-tree.api").tree.open({ find_file = true }) end
+
+M.clear_notifications = function() require("notify").dismiss({ silent = true, pending = true }) end
+
+M.minifiles_current = function() require("mini.files").open(vim.api.nvim_buf_get_name(0)) end
+
 
 return M

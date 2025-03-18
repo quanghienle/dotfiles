@@ -15,16 +15,11 @@ require('mini.files').setup({
   },
   -- Customization of explorer windows
   windows = {
-    -- Maximum number of windows to show side by side
-    max_number = math.huge,
-    -- Whether to show preview of file/directory under cursor
-    preview = true,
-    -- Width of focused window
-    width_focus = 50,
-    -- Width of non-focused window
-    width_nofocus = 25,
-    -- Width of preview window
-    width_preview = 80,
+    max_number = math.huge, -- Maximum number of windows to show side by side
+    preview = true,         -- Whether to show preview of file/directory under cursor
+    width_focus = 50,       -- Width of focused window
+    width_nofocus = 25,     -- Width of non-focused window
+    width_preview = 80,     -- Width of preview window
   },
 })
 
@@ -68,20 +63,18 @@ require("copilot").setup({
 })
 
 local lsp = require("lsp-zero")
-lsp.preset("recommended")
-lsp.ensure_installed({
-  "pyright", "ts_ls", "angularls", "intelephense",
-  "vimls", "html", "bashls", "eslint", "cssls", "jsonls", "dockerls"
-})
-lsp.set_preferences({
-  suggest_lsp_servers = false,
-  sign_icons = require("core.utils").signs_lower
-})
 
 --fix undefined vim
 require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
-
-lsp.setup()
+lsp.ui({
+  float_border = 'rounded',
+  sign_text = {
+    error = '✘',
+    warn = '▲',
+    hint = '⚑',
+    info = '»',
+  },
+})
 
 vim.diagnostic.config({ virtual_text = false, underline = false }) -- show diagnostics at the end of line
 --vim.o.updatetime = 250
