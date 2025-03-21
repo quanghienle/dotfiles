@@ -56,3 +56,6 @@ alias luamake=/Users/u1117687/Documents/dotfiles/nvim/lua-language-server/3rd/lu
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
